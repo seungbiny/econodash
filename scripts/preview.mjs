@@ -15,7 +15,8 @@ http.createServer(async (incoming,outgoing)=>{
   try {
     const url=new URL(incoming.url,`http://${incoming.headers.host}`);
     if(url.pathname==='/api/refresh'){
-      const request=new Request(url,{method:incoming.method,headers:incoming.headers});
+      const chunks=[];for await(const chunk of incoming)chunks.push(chunk);
+      const request=new Request(url,{method:incoming.method,headers:incoming.headers,...(!['GET','HEAD'].includes(incoming.method)&&chunks.length?{body:Buffer.concat(chunks)}:{})});
       const response=await handleRefresh(request,refreshAll);
       outgoing.writeHead(response.status,Object.fromEntries(response.headers));
       outgoing.end(Buffer.from(await response.arrayBuffer()));

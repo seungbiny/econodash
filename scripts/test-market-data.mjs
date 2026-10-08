@@ -1,7 +1,11 @@
 import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
 import {monthBefore,compareSeries,compareQuote,yahooRows,yahooQuote,yahooTradeDate,futuresContract,naverBondSnapshot,cryptoComparisons,tencentIndexRows,tencentIndexQuote,IDS} from '../lib/market-data.mjs';
 import {applyResults,cacheResponse} from '../refresh-state.js';
-assert.equal(new Set(IDS).size,22);
+assert.equal(IDS.length,31);assert.equal(new Set(IDS).size,31);
+const dashboard=JSON.parse(await fs.readFile(new URL('../data.json',import.meta.url),'utf8'));
+assert.deepEqual(new Set(dashboard.indicators.map(i=>i.id)),new Set(IDS),'Every displayed indicator has a matching refresh provider');
+assert.deepEqual(dashboard.indicators.filter(i=>i.category==='bonds').map(i=>i.id),['kr1','kr3','kr10','kr30','us1','us3','us10','us30','jp1','jp3','jp10','jp30']);
 const tencent={code:0,data:{sz399106:{qt:{sz399106:['51','深证综指','399106']},day:[['2026-09-30','2419.83','2404.48']]}}};
 assert.equal(tencentIndexRows(tencent,'https://web.ifzq.gtimg.cn/').at(-1).value,2404.48);
 assert.throws(()=>tencentIndexRows({code:0,data:{sz399001:{day:[]}}},''));
@@ -52,6 +56,20 @@ assert.throws(()=>naverBondSnapshot('jp10',{...bondQuote,localTradedAt:'2026-10-
 assert.throws(()=>naverBondSnapshot('jp10',{...bondQuote,yieldToLastClosePrice:3.111},bondHistory,now));
 const retainedBond=naverBondSnapshot('jp10',{...bondQuote,localTradedAt:'2026-10-07T15:20:05+09:00',closePriceYield:3.109,yieldToLastClosePrice:3.109,marketStatus:'CLOSE'},[...bondHistory,{localTradedAt:'2026-10-06T15:20:05+09:00',closePrice:'3.1100'}],now);
 assert.equal(retainedBond.values.previous,3.11,'A retained closed-market quote compares to its previous session, not itself');
+assert.equal(naverBondSnapshot('jp10',{...bondQuote,localTradedAt:'2026-10-07T15:20:05+09:00'},bondHistory,now).marketState,'closed','An older quote must not be labeled intraday even when the source reports OPEN');
+for(const [country,nation,currency] of [['kr','KOR','KRW'],['us','USA','USD'],['jp','JPN','JPY']]) {
+  for(const years of [1,3,30]) {
+    const id=`${country}${years}`,maturityNow=Date.parse('2026-10-08T12:00:00Z'),sample={...bondQuote,reutersCode:`${country.toUpperCase()}${years}YT=RR`,nationType:nation,currencyType:{code:currency},maturityType:`${years}Y`,localTradedAt:country==='us'?'2026-10-08T00:42:36-04:00':bondQuote.localTradedAt,delayTime:country==='jp'?120:0};
+    const snapshot=naverBondSnapshot(id,sample,bondHistory,maturityNow);
+    assert.equal(snapshot.values.current,3.082);assert.equal(snapshot.values.previous,3.109);assert.equal(snapshot.values.week,3.015);assert.equal(snapshot.values.month,2.887);
+    assert.throws(()=>naverBondSnapshot(id,{...sample,maturityType:'10Y'},bondHistory,maturityNow),'Reject a different maturity even when its code is correct');
+    assert.throws(()=>naverBondSnapshot(id,{...sample,nationType:'OTHER'},bondHistory,maturityNow));
+  }
+}
+const usQuote={...bondQuote,reutersCode:'US3YT=RR',nationType:'USA',currencyType:{code:'USD'},maturityType:'3Y',localTradedAt:'2026-10-07T20:42:36-04:00',delayTime:0,yieldToLastClosePrice:3.110};
+const usHistory=[{localTradedAt:'2026-10-07T17:05:00-04:00',closePrice:'999'},{localTradedAt:'2026-10-06T17:05:00-04:00',closePrice:'3.110'},{localTradedAt:'2026-09-30T17:05:00-04:00',closePrice:'3.015'},{localTradedAt:'2026-09-04T17:05:00-04:00',closePrice:'2.887'}];
+const usBond=naverBondSnapshot('us3',usQuote,usHistory,now);
+assert.equal(usBond.tradeDate,'2026-10-07');assert.equal(usBond.dates.current,'2026-10-08T00:42:36.000Z');assert.equal(usBond.values.previous,3.110,'US comparisons use New York trading dates rather than Korean dates');
 const ticker={market:'KRW-BTC',timestamp:Date.parse('2026-03-31T03:30:00Z'),trade_price:100};
 const candles=[{candle_date_time_utc:'2026-03-31T00:00:00',trade_price:999},{candle_date_time_utc:'2026-03-30T00:00:00',trade_price:90},{candle_date_time_utc:'2026-03-23T00:00:00',trade_price:80},{candle_date_time_utc:'2026-02-27T00:00:00',trade_price:70}];
 const crypto=cryptoComparisons(ticker,candles);
@@ -72,4 +90,4 @@ assert.equal(bondUpdated.indicators[0].delayMinutes,120);assert.equal(applyResul
 assert.throws(()=>applyResults(bondBase,{...bondResponse,results:[{...bondResponse.results[0],delayMinutes:-1}]}));
 assert.throws(()=>applyResults(base,{completedAt,results:[success,success]}));
 assert.throws(()=>applyResults(base,{completedAt,results:[{...success,source:'javascript:alert(1)'},response.results[1]]}));
-console.log('PASS: intraday quotes, Naver 10-year yields and delay metadata, previous completed close, calendar/holiday cutoffs, futures evening trading dates, units, same-contract futures, crypto 09:00 cutoff, partial failure retention, response validation and cache');
+console.log('PASS: 31 providers, 12 bond maturities, country/maturity validation, trading time zones, intraday quotes, delay metadata, completed comparisons, futures contracts, crypto cutoffs, partial failure retention and cache');

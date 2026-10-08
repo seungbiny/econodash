@@ -14,5 +14,5 @@ await fs.writeFile(path.join(root,'app.js'),`const API_ENDPOINT=document.querySe
 await fs.mkdir(path.join(root,'lib'),{recursive:true});
 await fs.copyFile(path.join(source,'lib/market-data.mjs'),path.join(root,'lib/market-data.mjs'));
 const tests=await fs.readFile(path.join(source,'scripts/test-market-data.mjs'),'utf8');
-await fs.writeFile(path.join(root,'scripts/test-market-data.mjs'),tests.replace("'../public/refresh-state.js'","'../refresh-state.js'"));
+await fs.writeFile(path.join(root,'scripts/test-market-data.mjs'),tests.replace("'../public/refresh-state.js'","'../refresh-state.js'").replace("'../public/data.json'","'../data.json'"));
 console.log('Exported dashboard assets, market providers and comparison tests.');

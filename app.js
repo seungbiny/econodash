@@ -24,7 +24,7 @@ const $ = selector => document.querySelector(selector);
 const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const groups = {
   stocks: { name:'주식', icon:'chart', note:'세계 주요 증시 · 포인트', basis:'각 시장의 최근 완료 종가. 중국 증시는 휴장으로 9월 30일 마감값을 유지합니다.' },
-  bonds: { name:'금리', icon:'landmark', note:'10년 만기 국채 · 연율 %', basis:'상대 변화율과 실제 금리 차이(bp)를 함께 표시합니다. 1bp = 0.01%포인트.' },
+  bonds: { name:'금리', icon:'landmark', note:'1·3·10·30년 만기 국채 · 연율 %', basis:'상대 변화율과 실제 금리 차이(bp)를 함께 표시합니다. 1bp = 0.01%포인트.' },
   commodities: { name:'상품', icon:'box', note:'미국 달러 표시 · 동일 계약월 선물', basis:'10월 7일 확정 마감값은 확인 불가. 마지막 확인된 10월 6일 완료 자료입니다. 금·은·구리는 2026년 12월물, WTI는 11월물로 모든 비교 계약이 같습니다.' },
   fx: { name:'환율', icon:'exchange', note:'해당 외화당 원화 · 엔은 100엔', basis:'10월 7일 확정 마감 여부는 확인 불가. 마지막 확인된 10월 6일 자료입니다. 환율 하락은 해당 외화 대비 원화 강세를 뜻합니다.' },
   crypto: { name:'가상자산', icon:'coin', note:'업비트 원화시장 · 1개당 원', basis:'보고서 체결가격은 10월 8일 08:40:26 KST 기준. 비교 가격은 모두 완료된 업비트 일봉으로, 한국시간 오전 9시에 마감합니다.' },
@@ -54,15 +54,15 @@ function sourceLabel(item) { return item.live ? item.provider : '10.08 보고서
 function delayLabel(minutes) {return minutes===0?'실시간':minutes%60===0?`${minutes/60}시간 지연`:`${minutes}분 지연`;}
 function priceLabel(item) {const label=item.priceKind==='published'?'최신 공표값 · 장중 시세 미제공':item.priceKind==='market'?(item.marketState==='trading'?'장중 시세':item.marketState==='closed'?'최근 거래 시세':'현재 시세'):'저장된 확인값';return label+(item.priceKind==='market'&&Number.isInteger(item.delayMinutes)?' · '+delayLabel(item.delayMinutes):'');}
 function rowStatus(item) {return item.refreshError?'조회 실패 · 이전 값':item.live?priceLabel(item)+(item.missing?.length?' · 비교 일부 확인 불가':''):'초기 보고서';}
-function liveBasis(key) {return {stocks:'장중을 포함한 최신 시세와 직전 거래일의 완료 종가를 비교합니다. 시세 기준 시각은 한국시간입니다. 시장이 닫혀 있으면 마지막 거래 시세를 표시하며 출처의 시세 지연이 있을 수 있습니다.',bonds:'한국·일본 10년물은 네이버 증권의 시장 수익률을 조회하며 일본은 출처 기준 2시간 지연입니다. 미국 10년물은 Yahoo Finance 기준입니다. 현재·직전·1주·1개월은 지표별 같은 출처를 사용하고 상대 변화율과 금리 차이(bp)를 표시합니다.',commodities:'동일 계약월의 현재 시세와 직전 완료 종가를 비교합니다. 저녁에 개장하는 미국 선물은 다음 거래일을 기준으로 비교합니다. 출처의 시세 지연이 있을 수 있습니다.',fx:'최신 환율과 직전 거래일 완료 종가를 비교합니다. 1외화당 원화, 엔은 100엔당 원화입니다. 위안은 같은 거래일·15분 이내 USD/KRW와 USD/CNY 시세의 교차 환율입니다.',crypto:'업비트 현재 체결가격과 완료된 일봉을 비교합니다. 일봉은 한국시간 오전 9시 마감이며 숫자 아래에 실제 기준 시각을 표시합니다.'}[key];}
+function liveBasis(key) {return {stocks:'장중을 포함한 최신 시세와 직전 거래일의 완료 종가를 비교합니다. 시세 기준 시각은 한국시간입니다. 시장이 닫혀 있으면 마지막 거래 시세를 표시하며 출처의 시세 지연이 있을 수 있습니다.',bonds:'한국·일본의 1·3·10·30년물과 미국 1·3·30년물은 네이버 증권의 시장 수익률을 조회하며 일본은 출처 기준 2시간 지연입니다. 미국 10년물은 Yahoo Finance 기준입니다. 현재·직전·1주·1개월은 지표별 같은 출처를 사용하고 상대 변화율과 금리 차이(bp)를 표시합니다.',commodities:'동일 계약월의 현재 시세와 직전 완료 종가를 비교합니다. 저녁에 개장하는 미국 선물은 다음 거래일을 기준으로 비교합니다. 출처의 시세 지연이 있을 수 있습니다.',fx:'최신 환율과 직전 거래일 완료 종가를 비교합니다. 1외화당 원화, 엔은 100엔당 원화입니다. 위안은 같은 거래일·15분 이내 USD/KRW와 USD/CNY 시세의 교차 환율입니다.',crypto:'업비트 현재 체결가격과 완료된 일봉을 비교합니다. 일봉은 한국시간 오전 9시 마감이며 숫자 아래에 실제 기준 시각을 표시합니다.'}[key];}
 function renderStatus() {
-  const run=state.lastRun;
+  const run=state.lastRun,total=state.data.indicators.length;
   $('#report-title').textContent=run?'시세 조회 · '+shortDate(run.completedAt):'현재 시세 자동 조회 준비';
-  $('#report-description').textContent=run?`${run.succeeded}/22개 조회 완료 · 시세별 기준 시각 확인`:'저장된 확인값 표시 · 최신 시세를 곧 조회합니다';
+  $('#report-description').textContent=run?`${run.succeeded}/${total}개 조회 완료 · 시세별 기준 시각 확인`:'저장된 확인값 표시 · 최신 시세를 곧 조회합니다';
   if(!run)return;
   const banner=$('#refresh-status'),failed=state.data.indicators.filter(i=>i.refreshError),gaps=state.data.indicators.filter(i=>i.live&&i.missing?.length),published=state.data.indicators.filter(i=>i.priceKind==='published'),delayed=state.data.indicators.filter(i=>i.live&&i.delayMinutes>0);
   banner.hidden=false;banner.classList.toggle('has-errors',failed.length>0);
-  banner.textContent=`${run.succeeded}/22개 지표 조회 완료. 장중을 포함한 최신 시세를 직전 완료 종가와 비교합니다.${failed.length?' '+failed.map(i=>i.name).join('·')+' 조회 실패: 마지막 확인값을 유지합니다.':''}${gaps.length?' '+gaps.map(i=>i.name).join('·')+'의 일부 비교 자료는 확인 불가입니다.':''}${published.length?' '+published.map(i=>i.name).join('·')+'은 장중 시세 미제공으로 최신 공식 공표값을 표시합니다.':''}${delayed.length?' '+delayed.map(i=>i.name+' '+delayLabel(i.delayMinutes)).join(' · ')+'.':''} 시세 지연이나 시장 휴장에 따라 기준 시각이 다를 수 있습니다.`;
+  banner.textContent=`${run.succeeded}/${total}개 지표 조회 완료. 장중을 포함한 최신 시세를 직전 완료 종가와 비교합니다.${failed.length?' '+failed.map(i=>i.name).join('·')+' 조회 실패: 마지막 확인값을 유지합니다.':''}${gaps.length?' '+gaps.map(i=>i.name).join('·')+'의 일부 비교 자료는 확인 불가입니다.':''}${published.length?' '+published.map(i=>i.name).join('·')+'은 장중 시세 미제공으로 최신 공식 공표값을 표시합니다.':''}${delayed.length?' '+delayed.map(i=>i.name+' '+delayLabel(i.delayMinutes)).join(' · ')+'.':''} 시세 지연이나 시장 휴장에 따라 기준 시각이 다를 수 있습니다.`;
 }
 function starButton(item,extra='') { const pressed=state.favorites.has(item.id); return `<button class="star-button ${extra}" data-favorite="${item.id}" aria-pressed="${pressed}" aria-label="${esc(item.name)} ${pressed?'관심 지표에서 제거':'관심 지표에 추가'}">${icon('star')}</button>`; }
 function filtered() { if(!state.data)return []; let rows=state.data.indicators.filter(item => (state.category==='all'||(state.category==='favorites'?state.favorites.has(item.id):item.category===state.category)) && (!state.query || `${item.name} ${item.ticker} ${countries[item.country]} ${groups[item.category].name}`.toLowerCase().includes(state.query.toLowerCase()))); if(state.sort==='down')rows.sort((a,b)=>(change(b.values.current,b.values.previous)??-Infinity)-(change(a.values.current,a.values.previous)??-Infinity));if(state.sort==='up')rows.sort((a,b)=>(change(a.values.current,a.values.previous)??Infinity)-(change(b.values.current,b.values.previous)??Infinity));if(state.sort==='name')rows.sort((a,b)=>a.name.localeCompare(b.name,'ko'));return rows; }
@@ -111,7 +111,7 @@ function renderTables() {
     return `<div class="table-group"><div class="group-heading"><div class="group-title">${icon(group.icon)}${group.name}<span>${members.length}</span></div><span class="group-note">${group.note}${isLive?' · 새로 조회됨':''}</span></div><div class="table-scroll" tabindex="0" role="region" aria-label="${group.name} 지표 표, 좁은 화면에서는 좌우로 스크롤"><table><caption class="sr-only">${group.name} 현재·직전·1주·1개월 수치와 변화율</caption><thead><tr><th scope="col">지표</th><th scope="col">현재 수치</th><th scope="col">직전 마감 / 대비</th><th scope="col">1주 비교 / 대비</th><th scope="col">1개월 비교 / 대비</th></tr></thead><tbody>${members.map(item=>`<tr><td><div class="indicator-cell"><span class="market-badge" data-country="${item.country}">${item.country}</span><div><button class="indicator-name" data-detail="${item.id}">${esc(item.name)}</button><span class="ticker">${esc(item.ticker)}${item.contract?' · '+esc(item.contract.replace('년 ','/').replace('월물','')):''}</span></div>${starButton(item)}</div></td><td><span class="cell-value">${number(item)}${item.category==='bonds'?'%':''}</span><span class="cell-meta">${shortDate(item.dates.current)} · ${esc(item.unit)}</span><span class="row-source ${item.refreshError?'refresh-error':''}">${esc(sourceLabel(item))} · ${rowStatus(item)}</span></td>${['previous','week','month'].map(p=>comparisonCell(item,p)).join('')}</tr>`).join('')}</tbody></table></div><div class="basis-note">${icon('info')}<span>${esc(basis)}</span></div></div>`;
   }).join('');
 }
-function renderAll() { renderStatus();renderKpis();renderPulse();renderChart();renderTables(); }
+function renderAll() { document.querySelectorAll('#navigation [data-category]').forEach(button=>{const category=button.dataset.category;button.querySelector('.nav-count').textContent=category==='all'?state.data.indicators.length:category==='favorites'?state.favorites.size:state.data.indicators.filter(i=>i.category===category).length;});renderStatus();renderKpis();renderPulse();renderChart();renderTables(); }
 function setCategory(category) {
   if(!['all','favorites',...Object.keys(groups)].includes(category))return;
   state.category=category;
@@ -146,22 +146,22 @@ function exportCsv() {
 }
 async function refreshMarkets(automatic=false) {
   if(state.refreshing||!state.data)return;
-  state.refreshing=true;const button=$('#refresh-button'),banner=$('#refresh-status');
+  state.refreshing=true;const total=state.data.indicators.length,button=$('#refresh-button'),banner=$('#refresh-status');
   button.disabled=true;button.innerHTML=icon('refresh')+'전체 조회 중…';button.setAttribute('aria-busy','true');
   $('#report-description').textContent='저장된 확인값 표시 · 현재 시세 조회 중…';
-  banner.hidden=false;banner.classList.remove('has-errors');banner.textContent=(automatic?'첫 진입 자동 조회 · ':'')+'22개 지표의 최신 시세와 직전 완료 종가를 조회하고 있습니다…';
+  banner.hidden=false;banner.classList.remove('has-errors');banner.textContent=(automatic?'첫 진입 자동 조회 · ':'')+total+'개 지표의 최신 시세와 직전 완료 종가를 조회하고 있습니다…';
   try {
-    const response=await fetch(API_ENDPOINT,{method:'POST',signal:AbortSignal.timeout(120000),cache:'no-store'});
+    const response=await fetch(API_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({ids:state.data.indicators.map(i=>i.id)}),signal:AbortSignal.timeout(120000),cache:'no-store'});
     if(!response.ok)throw new Error('전체 조회에 응답하지 못했습니다 (HTTP '+response.status+').');
     const result=await response.json();state.data=applyResults(state.data,result);
     state.lastRun={completedAt:result.completedAt,succeeded:result.results.filter(r=>r.ok).length,failed:result.results.filter(r=>!r.ok).length};
-    storage.set('econodash-market-cache-v4',{snapshot:cacheResponse(state.data,result.completedAt),lastResponse:result});
-    renderAll();if(!automatic||state.lastRun.failed)toast(state.lastRun.succeeded+'/22개 지표를 새로 조회했습니다.'+(state.lastRun.failed?' 실패한 지표는 이전 값을 유지합니다.':''));
+    storage.set('econodash-market-cache-v5',{snapshot:cacheResponse(state.data,result.completedAt),lastResponse:result});
+    renderAll();if(!automatic||state.lastRun.failed)toast(state.lastRun.succeeded+'/'+total+'개 지표를 새로 조회했습니다.'+(state.lastRun.failed?' 실패한 지표는 이전 값을 유지합니다.':''));
   } catch(error) {
     const message=error.name==='TimeoutError'?'조회 시간이 초과되었습니다.':error.message;
     const completedAt=new Date().toISOString();
     state.data={...state.data,indicators:state.data.indicators.map(i=>({...i,refreshError:message,attemptedAt:completedAt}))};
-    state.lastRun={completedAt,succeeded:0,failed:22};renderAll();toast(message+' 마지막 확인값을 유지합니다.');
+    state.lastRun={completedAt,succeeded:0,failed:total};renderAll();toast(message+' 마지막 확인값을 유지합니다.');
   } finally {state.refreshing=false;button.disabled=false;button.removeAttribute('aria-busy');button.innerHTML=icon('refresh')+'전체 재조회';}
 }
 function applyTheme(theme) {document.documentElement.dataset.theme=theme;$('#theme-button').innerHTML=icon(theme==='dark'?'sun':'moon');$('#theme-button').setAttribute('aria-label',theme==='dark'?'밝은 테마로 전환':'어두운 테마로 전환');}
@@ -187,8 +187,8 @@ for(const dialog of document.querySelectorAll('dialog'))dialog.addEventListener(
 new ResizeObserver(()=>renderChart()).observe($('#chart-container'));
 try {
   const response=await fetch('data.json');if(!response.ok)throw new Error('보고서 데이터를 불러오지 못했습니다.');state.data=await response.json();
-  if(!Array.isArray(state.data.indicators)||state.data.indicators.length!==22)throw new Error('지표 데이터 구성을 확인하지 못했습니다.');
-  const cached=storage.get('econodash-market-cache-v4');
+  if(!Array.isArray(state.data.indicators)||!state.data.indicators.length||new Set(state.data.indicators.map(i=>i.id)).size!==state.data.indicators.length)throw new Error('지표 데이터 구성을 확인하지 못했습니다.');
+  const cached=storage.get('econodash-market-cache-v5');
   if(cached?.snapshot&&cached?.lastResponse) {
     try {
       state.data=applyResults(state.data,cached.snapshot);state.data=applyResults(state.data,cached.lastResponse);
