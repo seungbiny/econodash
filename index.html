@@ -55,7 +55,13 @@
           <div class="chart-container" id="chart-container"></div>
           <div class="chart-caption"><span><i></i>비교 시점 5개의 관측값</span><span id="chart-caption-date"></span></div>
         </div>
-        <div class="panel pulse-panel"><div class="panel-heading"><div><span class="section-kicker">THE BIG PICTURE</span><h2>시장 한눈에</h2></div><span class="subtle-tag">직전 대비</span></div><div id="pulse-summary"></div><div class="pulse-note"><span data-icon="info"></span>상승·하락은 수치의 방향을 뜻합니다.<br>각 지표의 기준일은 서로 다를 수 있어요.</div></div>
+        <div class="panel pulse-panel">
+          <div class="panel-heading"><div><span class="section-kicker">THE BIG PICTURE</span><h2>시장 한눈에</h2></div><span class="subtle-tag" id="pulse-period-label">직전 마감 대비</span></div>
+          <div class="pulse-periods" role="group" aria-label="시장 한눈에 비교 기간"><button type="button" data-pulse-period="previous" aria-pressed="true">직전 마감</button><button type="button" data-pulse-period="week" aria-pressed="false">1주일</button><button type="button" data-pulse-period="month" aria-pressed="false">1개월</button><button type="button" data-pulse-period="quarter" aria-pressed="false">3개월</button></div>
+          <p class="pulse-period-note" id="pulse-period-note"></p>
+          <div id="pulse-summary" role="status" aria-live="polite"></div>
+          <div class="pulse-note"><span data-icon="info"></span>상승·하락은 수치의 방향을 뜻합니다.<br>각 지표의 기준일은 서로 다를 수 있어요.</div>
+        </div>
       </section>
       <section class="indicators-section" aria-labelledby="indicators-title">
         <div class="section-heading"><div><h2 id="indicators-title">전체 경제 지표 <span id="visible-count">31</span></h2><p>현재 시세와 직전 마감·1주·1개월·3개월 비교를 살펴보세요.</p></div><label class="search-field"><span data-icon="search"></span><input id="search-input" type="search" placeholder="지표 검색" aria-label="지표 이름 또는 국가 검색"><kbd>/</kbd></label></div>

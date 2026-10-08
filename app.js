@@ -35,7 +35,8 @@ const storage = {
   set(key,value) { try { localStorage.setItem(key,JSON.stringify(value)); return true; } catch { return false; } },
 };
 const savedFavorites = storage.get('econodash-favorites');
-const state = { data:null,category:'all',query:'',sort:'default',selected:'kospi',favorites:new Set(Array.isArray(savedFavorites) ? savedFavorites.filter(v=>typeof v==='string') : []),refreshing:false,lastRun:null };
+const state = { data:null,category:'all',query:'',sort:'default',selected:'kospi',pulsePeriod:'previous',favorites:new Set(Array.isArray(savedFavorites) ? savedFavorites.filter(v=>typeof v==='string') : []),refreshing:false,lastRun:null };
+const pulsePeriods={previous:'직전 마감',week:'1주일',month:'1개월',quarter:'3개월'};
 let toastTimer;
 function toast(message, persistent = false) {
   clearTimeout(toastTimer); $('#toast').textContent=message; $('#toast').classList.add('visible');
@@ -75,9 +76,22 @@ function renderKpis() {
   }).join('');
 }
 function renderPulse() {
-  const items=state.data.indicators,ups=items.filter(i=>change(i.values.current,i.values.previous)>0).length,downs=items.filter(i=>change(i.values.current,i.values.previous)<0).length,flat=items.length-ups-downs;
-  const rows=Object.entries(groups).map(([key,group])=>{const members=items.filter(i=>i.category===key);const up=members.filter(i=>change(i.values.current,i.values.previous)>0).length;const down=members.filter(i=>change(i.values.current,i.values.previous)<0).length;return `<div class="pulse-bar-row"><span>${group.name}</span><span class="pulse-bar"><i style="width:${up/members.length*100}%;background:var(--up)"></i><i style="width:${down/members.length*100}%;background:var(--down)"></i></span><span>${up}↑ ${down}↓</span></div>`;}).join('');
-  $('#pulse-summary').innerHTML=`<div class="pulse-main"><div class="pulse-ring" style="--up-angle:${ups/items.length*360}deg;--down-angle:${(ups+downs)/items.length*360}deg"><div>${items.length}<small>전체 지표</small></div></div><div class="pulse-counts"><div><i style="background:var(--up)"></i>상승<strong>${ups}</strong></div><div><i style="background:var(--down)"></i>하락<strong>${downs}</strong></div><div><i style="background:var(--line)"></i>보합<strong>${flat}</strong></div></div></div><div>${rows}</div>`;
+  if(!state.data)return;
+  const items=state.data.indicators,period=state.pulsePeriod,label=pulsePeriods[period],{up,down,flat,missing}=pulseCounts(items,period),total=items.length||1;
+  $('#pulse-period-label').textContent=label+' 대비';
+  $('#pulse-period-note').textContent=`${label==='직전 마감'?label:label+' 전'} 대비 · ${items.length-missing}/${items.length}개 지표 비교${missing?' · 비교 자료 없는 '+missing+'개 제외':''}`;
+  document.querySelectorAll('[data-pulse-period]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.pulsePeriod===period)));
+  const rows=Object.entries(groups).map(([key,group])=>{const members=items.filter(i=>i.category===key),counts=pulseCounts(members,period),total=members.length||1;return `<div class="pulse-bar-row"><span>${group.name}</span><span class="pulse-bar"><i style="width:${counts.up/total*100}%;background:var(--up)"></i><i style="width:${counts.down/total*100}%;background:var(--down)"></i></span><span>${counts.up}↑ ${counts.down}↓</span></div>`;}).join('');
+  $('#pulse-summary').innerHTML=`<div class="pulse-main"><div class="pulse-ring" style="--up-angle:${up/total*360}deg;--down-angle:${(up+down)/total*360}deg"><div>${items.length}<small>전체 지표</small></div></div><div class="pulse-counts"><div><i style="background:var(--up)"></i>상승<strong>${up}</strong></div><div><i style="background:var(--down)"></i>하락<strong>${down}</strong></div><div><i style="background:var(--line)"></i>보합<strong>${flat}</strong></div>${missing?`<div><i style="background:var(--muted)"></i>비교 불가<strong>${missing}</strong></div>`:''}</div></div><div>${rows}</div>`;
+}
+function pulseCounts(items,period) {
+  const counts={up:0,down:0,flat:0,missing:0};
+  for(const item of items) {
+    const current=item.values.current,baseline=item.values[period];
+    if(!Number.isFinite(current)||!Number.isFinite(baseline)){counts.missing++;continue;}
+    counts[current>baseline?'up':current<baseline?'down':'flat']++;
+  }
+  return counts;
 }
 function renderChart() {
   if(!state.data)return;
@@ -167,6 +181,7 @@ async function refreshMarkets(automatic=false) {
 function applyTheme(theme) {document.documentElement.dataset.theme=theme;$('#theme-button').innerHTML=icon(theme==='dark'?'sun':'moon');$('#theme-button').setAttribute('aria-label',theme==='dark'?'밝은 테마로 전환':'어두운 테마로 전환');}
 mountIcons();applyTheme(storage.get('econodash-theme')==='dark'?'dark':'light');
 document.addEventListener('click',event=>{
+  const period=event.target.closest('[data-pulse-period]');if(period){if(Object.hasOwn(pulsePeriods,period.dataset.pulsePeriod)){state.pulsePeriod=period.dataset.pulsePeriod;renderPulse();}return;}
   const favorite=event.target.closest('[data-favorite]');if(favorite){event.stopPropagation();toggleFavorite(favorite.dataset.favorite);return;}
   const category=event.target.closest('[data-category]');if(category){setCategory(category.dataset.category);return;}
   const detail=event.target.closest('[data-detail]');if(detail){openDetail(detail.dataset.detail);return;}
