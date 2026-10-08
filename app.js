@@ -77,12 +77,11 @@ function renderKpis() {
 }
 function renderPulse() {
   if(!state.data)return;
-  const items=state.data.indicators,period=state.pulsePeriod,label=pulsePeriods[period],{up,down,flat,missing}=pulseCounts(items,period),total=items.length||1;
+  const items=state.data.indicators,period=state.pulsePeriod,label=pulsePeriods[period];
   $('#pulse-period-label').textContent=label+' 대비';
-  $('#pulse-period-note').textContent=`${label==='직전 마감'?label:label+' 전'} 대비 · ${items.length-missing}/${items.length}개 지표 비교${missing?' · 비교 자료 없는 '+missing+'개 제외':''}`;
   document.querySelectorAll('[data-pulse-period]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.pulsePeriod===period)));
   const rows=Object.entries(groups).map(([key,group])=>{const members=items.filter(i=>i.category===key),counts=pulseCounts(members,period),total=members.length||1;return `<div class="pulse-bar-row"><span>${group.name}</span><span class="pulse-bar"><i style="width:${counts.up/total*100}%;background:var(--up)"></i><i style="width:${counts.down/total*100}%;background:var(--down)"></i></span><span>${counts.up}↑ ${counts.down}↓</span></div>`;}).join('');
-  $('#pulse-summary').innerHTML=`<div class="pulse-main"><div class="pulse-ring" style="--up-angle:${up/total*360}deg;--down-angle:${(up+down)/total*360}deg"><div>${items.length}<small>전체 지표</small></div></div><div class="pulse-counts"><div><i style="background:var(--up)"></i>상승<strong>${up}</strong></div><div><i style="background:var(--down)"></i>하락<strong>${down}</strong></div><div><i style="background:var(--line)"></i>보합<strong>${flat}</strong></div>${missing?`<div><i style="background:var(--muted)"></i>비교 불가<strong>${missing}</strong></div>`:''}</div></div><div>${rows}</div>`;
+  $('#pulse-summary').innerHTML=rows;
 }
 function pulseCounts(items,period) {
   const counts={up:0,down:0,flat:0,missing:0};
