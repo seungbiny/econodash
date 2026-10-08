@@ -8,7 +8,7 @@ import {handleRefresh} from '../lib/refresh-api.mjs';
 const root=fileURLToPath(new URL('../',import.meta.url));
 const port=Number(process.env.PORT||4174);
 const prefix='/econodash/';
-const assets=new Set(['index.html','app.js','refresh-state.js','styles.css','data.json','favicon.svg']);
+const assets=new Set(['index.html','app.js','refresh-state.js','chart-comparison.js','styles.css','data.json','favicon.svg']);
 const types={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.svg':'image/svg+xml'};
 
 http.createServer(async (incoming,outgoing)=>{

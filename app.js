@@ -1,5 +1,6 @@
 const API_ENDPOINT=document.querySelector('meta[name="econodash-api-endpoint"]')?.content||'/api/refresh';
 import {applyResults,cacheResponse} from './refresh-state.js';
+import {chartPeriods,chartPeriodLabels,compareIndicators} from './chart-comparison.js';
 const paths = {
   grid:'<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
   chart:'<path d="M4 4v16h16M7 14l4-4 4 3 5-7"/>',
@@ -35,7 +36,7 @@ const storage = {
   set(key,value) { try { localStorage.setItem(key,JSON.stringify(value)); return true; } catch { return false; } },
 };
 const savedFavorites = storage.get('econodash-favorites');
-const state = { data:null,category:'all',query:'',sort:'default',selected:'kospi',pulsePeriod:'previous',favorites:new Set(Array.isArray(savedFavorites) ? savedFavorites.filter(v=>typeof v==='string') : []),refreshing:false,lastRun:null };
+const state = { data:null,category:'all',query:'',sort:'default',selected:'kospi',compared:'sp500',pulsePeriod:'previous',favorites:new Set(Array.isArray(savedFavorites) ? savedFavorites.filter(v=>typeof v==='string') : []),refreshing:false,lastRun:null };
 const pulsePeriods={previous:'직전 마감',week:'1주일',month:'1개월',quarter:'3개월'};
 let toastTimer;
 function toast(message, persistent = false) {
@@ -85,20 +86,30 @@ function pulseCounts(items,period) {
 }
 function renderChart() {
   if(!state.data)return;
-  const item=state.data.indicators.find(i=>i.id===state.selected);
-  $('#chart-value').textContent=number(item);$('#chart-change').innerHTML=changeHtml(item,'month',true);$('#chart-unit').textContent=`${item.unit} · 1개월 대비`;
-  const data=['quarter','month','week','previous','current'].map(key=>({key,value:item.values[key],date:item.dates[key]})).filter(p=>Number.isFinite(p.value));
-  const container=$('#chart-container'),width=Math.max(container.clientWidth,240),height=173,pad={left:47,right:20,top:25,bottom:34};
-  const values=data.map(d=>d.value),low=Math.min(...values),high=Math.max(...values),span=(high-low)||Math.abs(high)*.02||1,min=low-span*.27,max=high+span*.3;
-  const x=i=>pad.left+i/(Math.max(data.length-1,1))*(width-pad.left-pad.right),y=v=>pad.top+(max-v)/(max-min)*(height-pad.top-pad.bottom);
-  const points=data.map((d,i)=>[x(i),y(d.value)]),line=points.map(([px,py],i)=>`${i?'L':'M'}${px.toFixed(2)},${py.toFixed(2)}`).join(' ');
-  const labels={quarter:'3개월 비교',month:'1개월 비교',week:'1주 비교',previous:'직전 마감',current:item.priceKind==='published'?'최신 공표':'현재 시세'};
-  const ticks=Array.from({length:4},(_,i)=>min+(max-min)*i/3);
-  const tickFormat=v=>Math.abs(v)>=1000000?`${(v/1000000).toFixed(1)}M`:Math.abs(v)>=10000?`${(v/1000).toFixed(1)}K`:v.toLocaleString('en-US',{maximumFractionDigits:item.category==='bonds'?2:Math.abs(v)<10?2:0});
-  const chartAlt=`${item.name}, ${data.map(d=>`${labels[d.key]} ${number(item,d.value)}, ${longDate(d.date)}`).join('; ')}`;
-  const end=points[points.length-1];
-  container.innerHTML=`<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="${esc(chartAlt)}"><defs><linearGradient id="chart-gradient" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="var(--chart)" stop-opacity=".14"/><stop offset="100%" stop-color="var(--chart)" stop-opacity=".01"/></linearGradient></defs>${ticks.map(t=>`<line class="chart-grid" x1="${pad.left}" x2="${width-pad.right}" y1="${y(t)}" y2="${y(t)}"/><text class="chart-axis-text" x="${pad.left-10}" y="${y(t)+3}" text-anchor="end">${tickFormat(t)}</text>`).join('')}<path d="${line} L${end[0]},${height-pad.bottom} L${points[0][0]},${height-pad.bottom} Z" fill="url(#chart-gradient)"/><path class="chart-line" d="${line}"/>${data.map((d,i)=>`<circle class="chart-point" cx="${x(i)}" cy="${y(d.value)}" r="3.5"><title>${labels[d.key]} · ${longDate(d.date)} · ${number(item,d.value)} ${item.unit}</title></circle><text class="chart-axis-text" x="${x(i)}" y="${height-17}" text-anchor="${i===0?'start':i===data.length-1?'end':'middle'}">${labels[d.key]}</text><text class="chart-axis-text" x="${x(i)}" y="${height-4}" text-anchor="${i===0?'start':i===data.length-1?'end':'middle'}">${displayDate(d.date).slice(5,10).replace('-','.')}</text>`).join('')}<text class="chart-value-label" x="${end[0]}" y="${Math.max(12,end[1]-12)}" text-anchor="end">${number(item)}</text></svg>`;
-  $('#chart-caption-date').textContent=`${data[0].date.slice(0,10).replaceAll('-','.')} — ${displayDate(item.dates.current).replaceAll('-','.')}`;
+  const items=[state.selected,state.compared].map(id=>state.data.indicators.find(i=>i.id===id));
+  const {baseline,series}=compareIndicators(items),baseLabel=chartPeriodLabels[baseline];
+  $('#chart-legend').innerHTML=series.map(({item,points},index)=>`<div class="chart-series-card" data-series="${index}"><span class="chart-series-name"><i></i>${esc(item.name)}</span><strong>${number(item)} <small>${esc(item.unit)}</small></strong><span class="change ${changeClass(points[4].percent)}">${signed(points[4].percent)}${points[4].percent===null?'':'%'}<small>${baseline?` · ${baseLabel} 대비`:''}</small></span></div>`).join('');
+  $('#chart-basis').textContent=baseline?`각 지표의 ${baseLabel} 값을 0%로 맞춘 변화율`:'두 지표에 공통으로 확인된 비교 기준이 없습니다.';
+  $('#chart-caption-date').textContent='기준일은 지표마다 다를 수 있습니다.';
+  $('#chart-point-detail').textContent='점에 마우스를 올리거나 선택하면 실제 수치와 기준일을 볼 수 있습니다.';
+  const container=$('#chart-container');
+  if(!baseline){container.innerHTML='<div class="chart-empty">비교할 수 있는 기준값이 없습니다.</div>';return;}
+  const width=Math.max(container.clientWidth,240),height=207,pad={left:54,right:22,top:15,bottom:32};
+  const values=series.flatMap(s=>s.points.map(p=>p.percent)).filter(Number.isFinite),low=Math.min(0,...values),high=Math.max(0,...values),span=high-low||2,min=low-span*.16,max=high+span*.16;
+  const x=index=>pad.left+index/4*(width-pad.left-pad.right),y=value=>pad.top+(max-value)/(max-min)*(height-pad.top-pad.bottom);
+  const ticks=[...Array.from({length:5},(_,index)=>min+(max-min)*index/4).filter(value=>Math.abs(value)>(max-min)/20),0].sort((a,b)=>a-b);
+  const tickFormat=value=>`${signed(value,Math.max(Math.abs(min),Math.abs(max))<1?2:1)}%`;
+  const chartAlt=`${baseLabel} 대비 변화율. ${series.map(({item,points})=>`${item.name}: ${points.map(p=>`${chartPeriodLabels[p.key]} ${number(item,p.value)} ${item.unit}, ${signed(p.percent)}${p.percent===null?'':'%'}, ${longDate(p.date)}`).join('; ')}`).join('. ')}`;
+  const lines=series.map(({item,points},index)=>{
+    let connected=false;
+    const line=points.map(p=>{if(p.percent===null){connected=false;return '';}const command=connected?'L':'M';connected=true;return `${command}${x(p.index).toFixed(2)},${y(p.percent).toFixed(2)}`;}).join(' ');
+    return `<g class="chart-series" data-series="${index}" data-indicator="${esc(item.id)}"><path class="chart-line" d="${line}"/>${points.filter(p=>p.percent!==null).map(p=>`<circle class="chart-point" cx="${x(p.index)}" cy="${y(p.percent)}" r="${index?4:3}" tabindex="0" data-chart-point data-series="${index}" data-period="${p.key}" aria-label="${esc(`${item.name} · ${chartPeriodLabels[p.key]} · ${number(item,p.value)} ${item.unit} · ${signed(p.percent)}% · ${longDate(p.date)}`)}"><title>${esc(`${item.name} · ${chartPeriodLabels[p.key]} · ${number(item,p.value)} ${item.unit} · ${signed(p.percent)}% · ${longDate(p.date)}`)}</title></circle>`).join('')}</g>`;
+  }).join('');
+  container.innerHTML=`<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="${esc(chartAlt)}">${ticks.map(t=>`<line class="chart-grid ${t===0?'chart-zero':''}" x1="${pad.left}" x2="${width-pad.right}" y1="${y(t)}" y2="${y(t)}"/><text class="chart-axis-text" x="${pad.left-8}" y="${y(t)+3}" text-anchor="end">${tickFormat(t)}</text>`).join('')}${lines}${chartPeriods.map((key,index)=>`<text class="chart-axis-text" x="${x(index)}" y="${height-12}" text-anchor="${index===0?'start':index===4?'end':'middle'}">${chartPeriodLabels[key]}</text>`).join('')}</svg>`;
+}
+function showChartPoint(target) {
+  const point=target.closest?.('[data-chart-point]');
+  if(point)$('#chart-point-detail').textContent=point.getAttribute('aria-label');
 }
 function comparisonCell(item,key) {
   const bp=item.category==='bonds'&&Number.isFinite(item.values[key])?` · ${signed((item.values.current-item.values[key])*100,1)}bp`:'';
@@ -183,6 +194,8 @@ document.addEventListener('keydown',event=>{
 $('#search-input').addEventListener('input',event=>{state.query=event.target.value.trim();renderTables();});
 $('#sort-select').addEventListener('change',event=>{state.sort=event.target.value;renderTables();});
 $('#chart-select').addEventListener('change',event=>{state.selected=event.target.value;renderChart();});
+$('#chart-select-second').addEventListener('change',event=>{state.compared=event.target.value;renderChart();});
+for(const event of ['pointerover','focusin','click'])$('#chart-container').addEventListener(event,event=>showChartPoint(event.target));
 $('#theme-button').addEventListener('click',()=>{const theme=document.documentElement.dataset.theme==='dark'?'light':'dark';applyTheme(theme);storage.set('econodash-theme',theme);});
 $('#export-button').addEventListener('click',exportCsv);$('#refresh-button').addEventListener('click',()=>refreshMarkets());
 for(const id of ['method-button','footer-method'])$('#'+id).addEventListener('click',()=>$('#method-dialog').showModal());
@@ -199,6 +212,9 @@ try {
     } catch { /* Invalid or outdated cache falls back to the initial report. */ }
   }
   state.favorites=new Set([...state.favorites].filter(id=>state.data.indicators.some(i=>i.id===id)));
-  $('#chart-select').innerHTML=state.data.indicators.map(i=>`<option value="${i.id}">${esc(i.name)}</option>`).join('');
+  for(const [id,key] of [['chart-select','selected'],['chart-select-second','compared']]) {
+    const select=$('#'+id);select.innerHTML=state.data.indicators.map(i=>`<option value="${i.id}">${esc(i.name)}</option>`).join('');
+    select.value=state[key];
+  }
   $('#load-status').classList.add('hidden');renderAll();await refreshMarkets(true);
 }catch(error){$('#load-status').textContent=`${error.message} 페이지를 새로고침해 주세요.`;$('#refresh-button').disabled=true;$('#export-button').disabled=true;}
