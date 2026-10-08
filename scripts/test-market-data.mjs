@@ -1,11 +1,21 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
-import {monthBefore,compareSeries,compareQuote,yahooRows,yahooQuote,yahooTradeDate,futuresContract,naverBondSnapshot,cryptoComparisons,tencentIndexRows,tencentIndexQuote,IDS,LEGACY_IDS} from '../lib/market-data.mjs';
+import {monthBefore,compareSeries,compareQuote,yahooRows,yahooQuote,yahooTradeDate,futuresContract,naverBondSnapshot,cryptoComparisons,tencentIndexRows,tencentIndexQuote,IDS,LEGACY_IDS,CRYPTO_MARKETS} from '../lib/market-data.mjs';
 import {applyResults,cacheResponse,validateResponse} from '../refresh-state.js';
-assert.equal(IDS.length,32);assert.equal(new Set(IDS).size,32);
+assert.equal(IDS.length,34);assert.equal(new Set(IDS).size,34);
 assert.equal(LEGACY_IDS.length,22);assert.ok(!LEGACY_IDS.includes('chf'),'Old dashboards retain their original indicator list');
 const dashboard=JSON.parse(await fs.readFile(new URL('../data.json',import.meta.url),'utf8'));
 assert.deepEqual(new Set(dashboard.indicators.map(i=>i.id)),new Set(IDS),'Every displayed indicator has a matching refresh provider');
+assert.deepEqual(CRYPTO_MARKETS,{btc:'KRW-BTC',eth:'KRW-ETH',xrp:'KRW-XRP',sol:'KRW-SOL'});
+assert.deepEqual(dashboard.indicators.filter(i=>i.category==='crypto').map(i=>i.id),Object.keys(CRYPTO_MARKETS));
+assert.ok(!LEGACY_IDS.includes('xrp')&&!LEGACY_IDS.includes('sol'),'Old dashboards retain their original crypto list');
+for(const [id,market] of Object.entries(CRYPTO_MARKETS)) {
+  const item=dashboard.indicators.find(i=>i.id===id);
+  assert.equal(item.unit,'원/개');assert.equal(item.ticker,market.slice(4)+' / KRW');
+  assert.equal(new URL(item.source).searchParams.get('markets'),market,'Each crypto uses its own KRW ticker');
+  const sample=cryptoComparisons({market,trade_price:100,timestamp:Date.parse('2026-10-08T03:00:00Z')},[{candle_date_time_utc:'2026-10-07T00:00:00',trade_price:90}]);
+  assert.equal(new URL(sample.comparisonSources.previous).searchParams.get('market'),market);
+}
 assert.deepEqual(dashboard.indicators.filter(i=>i.category==='fx').map(i=>i.id),['usd','eur','jpy','cny','chf']);
 const franc=dashboard.indicators.find(i=>i.id==='chf');
 assert.equal(franc.country,'CH');assert.equal(franc.unit,'원/1프랑');assert.equal(franc.decimals,2);
@@ -115,4 +125,4 @@ assert.equal(bondUpdated.indicators[0].delayMinutes,120);assert.equal(applyResul
 assert.throws(()=>applyResults(bondBase,{...bondResponse,results:[{...bondResponse.results[0],delayMinutes:-1}]}));
 assert.throws(()=>applyResults(base,{completedAt,results:[success,success]}));
 assert.throws(()=>applyResults(base,{completedAt,results:[{...success,source:'javascript:alert(1)'},response.results[1]]}));
-console.log('PASS: 32 providers, CHF/KRW and legacy response compatibility, 12 bond maturities, country/maturity validation, trading time zones, intraday quotes, delay metadata, completed comparisons, futures contracts, crypto cutoffs, partial failure retention and cache');
+console.log('PASS: 34 providers, four KRW crypto pairs, CHF/KRW and legacy response compatibility, 12 bond maturities, country/maturity validation, trading time zones, intraday quotes, delay metadata, completed comparisons, futures contracts, crypto cutoffs, partial failure retention and cache');
