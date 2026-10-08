@@ -1,0 +1,668 @@
+{
+  "reportDate": "2026-10-08T08:40:26+09:00",
+  "title": "경제 지표 대시보드 정리",
+  "reportUrl": "https://chatgpt.com/s/cx_6ac707fd7a188191aef08f19a861ea0c",
+  "kind": "report-snapshot",
+  "indicators": [
+    {
+      "id": "kospi",
+      "category": "stocks",
+      "name": "코스피",
+      "ticker": "KOSPI",
+      "country": "KR",
+      "unit": "pt",
+      "decimals": 2,
+      "source": "https://www.investing.com/indices/kospi-historical-data",
+      "contract": null,
+      "values": {
+        "current": 6803.9,
+        "previous": 6941.39,
+        "week": 6838.04,
+        "month": 6995.39
+      },
+      "dates": {
+        "current": "2026-10-07",
+        "previous": "2026-10-06",
+        "week": "2026-09-30",
+        "month": "2026-09-07"
+      },
+      "note": "",
+      "comparisonSources": {
+        "current": "https://www.investing.com/indices/kospi-historical-data",
+        "previous": "https://www.investing.com/indices/kospi-historical-data",
+        "week": "https://www.investing.com/indices/kospi-historical-data",
+        "month": "https://www.investing.com/indices/kospi-historical-data"
+      }
+    },
+    {
+      "id": "kosdaq",
+      "category": "stocks",
+      "name": "코스닥",
+      "ticker": "KOSDAQ",
+      "country": "KR",
+      "unit": "pt",
+      "decimals": 2,
+      "source": "https://www.investing.com/indices/kosdaq-historical-data",
+      "contract": null,
+      "values": {
+        "current": 898.43,
+        "previous": 919.92,
+        "week": 855.91,
+        "month": 822.19
+      },
+      "dates": {
+        "current": "2026-10-07",
+        "previous": "2026-10-06",
+        "week": "2026-09-30",
+        "month": "2026-09-07"
+      },
+      "note": "",
+      "comparisonSources": {
+        "current": "https://www.investing.com/indices/kosdaq-historical-data",
+        "previous": "https://www.investing.com/indices/kosdaq-historical-data",
+        "week": "https://www.investing.com/indices/kosdaq-historical-data",
+        "month": "https://www.investing.com/indices/kosdaq-historical-data"
+      }
+    },
+    {
+      "id": "sp500",
+      "category": "stocks",
+      "name": "S&P 500",
+      "ticker": "S&P 500",
+      "country": "US",
+      "unit": "pt",
+      "decimals": 2,
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1786752000&period2=1791416250&interval=1d",
+      "contract": null,
+      "values": {
+        "current": 7801.77,
+        "previous": 7818.93,
+        "week": 7651.54,
+        "month": 7718.6
+      },
+      "dates": {
+        "current": "2026-10-07",
+        "previous": "2026-10-06",
+        "week": "2026-09-30",
+        "month": "2026-09-04"
+      },
+      "note": "",
+      "comparisonSources": {
+        "current": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1786752000&period2=1791416250&interval=1d",
+        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1786752000&period2=1791416250&interval=1d",
+        "week": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1786752000&period2=1791416250&interval=1d",
+        "month": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1786752000&period2=1791416250&interval=1d"
+      }
+    },
+    {
+      "id": "nasdaq",
+      "category": "stocks",
+      "name": "나스닥 종합",
+      "ticker": "NASDAQ",
+      "country": "US",
+      "unit": "pt",
+      "decimals": 2,
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1786752000&period2=1791416250&interval=1d",
+      "contract": null,
+      "values": {
+        "current": 27538.69,
+        "previous": 27599.79,
+        "week": 26861.06,
+        "month": 26506.99
+      },
+      "dates": {
+        "current": "2026-10-07",
+        "previous": "2026-10-06",
+        "week": "2026-09-30",
+        "month": "2026-09-04"
+      },
+      "note": "",
+      "comparisonSources": {
+        "current": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1786752000&period2=1791416250&interval=1d",
+        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1786752000&period2=1791416250&interval=1d",
+        "week": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1786752000&period2=1791416250&interval=1d",
+        "month": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1786752000&period2=1791416250&interval=1d"
+      }
+    },
+    {
+      "id": "dow",
+      "category": "stocks",
+      "name": "다우존스",
+      "ticker": "DOW JONES",
+      "country": "US",
+      "unit": "pt",
+      "decimals": 2,
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/%5EDJI?period1=1786752000&period2=1791416250&interval=1d",
+      "contract": null,
+      "values": {
+        "current": 51179.87,
+        "previous": 51521.28,
+        "week": 50906.05,
+        "month": 53414.25
+      },
+      "dates": {
+        "current": "2026-10-07",
+        "previous": "2026-10-06",
+        "week": "2026-09-30",
+        "month": "2026-09-04"
+      },
+      "note": "",
+      "comparisonSources": {
+        "current": "https://query1.finance.yahoo.com/v8/finance/chart/%5EDJI?period1=1786752000&period2=1791416250&interval=1d",
+        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/%5EDJI?period1=1786752000&period2=1791416250&interval=1d",
+        "week": "https://query1.finance.yahoo.com/v8/finance/chart/%5EDJI?period1=1786752000&period2=1791416250&interval=1d",
+        "month": "https://query1.finance.yahoo.com/v8/finance/chart/%5EDJI?period1=1786752000&period2=1791416250&interval=1d"
+      }
+    },
+    {
+      "id": "shanghai",
+      "category": "stocks",
+      "name": "상하이 종합",
+      "ticker": "SSE COMPOSITE",
+      "country": "CN",
+      "unit": "pt",
+      "decimals": 2,
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/000001.SS?period1=1786752000&period2=1791416250&interval=1d",
+      "contract": null,
+      "values": {
+        "current": 3842.2,
+        "previous": 3830.45,
+        "week": 3936.52,
+        "month": 3952.18
+      },
+      "dates": {
+        "current": "2026-09-30",
+        "previous": "2026-09-29",
+        "week": "2026-09-23",
+        "month": "2026-08-28"
+      },
+      "note": "중국 증시 휴장으로 9월 30일 최근 마감값을 유지합니다.",
+      "comparisonSources": {
+        "current": "https://query1.finance.yahoo.com/v8/finance/chart/000001.SS?period1=1786752000&period2=1791416250&interval=1d",
+        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/000001.SS?period1=1786752000&period2=1791416250&interval=1d",
+        "week": "https://query1.finance.yahoo.com/v8/finance/chart/000001.SS?period1=1786752000&period2=1791416250&interval=1d",
+        "month": "https://query1.finance.yahoo.com/v8/finance/chart/000001.SS?period1=1786752000&period2=1791416250&interval=1d"
+      }
+    },
+    {
+      "id": "shenzhen",
+      "category": "stocks",
+      "name": "선전 종합",
+      "ticker": "SZSE COMPOSITE",
+      "country": "CN",
+      "unit": "pt",
+      "decimals": 2,
+      "source": "https://www.investing.com/indices/szse-composite-historical-data",
+      "contract": null,
+      "values": {
+        "current": 2404.48,
+        "previous": 2410.04,
+        "week": 2525.92,
+        "month": 2550.17
+      },
+      "dates": {
+        "current": "2026-09-30",
+        "previous": "2026-09-29",
+        "week": "2026-09-23",
+        "month": "2026-08-28"
+      },
+      "note": "중국 증시 휴장으로 9월 30일 최근 마감값을 유지합니다.",
+      "comparisonSources": {
+        "current": "https://www.investing.com/indices/szse-composite-historical-data",
+        "previous": "https://www.investing.com/indices/szse-composite-historical-data",
+        "week": "https://www.investing.com/indices/szse-composite-historical-data",
+        "month": "https://ng.investing.com/indices/szse-composite-historical-data"
+      }
+    },
+    {
+      "id": "nikkei",
+      "category": "stocks",
+      "name": "닛케이 225",
+      "ticker": "NIKKEI 225",
+      "country": "JP",
+      "unit": "pt",
+      "decimals": 2,
+      "source": "https://www.investing.com/indices/japan-ni225-historical-data",
+      "contract": null,
+      "values": {
+        "current": 70035.71,
+        "previous": 70683.98,
+        "week": 66753.72,
+        "month": 66399.84
+      },
+      "dates": {
+        "current": "2026-10-07",
+        "previous": "2026-10-06",
+        "week": "2026-09-30",
+        "month": "2026-09-07"
+      },
+      "note": "",
+      "comparisonSources": {
+        "current": "https://www.investing.com/indices/japan-ni225-historical-data",
+        "previous": "https://www.investing.com/indices/japan-ni225-historical-data",
+        "week": "https://www.investing.com/indices/japan-ni225-historical-data",
+        "month": "https://www.investing.com/indices/japan-ni225-historical-data"
+      }
+    },
+    {
+      "id": "hangseng",
+      "category": "stocks",
+      "name": "항셍",
+      "ticker": "HANG SENG",
+      "country": "HK",
+      "unit": "pt",
+      "decimals": 2,
+      "source": "https://www.investing.com/indices/hang-sen-40-historical-data",
+      "contract": null,
+      "values": {
+        "current": 24130.5,
+        "previous": 24280.56,
+        "week": 24613.27,
+        "month": 25413.12
+      },
+      "dates": {
+        "current": "2026-10-07",
+        "previous": "2026-10-06",
+        "week": "2026-09-30",
+        "month": "2026-09-07"
+      },
+      "note": "",
+      "comparisonSources": {
+        "current": "https://www.investing.com/indices/hang-sen-40-historical-data",
+        "previous": "https://www.investing.com/indices/hang-sen-40-historical-data",
+        "week": "https://www.investing.com/indices/hang-sen-40-historical-data",
+        "month": "https://www.investing.com/indices/hang-sen-40-historical-data"
+      }
+    },
+    {
+      "id": "kr10",
+      "category": "bonds",
+      "name": "한국 10년물",
+      "ticker": "KOREA 10Y",
+      "country": "KR",
+      "unit": "%",
+      "decimals": 3,
+      "source": "https://www.investing.com/rates-bonds/south-korea-10-year-bond-yield-historical-data",
+      "contract": null,
+      "values": {
+        "current": 4.379,
+        "previous": 4.373,
+        "week": 4.401,
+        "month": 4.381
+      },
+      "dates": {
+        "current": "2026-10-07",
+        "previous": "2026-10-06",
+        "week": "2026-09-30",
+        "month": "2026-09-07"
+      },
+      "note": "",
+      "comparisonSources": {
+        "current": "https://www.investing.com/rates-bonds/south-korea-10-year-bond-yield-historical-data",
+        "previous": "https://www.investing.com/rates-bonds/south-korea-10-year-bond-yield-historical-data",
+        "week": "https://www.investing.com/rates-bonds/south-korea-10-year-bond-yield-historical-data",
+        "month": "https://www.investing.com/rates-bonds/south-korea-10-year-bond-yield-historical-data"
+      }
+    },
+    {
+      "id": "us10",
+      "category": "bonds",
+      "name": "미국 10년물",
+      "ticker": "US 10Y",
+      "country": "US",
+      "unit": "%",
+      "decimals": 3,
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/%5ETNX?period1=1786752000&period2=1791416250&interval=1d",
+      "contract": null,
+      "values": {
+        "current": 5.277,
+        "previous": 5.269,
+        "week": 5.293,
+        "month": 4.784
+      },
+      "dates": {
+        "current": "2026-10-07",
+        "previous": "2026-10-06",
+        "week": "2026-09-30",
+        "month": "2026-09-04"
+      },
+      "note": "",
+      "comparisonSources": {
+        "current": "https://query1.finance.yahoo.com/v8/finance/chart/%5ETNX?period1=1786752000&period2=1791416250&interval=1d",
+        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/%5ETNX?period1=1786752000&period2=1791416250&interval=1d",
+        "week": "https://query1.finance.yahoo.com/v8/finance/chart/%5ETNX?period1=1786752000&period2=1791416250&interval=1d",
+        "month": "https://query1.finance.yahoo.com/v8/finance/chart/%5ETNX?period1=1786752000&period2=1791416250&interval=1d"
+      }
+    },
+    {
+      "id": "jp10",
+      "category": "bonds",
+      "name": "일본 10년물",
+      "ticker": "JAPAN 10Y",
+      "country": "JP",
+      "unit": "%",
+      "decimals": 3,
+      "source": "https://www.investing.com/rates-bonds/japan-10-year-bond-yield-historical-data",
+      "contract": null,
+      "values": {
+        "current": 3.107,
+        "previous": 3.109,
+        "week": 3.063,
+        "month": 2.935
+      },
+      "dates": {
+        "current": "2026-10-07",
+        "previous": "2026-10-06",
+        "week": "2026-09-30",
+        "month": "2026-09-07"
+      },
+      "note": "",
+      "comparisonSources": {
+        "current": "https://www.investing.com/rates-bonds/japan-10-year-bond-yield-historical-data",
+        "previous": "https://www.investing.com/rates-bonds/japan-10-year-bond-yield-historical-data",
+        "week": "https://www.investing.com/rates-bonds/japan-10-year-bond-yield-historical-data",
+        "month": "https://www.investing.com/rates-bonds/japan-10-year-bond-yield-historical-data"
+      }
+    },
+    {
+      "id": "gold",
+      "category": "commodities",
+      "name": "금",
+      "ticker": "GOLD",
+      "country": "US",
+      "unit": "$/트로이온스",
+      "decimals": 2,
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/GCZ26.CMX?period1=1786752000&period2=1791416250&interval=1d",
+      "contract": "2026년 12월물",
+      "values": {
+        "current": 4187.1,
+        "previous": 4156.8,
+        "week": 4179.7,
+        "month": 4476.6
+      },
+      "dates": {
+        "current": "2026-10-06",
+        "previous": "2026-10-05",
+        "week": "2026-09-29",
+        "month": "2026-09-04"
+      },
+      "note": "10월 7일 확정 마감값은 확인 불가. 마지막 확인된 10월 6일 완료 자료입니다.",
+      "comparisonSources": {
+        "current": "https://query1.finance.yahoo.com/v8/finance/chart/GCZ26.CMX?period1=1786752000&period2=1791416250&interval=1d",
+        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/GCZ26.CMX?period1=1786752000&period2=1791416250&interval=1d",
+        "week": "https://query1.finance.yahoo.com/v8/finance/chart/GCZ26.CMX?period1=1786752000&period2=1791416250&interval=1d",
+        "month": "https://query1.finance.yahoo.com/v8/finance/chart/GCZ26.CMX?period1=1786752000&period2=1791416250&interval=1d"
+      }
+    },
+    {
+      "id": "silver",
+      "category": "commodities",
+      "name": "은",
+      "ticker": "SILVER",
+      "country": "US",
+      "unit": "$/트로이온스",
+      "decimals": 3,
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/SIZ26.CMX?period1=1786752000&period2=1791416250&interval=1d",
+      "contract": "2026년 12월물",
+      "values": {
+        "current": 61.589,
+        "previous": 61.3,
+        "week": 61.153,
+        "month": 66.748
+      },
+      "dates": {
+        "current": "2026-10-06",
+        "previous": "2026-10-05",
+        "week": "2026-09-29",
+        "month": "2026-09-04"
+      },
+      "note": "10월 7일 확정 마감값은 확인 불가. 마지막 확인된 10월 6일 완료 자료입니다.",
+      "comparisonSources": {
+        "current": "https://query1.finance.yahoo.com/v8/finance/chart/SIZ26.CMX?period1=1786752000&period2=1791416250&interval=1d",
+        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/SIZ26.CMX?period1=1786752000&period2=1791416250&interval=1d",
+        "week": "https://query1.finance.yahoo.com/v8/finance/chart/SIZ26.CMX?period1=1786752000&period2=1791416250&interval=1d",
+        "month": "https://query1.finance.yahoo.com/v8/finance/chart/SIZ26.CMX?period1=1786752000&period2=1791416250&interval=1d"
+      }
+    },
+    {
+      "id": "copper",
+      "category": "commodities",
+      "name": "동(구리)",
+      "ticker": "COPPER",
+      "country": "US",
+      "unit": "$/파운드",
+      "decimals": 4,
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/HGZ26.CMX?period1=1786752000&period2=1791416250&interval=1d",
+      "contract": "2026년 12월물",
+      "values": {
+        "current": 6.6495,
+        "previous": 6.641,
+        "week": 6.6035,
+        "month": 6.6825
+      },
+      "dates": {
+        "current": "2026-10-06",
+        "previous": "2026-10-05",
+        "week": "2026-09-29",
+        "month": "2026-09-04"
+      },
+      "note": "10월 7일 확정 마감값은 확인 불가. 마지막 확인된 10월 6일 완료 자료입니다.",
+      "comparisonSources": {
+        "current": "https://query1.finance.yahoo.com/v8/finance/chart/HGZ26.CMX?period1=1786752000&period2=1791416250&interval=1d",
+        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/HGZ26.CMX?period1=1786752000&period2=1791416250&interval=1d",
+        "week": "https://query1.finance.yahoo.com/v8/finance/chart/HGZ26.CMX?period1=1786752000&period2=1791416250&interval=1d",
+        "month": "https://query1.finance.yahoo.com/v8/finance/chart/HGZ26.CMX?period1=1786752000&period2=1791416250&interval=1d"
+      }
+    },
+    {
+      "id": "wti",
+      "category": "commodities",
+      "name": "WTI 원유",
+      "ticker": "WTI",
+      "country": "US",
+      "unit": "$/배럴",
+      "decimals": 2,
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/CLX26.NYM?period1=1786752000&period2=1791416250&interval=1d",
+      "contract": "2026년 11월물",
+      "values": {
+        "current": 89.44,
+        "previous": 89.43,
+        "week": 89.38,
+        "month": 88.57
+      },
+      "dates": {
+        "current": "2026-10-06",
+        "previous": "2026-10-05",
+        "week": "2026-09-29",
+        "month": "2026-09-04"
+      },
+      "note": "10월 7일 확정 마감값은 확인 불가. 마지막 확인된 10월 6일 완료 자료입니다.",
+      "comparisonSources": {
+        "current": "https://query1.finance.yahoo.com/v8/finance/chart/CLX26.NYM?period1=1786752000&period2=1791416250&interval=1d",
+        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/CLX26.NYM?period1=1786752000&period2=1791416250&interval=1d",
+        "week": "https://query1.finance.yahoo.com/v8/finance/chart/CLX26.NYM?period1=1786752000&period2=1791416250&interval=1d",
+        "month": "https://query1.finance.yahoo.com/v8/finance/chart/CLX26.NYM?period1=1786752000&period2=1791416250&interval=1d"
+      }
+    },
+    {
+      "id": "usd",
+      "category": "fx",
+      "name": "미국 달러",
+      "ticker": "USD / KRW",
+      "country": "US",
+      "unit": "원/1달러",
+      "decimals": 2,
+      "source": "https://www.investing.com/currencies/usd-krw-historical-data",
+      "contract": null,
+      "values": {
+        "current": 1340.07,
+        "previous": 1342.13,
+        "week": 1352.18,
+        "month": 1344.55
+      },
+      "dates": {
+        "current": "2026-10-06",
+        "previous": "2026-10-05",
+        "week": "2026-09-29",
+        "month": "2026-09-04"
+      },
+      "note": "10월 7일 확정 마감값은 확인 불가. 마지막 확인된 10월 6일 완료 자료입니다.",
+      "comparisonSources": {
+        "current": "https://www.investing.com/currencies/usd-krw-historical-data",
+        "previous": "https://www.investing.com/currencies/usd-krw-historical-data",
+        "week": "https://www.investing.com/currencies/usd-krw-historical-data",
+        "month": "https://uk.investing.com/currencies/usd-krw-historical-data?_pmch=1679043778718"
+      }
+    },
+    {
+      "id": "eur",
+      "category": "fx",
+      "name": "유로",
+      "ticker": "EUR / KRW",
+      "country": "EU",
+      "unit": "원/1유로",
+      "decimals": 2,
+      "source": "https://www.investing.com/currencies/eur-krw-historical-data",
+      "contract": null,
+      "values": {
+        "current": 1507.98,
+        "previous": 1506.27,
+        "week": 1533.57,
+        "month": 1561.49
+      },
+      "dates": {
+        "current": "2026-10-06",
+        "previous": "2026-10-05",
+        "week": "2026-09-29",
+        "month": "2026-09-04"
+      },
+      "note": "10월 7일 확정 마감값은 확인 불가. 마지막 확인된 10월 6일 완료 자료입니다.",
+      "comparisonSources": {
+        "current": "https://www.investing.com/currencies/eur-krw-historical-data",
+        "previous": "https://www.investing.com/currencies/eur-krw-historical-data",
+        "week": "https://www.investing.com/currencies/eur-krw-historical-data",
+        "month": "https://www.investing.com/currencies/eur-krw-historical-data"
+      }
+    },
+    {
+      "id": "jpy",
+      "category": "fx",
+      "name": "일본 엔",
+      "ticker": "JPY / KRW",
+      "country": "JP",
+      "unit": "원/100엔",
+      "decimals": 2,
+      "source": "https://www.investing.com/currencies/jpy-krw-historical-data",
+      "contract": null,
+      "values": {
+        "current": 845.7,
+        "previous": 849.88,
+        "week": 859.64,
+        "month": 860.54
+      },
+      "dates": {
+        "current": "2026-10-06",
+        "previous": "2026-10-05",
+        "week": "2026-09-29",
+        "month": "2026-09-04"
+      },
+      "note": "10월 7일 확정 마감값은 확인 불가. 마지막 확인된 10월 6일 완료 자료입니다.",
+      "comparisonSources": {
+        "current": "https://www.investing.com/currencies/jpy-krw-historical-data",
+        "previous": "https://www.investing.com/currencies/jpy-krw-historical-data",
+        "week": "https://www.investing.com/currencies/jpy-krw-historical-data",
+        "month": "https://uk.investing.com/currencies/jpy-krw-historical-data?_pmch=1689013236329"
+      }
+    },
+    {
+      "id": "cny",
+      "category": "fx",
+      "name": "중국 위안",
+      "ticker": "CNY / KRW",
+      "country": "CN",
+      "unit": "원/1위안",
+      "decimals": 2,
+      "source": "https://www.investing.com/currencies/cny-krw-historical-data",
+      "contract": null,
+      "values": {
+        "current": 199.62,
+        "previous": 200.19,
+        "week": 201.72,
+        "month": 200.35
+      },
+      "dates": {
+        "current": "2026-10-06",
+        "previous": "2026-10-05",
+        "week": "2026-09-29",
+        "month": "2026-09-04"
+      },
+      "note": "10월 7일 확정 마감값은 확인 불가. 마지막 확인된 10월 6일 완료 자료입니다.",
+      "comparisonSources": {
+        "current": "https://www.investing.com/currencies/cny-krw-historical-data",
+        "previous": "https://www.investing.com/currencies/cny-krw-historical-data",
+        "week": "https://www.investing.com/currencies/cny-krw-historical-data",
+        "month": "https://mx.investing.com/currencies/cny-krw-historical-data"
+      }
+    },
+    {
+      "id": "btc",
+      "category": "crypto",
+      "name": "비트코인",
+      "ticker": "BTC / KRW",
+      "country": "BTC",
+      "unit": "원/개",
+      "decimals": 0,
+      "source": "https://api.upbit.com/v1/ticker?markets=KRW-BTC,KRW-ETH",
+      "contract": null,
+      "values": {
+        "current": 113733000,
+        "previous": 115969000,
+        "week": 113587000,
+        "month": 109407000
+      },
+      "dates": {
+        "current": "2026-10-08T08:40:26+09:00",
+        "previous": "2026-10-07T09:00:00+09:00",
+        "week": "2026-09-30T09:00:00+09:00",
+        "month": "2026-09-07T09:00:00+09:00"
+      },
+      "note": "10월 8일 08:40:26 보고서의 체결가격. 비교 종가는 한국시간 오전 9시 마감 기준입니다.",
+      "comparisonSources": {
+        "current": "https://api.upbit.com/v1/ticker?markets=KRW-BTC,KRW-ETH",
+        "previous": "https://api.upbit.com/v1/ticker?markets=KRW-BTC,KRW-ETH",
+        "week": "https://api.upbit.com/v1/candles/days?market=KRW-BTC&to=2026-09-30T00%3A00%3A00Z&count=1",
+        "month": "https://api.upbit.com/v1/candles/days?market=KRW-BTC&to=2026-09-07T00%3A00%3A00Z&count=1"
+      }
+    },
+    {
+      "id": "eth",
+      "category": "crypto",
+      "name": "이더리움",
+      "ticker": "ETH / KRW",
+      "country": "ETH",
+      "unit": "원/개",
+      "decimals": 0,
+      "source": "https://api.upbit.com/v1/ticker?markets=KRW-BTC,KRW-ETH",
+      "contract": null,
+      "values": {
+        "current": 3511000,
+        "previous": 3655000,
+        "week": 3637000,
+        "month": 3423000
+      },
+      "dates": {
+        "current": "2026-10-08T08:40:26+09:00",
+        "previous": "2026-10-07T09:00:00+09:00",
+        "week": "2026-09-30T09:00:00+09:00",
+        "month": "2026-09-07T09:00:00+09:00"
+      },
+      "note": "10월 8일 08:40:26 보고서의 체결가격. 비교 종가는 한국시간 오전 9시 마감 기준입니다.",
+      "comparisonSources": {
+        "current": "https://api.upbit.com/v1/ticker?markets=KRW-BTC,KRW-ETH",
+        "previous": "https://api.upbit.com/v1/ticker?markets=KRW-BTC,KRW-ETH",
+        "week": "https://api.upbit.com/v1/candles/days?market=KRW-ETH&to=2026-09-30T00%3A00%3A00Z&count=1",
+        "month": "https://api.upbit.com/v1/candles/days?market=KRW-ETH&to=2026-09-07T00%3A00%3A00Z&count=1"
+      }
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import {handleRefresh} from '../lib/refresh-api.mjs';
+const endpoint='https://api.example.test/api/refresh',origin='https://dashboard-owner.github.io';
+let calls=0;const refresh=async()=>{calls++;return {succeeded:22,results:[]};};
+const accepted=await handleRefresh(new Request(endpoint,{method:'POST',headers:{Origin:origin}}),refresh,[origin]);
+assert.equal(accepted.status,200);assert.equal(accepted.headers.get('access-control-allow-origin'),origin);assert.equal(accepted.headers.get('cache-control'),'no-store');assert.equal(calls,1);
+const rejected=await handleRefresh(new Request(endpoint,{method:'POST',headers:{Origin:'https://unrelated.github.io'}}),refresh,[origin]);
+assert.equal(rejected.status,403);assert.equal(rejected.headers.get('access-control-allow-origin'),null);assert.equal(calls,1);
+const preflight=await handleRefresh(new Request(endpoint,{method:'OPTIONS',headers:{Origin:origin}}),refresh,[origin]);
+assert.equal(preflight.status,204);assert.equal(calls,1);
+const failed=await handleRefresh(new Request(endpoint,{method:'POST',headers:{Origin:origin}}),async()=>{throw new Error('upstream');},[origin]);
+assert.equal(failed.status,502);assert.equal(failed.headers.get('access-control-allow-origin'),origin);
+const invalidMethod=await handleRefresh(new Request(endpoint),refresh,[origin]);assert.equal(invalidMethod.status,405);assert.equal(calls,1);
+console.log('PASS: Pages-origin CORS, untrusted origins, preflight, no-store and upstream failures.');
