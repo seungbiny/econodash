@@ -1,10 +1,15 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
-import {monthBefore,compareSeries,compareQuote,yahooRows,yahooQuote,yahooTradeDate,futuresContract,naverBondSnapshot,cryptoComparisons,tencentIndexRows,tencentIndexQuote,IDS} from '../lib/market-data.mjs';
+import {monthBefore,compareSeries,compareQuote,yahooRows,yahooQuote,yahooTradeDate,futuresContract,naverBondSnapshot,cryptoComparisons,tencentIndexRows,tencentIndexQuote,IDS,LEGACY_IDS} from '../lib/market-data.mjs';
 import {applyResults,cacheResponse,validateResponse} from '../refresh-state.js';
-assert.equal(IDS.length,31);assert.equal(new Set(IDS).size,31);
+assert.equal(IDS.length,32);assert.equal(new Set(IDS).size,32);
+assert.equal(LEGACY_IDS.length,22);assert.ok(!LEGACY_IDS.includes('chf'),'Old dashboards retain their original indicator list');
 const dashboard=JSON.parse(await fs.readFile(new URL('../data.json',import.meta.url),'utf8'));
 assert.deepEqual(new Set(dashboard.indicators.map(i=>i.id)),new Set(IDS),'Every displayed indicator has a matching refresh provider');
+assert.deepEqual(dashboard.indicators.filter(i=>i.category==='fx').map(i=>i.id),['usd','eur','jpy','cny','chf']);
+const franc=dashboard.indicators.find(i=>i.id==='chf');
+assert.equal(franc.country,'CH');assert.equal(franc.unit,'원/1프랑');assert.equal(franc.decimals,2);
+assert.match(franc.source,/CHFKRW%3DX/);
 assert.deepEqual(dashboard.indicators.filter(i=>i.category==='bonds').map(i=>i.id),['kr1','kr3','kr10','kr30','us1','us3','us10','us30','jp1','jp3','jp10','jp30']);
 const tencent={code:0,data:{sz399106:{qt:{sz399106:['51','深证综指','399106']},day:[['2026-09-30','2419.83','2404.48']]}}};
 assert.equal(tencentIndexRows(tencent,'https://web.ifzq.gtimg.cn/').at(-1).value,2404.48);
@@ -110,4 +115,4 @@ assert.equal(bondUpdated.indicators[0].delayMinutes,120);assert.equal(applyResul
 assert.throws(()=>applyResults(bondBase,{...bondResponse,results:[{...bondResponse.results[0],delayMinutes:-1}]}));
 assert.throws(()=>applyResults(base,{completedAt,results:[success,success]}));
 assert.throws(()=>applyResults(base,{completedAt,results:[{...success,source:'javascript:alert(1)'},response.results[1]]}));
-console.log('PASS: 31 providers, 12 bond maturities, country/maturity validation, trading time zones, intraday quotes, delay metadata, completed comparisons, futures contracts, crypto cutoffs, partial failure retention and cache');
+console.log('PASS: 32 providers, CHF/KRW and legacy response compatibility, 12 bond maturities, country/maturity validation, trading time zones, intraday quotes, delay metadata, completed comparisons, futures contracts, crypto cutoffs, partial failure retention and cache');
