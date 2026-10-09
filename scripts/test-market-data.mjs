@@ -2,10 +2,20 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import {monthBefore,compareSeries,compareQuote,yahooRows,yahooQuote,yahooTradeDate,futuresContract,naverBondSnapshot,cryptoComparisons,cryptoTarget,tencentIndexRows,tencentIndexQuote,IDS,LEGACY_IDS,CRYPTO_MARKETS} from '../lib/market-data.mjs';
 import {applyResults,cacheResponse,validateResponse} from '../refresh-state.js';
-assert.equal(IDS.length,34);assert.equal(new Set(IDS).size,34);
+assert.equal(IDS.length,36);assert.equal(new Set(IDS).size,36);
 assert.equal(LEGACY_IDS.length,22);assert.ok(!LEGACY_IDS.includes('chf'),'Old dashboards retain their original indicator list');
 const dashboard=JSON.parse(await fs.readFile(new URL('../data.json',import.meta.url),'utf8'));
 assert.deepEqual(new Set(dashboard.indicators.map(i=>i.id)),new Set(IDS),'Every displayed indicator has a matching refresh provider');
+assert.equal(dashboard.indicators.filter(item=>item.category==='stocks').length,11);
+for(const [id,country,symbol] of [['nifty50','IN','^NSEI'],['eurostoxx50','EU','^STOXX50E']]) {
+  const item=dashboard.indicators.find(i=>i.id===id);
+  assert.equal(item.country,country);assert.equal(item.category,'stocks');assert.equal(item.unit,'pt');
+  assert.ok(new URL(item.source).pathname.endsWith('/'+encodeURIComponent(symbol)));
+  assert.ok(!LEGACY_IDS.includes(id),'The original client list excludes newly added stocks');
+}
+assert.equal(yahooTradeDate({exchangeTimezoneName:'Asia/Kolkata'},Date.parse('2026-10-08T19:00:00Z')),'2026-10-09');
+assert.equal(yahooTradeDate({exchangeTimezoneName:'Europe/Zurich'},Date.parse('2026-10-08T22:30:00Z')),'2026-10-09');
+assert.equal(yahooTradeDate({exchangeTimezoneName:'Asia/Kolkata'},Date.parse('2026-10-08T18:00:00Z')),'2026-10-08');
 assert.deepEqual(CRYPTO_MARKETS,{btc:'KRW-BTC',eth:'KRW-ETH',xrp:'KRW-XRP',sol:'KRW-SOL'});
 assert.deepEqual(dashboard.indicators.filter(i=>i.category==='crypto').map(i=>i.id),Object.keys(CRYPTO_MARKETS));
 assert.ok(!LEGACY_IDS.includes('xrp')&&!LEGACY_IDS.includes('sol'),'Old dashboards retain their original crypto list');
@@ -146,4 +156,4 @@ assert.equal(bondUpdated.indicators[0].delayMinutes,120);assert.equal(applyResul
 assert.throws(()=>applyResults(bondBase,{...bondResponse,results:[{...bondResponse.results[0],delayMinutes:-1}]}));
 assert.throws(()=>applyResults(base,{completedAt,results:[success,success]}));
 assert.throws(()=>applyResults(base,{completedAt,results:[{...success,source:'javascript:alert(1)'},response.results[1]]}));
-console.log('PASS: 34 providers, four KRW crypto pairs, CHF/KRW and legacy response compatibility, 12 bond maturities, country/maturity validation, trading time zones, intraday quotes, delay metadata, completed comparisons, futures contracts, crypto cutoffs, partial failure retention and cache');
+console.log('PASS: 36 providers including India and Eurozone indices, four KRW crypto pairs, CHF/KRW and legacy response compatibility, 12 bond maturities, country/maturity validation, trading time zones, intraday quotes, delay metadata, completed comparisons, futures contracts, crypto cutoffs, partial failure retention and cache');

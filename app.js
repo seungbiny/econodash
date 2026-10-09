@@ -30,7 +30,7 @@ const groups = {
   fx: { name:'환율', icon:'exchange', note:'해당 외화당 원화 · 엔은 100엔', basis:'10월 7일 확정 마감 여부는 확인 불가. 마지막 확인된 10월 6일 자료입니다. 환율 하락은 해당 외화 대비 원화 강세를 뜻합니다.' },
   crypto: { name:'가상자산', icon:'coin', note:'업비트 원화시장 · 1개당 원', basis:'보고서 체결가격은 10월 8일 08:40:26 KST 기준. 비교 가격은 모두 완료된 업비트 일봉으로, 한국시간 오전 9시에 마감합니다.' },
 };
-const countries = { KR:'한국',US:'미국',CN:'중국',JP:'일본',HK:'홍콩',EU:'유럽',CH:'스위스',BTC:'비트코인',ETH:'이더리움',XRP:'리플',SOL:'솔라나' };
+const countries = { KR:'한국',US:'미국',CN:'중국',JP:'일본',HK:'홍콩',IN:'인도',EU:'유럽 유로존',CH:'스위스',BTC:'비트코인',ETH:'이더리움',XRP:'리플',SOL:'솔라나' };
 const storage = {
   get(key) { try { return JSON.parse(localStorage.getItem(key)); } catch { return null; } },
   set(key,value) { try { localStorage.setItem(key,JSON.stringify(value)); return true; } catch { return false; } },
@@ -172,7 +172,7 @@ async function refreshMarkets(automatic=false) {
     if(!response.ok)throw new Error('전체 조회에 응답하지 못했습니다 (HTTP '+response.status+').');
     const result=await response.json();state.data=applyResults(state.data,result);
     state.lastRun={completedAt:result.completedAt,succeeded:result.results.filter(r=>r.ok).length,failed:result.results.filter(r=>!r.ok).length};
-    storage.set('econodash-market-cache-v9',{snapshot:cacheResponse(state.data,result.completedAt),lastResponse:result});
+    storage.set('econodash-market-cache-v10',{snapshot:cacheResponse(state.data,result.completedAt),lastResponse:result});
     renderAll();if(!automatic||state.lastRun.failed)toast(state.lastRun.succeeded+'/'+total+'개 지표를 새로 조회했습니다.'+(state.lastRun.failed?' 실패한 지표는 이전 값을 유지합니다.':''));
   } catch(error) {
     const message=error.name==='TimeoutError'?'조회 시간이 초과되었습니다.':error.message;
@@ -209,7 +209,7 @@ new ResizeObserver(()=>renderChart()).observe($('#chart-container'));
 try {
   const response=await fetch('data.json');if(!response.ok)throw new Error('보고서 데이터를 불러오지 못했습니다.');state.data=await response.json();
   if(!Array.isArray(state.data.indicators)||!state.data.indicators.length||new Set(state.data.indicators.map(i=>i.id)).size!==state.data.indicators.length)throw new Error('지표 데이터 구성을 확인하지 못했습니다.');
-  const cached=storage.get('econodash-market-cache-v9');
+  const cached=storage.get('econodash-market-cache-v10');
   if(cached?.snapshot&&cached?.lastResponse) {
     try {
       state.data=applyResults(state.data,cached.snapshot);state.data=applyResults(state.data,cached.lastResponse);

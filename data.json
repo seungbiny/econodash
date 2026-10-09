@@ -418,6 +418,98 @@
       "refreshError": ""
     },
     {
+      "id": "nifty50",
+      "name": "니프티 50",
+      "ticker": "NIFTY 50",
+      "country": "IN",
+      "category": "stocks",
+      "unit": "pt",
+      "decimals": 2,
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/%5ENSEI?range=2y&interval=1d",
+      "contract": null,
+      "values": {
+        "current": 22231.8,
+        "previous": 22603.05078125,
+        "week": 22421.94921875,
+        "month": 23635.099609375,
+        "quarter": 23882.05078125,
+        "year": 25046.150390625
+      },
+      "dates": {
+        "current": "2026-10-08T10:01:53.000Z",
+        "previous": "2026-10-07",
+        "week": "2026-10-01",
+        "month": "2026-09-08",
+        "quarter": "2026-07-08",
+        "year": "2025-10-08"
+      },
+      "note": "Yahoo Finance의 최신 시세(장중 포함)를 직전 거래일 완료 종가와 비교합니다. 현재 시세의 실제 기준 시각을 표시하며 출처의 지연 시세일 수 있습니다. 시장이 닫혀 있으면 마지막 거래 시세를 표시합니다.",
+      "live": true,
+      "comparisonSources": {
+        "current": "https://query1.finance.yahoo.com/v8/finance/chart/%5ENSEI?range=2y&interval=1d",
+        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/%5ENSEI?range=2y&interval=1d",
+        "week": "https://query1.finance.yahoo.com/v8/finance/chart/%5ENSEI?range=2y&interval=1d",
+        "month": "https://query1.finance.yahoo.com/v8/finance/chart/%5ENSEI?range=2y&interval=1d",
+        "quarter": "https://query1.finance.yahoo.com/v8/finance/chart/%5ENSEI?range=2y&interval=1d",
+        "year": "https://query1.finance.yahoo.com/v8/finance/chart/%5ENSEI?range=2y&interval=1d"
+      },
+      "additionalSources": [],
+      "provider": "Yahoo Finance",
+      "retrievedAt": "2026-10-09T02:27:53.633Z",
+      "attemptedAt": "2026-10-09T02:27:55.778Z",
+      "priceKind": "market",
+      "marketState": "closed",
+      "tradeDate": "2026-10-08",
+      "missing": [],
+      "refreshError": ""
+    },
+    {
+      "id": "eurostoxx50",
+      "name": "유로 스톡스 50",
+      "ticker": "EURO STOXX 50",
+      "country": "EU",
+      "category": "stocks",
+      "unit": "pt",
+      "decimals": 2,
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/%5ESTOXX50E?range=2y&interval=1d",
+      "contract": null,
+      "values": {
+        "current": 6126.73,
+        "previous": 6180.2900390625,
+        "week": 6175.4501953125,
+        "month": 6413.169921875,
+        "quarter": 6204.91015625,
+        "year": 5649.72998046875
+      },
+      "dates": {
+        "current": "2026-10-08T16:00:00.000Z",
+        "previous": "2026-10-07",
+        "week": "2026-10-01",
+        "month": "2026-09-08",
+        "quarter": "2026-07-08",
+        "year": "2025-10-08"
+      },
+      "note": "Yahoo Finance의 최신 시세(장중 포함)를 직전 거래일 완료 종가와 비교합니다. 현재 시세의 실제 기준 시각을 표시하며 출처의 지연 시세일 수 있습니다. 시장이 닫혀 있으면 마지막 거래 시세를 표시합니다.",
+      "live": true,
+      "comparisonSources": {
+        "current": "https://query1.finance.yahoo.com/v8/finance/chart/%5ESTOXX50E?range=2y&interval=1d",
+        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/%5ESTOXX50E?range=2y&interval=1d",
+        "week": "https://query1.finance.yahoo.com/v8/finance/chart/%5ESTOXX50E?range=2y&interval=1d",
+        "month": "https://query1.finance.yahoo.com/v8/finance/chart/%5ESTOXX50E?range=2y&interval=1d",
+        "quarter": "https://query1.finance.yahoo.com/v8/finance/chart/%5ESTOXX50E?range=2y&interval=1d",
+        "year": "https://query1.finance.yahoo.com/v8/finance/chart/%5ESTOXX50E?range=2y&interval=1d"
+      },
+      "additionalSources": [],
+      "provider": "Yahoo Finance",
+      "retrievedAt": "2026-10-09T02:27:53.715Z",
+      "attemptedAt": "2026-10-09T02:27:55.778Z",
+      "priceKind": "market",
+      "marketState": "closed",
+      "tradeDate": "2026-10-08",
+      "missing": [],
+      "refreshError": ""
+    },
+    {
       "id": "kr1",
       "category": "bonds",
       "name": "한국 1년물",
