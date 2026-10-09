@@ -5,14 +5,17 @@ import {createHash} from 'node:crypto';
 const root=fileURLToPath(new URL('../',import.meta.url));
 const output=path.join(root,'dist');
 await fs.mkdir(output,{recursive:true});
-for(const file of ['index.html','app.js','refresh-state.js','chart-comparison.js','styles.css','data.json','favicon.svg'])await fs.copyFile(path.join(root,file),path.join(output,file));
+for(const file of ['index.html','app.js','refresh-state.js','chart-comparison.js','pdf-report.js','styles.css','data.json','favicon.svg'])await fs.copyFile(path.join(root,file),path.join(output,file));
 // Each changed asset gets a new URL so already-open browsers load the published version.
 const fingerprint=content=>createHash('sha256').update(content).digest('hex').slice(0,12);
 const hashFile=async file=>fingerprint(await fs.readFile(path.join(output,file)));
 const stateHash=await hashFile('refresh-state.js'),comparisonHash=await hashFile('chart-comparison.js'),dataHash=await hashFile('data.json');
+const report=(await fs.readFile(path.join(output,'pdf-report.js'),'utf8')).replace("from './chart-comparison.js'",`from './chart-comparison.js?v=${comparisonHash}'`);
+await fs.writeFile(path.join(output,'pdf-report.js'),report);
+const reportHash=await hashFile('pdf-report.js');
 let app=await fs.readFile(path.join(output,'app.js'),'utf8');
-if(!app.includes("from './refresh-state.js'")||!app.includes("from './chart-comparison.js'")||!app.includes("fetch('data.json')"))throw new Error('Dashboard asset references changed; update the publication build.');
-app=app.replace("from './refresh-state.js'",`from './refresh-state.js?v=${stateHash}'`).replace("from './chart-comparison.js'",`from './chart-comparison.js?v=${comparisonHash}'`).replace("fetch('data.json')",`fetch('data.json?v=${dataHash}',{cache:'no-store'})`);
+if(!app.includes("from './refresh-state.js'")||!app.includes("from './chart-comparison.js'")||!app.includes("import('./pdf-report.js')")||!app.includes("fetch('data.json')"))throw new Error('Dashboard asset references changed; update the publication build.');
+app=app.replace("from './refresh-state.js'",`from './refresh-state.js?v=${stateHash}'`).replace("from './chart-comparison.js'",`from './chart-comparison.js?v=${comparisonHash}'`).replace("import('./pdf-report.js')",`import('./pdf-report.js?v=${reportHash}')`).replace("fetch('data.json')",`fetch('data.json?v=${dataHash}',{cache:'no-store'})`);
 await fs.writeFile(path.join(output,'app.js'),app);
 let html=await fs.readFile(path.join(output,'index.html'),'utf8');
 for(const [file,attribute] of [['app.js','src'],['styles.css','href'],['favicon.svg','href']]) {

@@ -156,12 +156,14 @@ function openDetail(id) {
   $('#detail-content').innerHTML=`<div class="dialog-heading"><div><span class="section-kicker">${esc(item.ticker)} · ${groups[item.category].name}</span><h2>${esc(item.name)}</h2><p class="detail-unit">${esc(item.unit)}${item.contract?' · '+esc(item.contract):''}</p></div><button class="icon-button dialog-close" aria-label="상세 정보 닫기">${icon('close')}</button></div><div class="detail-big">${number(item)}${item.category==='bonds'?'%':''}</div><div class="detail-status">${esc(sourceLabel(item))} · ${longDate(item.dates.current)}</div><div class="detail-status ${item.refreshError?'refresh-error':''}">${rowStatus(item)}${item.retrievedAt?' · 마지막 성공 조회 '+longDate(item.retrievedAt):''}${item.refreshError?'<br>'+esc(item.refreshError):''}</div><div class="detail-comparisons">${[['previous','직전'],['week','1주 비교'],['month','1개월 비교'],['quarter','3개월 비교'],['year','12개월 비교']].map(([key,label])=>`<div class="detail-box"><small>${label}</small><strong>${number(item,item.values[key])}${item.category==='bonds'?'%':''}</strong>${changeHtml(item,key)}<div class="date">${longDate(item.dates[key])}${item.category==='bonds'?'<br>'+(Number.isFinite(item.values[key])?signed((item.values.current-item.values[key])*100,1)+'bp':'금리 차이 확인 불가'):''}</div></div>`).join('')}</div><p class="detail-note">${esc(item.note||'보고서에서 확인한 완료 마감값을 비교합니다. 비교일이 휴장일이면 해당 날짜 이전의 가장 최근 마감값을 사용했습니다.')}</p>${item.additionalSources?.length?`<div class="detail-links">${(item.additionalSources||[]).map(url=>`<a class="button secondary" href="${esc(url)}" target="_blank" rel="noopener noreferrer">추가 자료 출처${icon('external')}</a>`).join('')}</div>`: ''}`;
   $('#detail-dialog').showModal();
 }
-function exportCsv() {
-  if(!state.data)return;const rows=filtered();if(!rows.length){toast('내보낼 지표가 없습니다.');return;}
-  const header=['분류','지표','단위','계약월','최근수치','최근기준일','직전수치','직전기준일','직전변화율(%)','직전금리차이(bp)','1주비교수치','1주기준일','1주변화율(%)','1주금리차이(bp)','1개월비교수치','1개월기준일','1개월변화율(%)','1개월금리차이(bp)','3개월비교수치','3개월기준일','3개월변화율(%)','3개월금리차이(bp)','12개월비교수치','12개월기준일','12개월변화율(%)','12개월금리차이(bp)','데이터출처','현재수치종류','시세지연분','현재시세현지거래일','교차환율시세별시각','조회상태','마지막성공조회시각','마지막시도시각','출처URL','추가출처URL','비교별출처','유의사항'];
-  const quote=v=>'"'+String(v??'').replaceAll('"','""')+'"';
-  const content=[header,...rows.map(item=>[groups[item.category].name,item.name,item.unit,item.contract,item.values.current,item.dates.current,...['previous','week','month','quarter','year'].flatMap(key=>[item.values[key]??'확인 불가',item.dates[key]??'확인 불가',change(item.values.current,item.values[key])?.toFixed(2)??'확인 불가',item.category==='bonds'?(Number.isFinite(item.values[key])?((item.values.current-item.values[key])*100).toFixed(1):'확인 불가'):'']),sourceLabel(item),priceLabel(item),item.delayMinutes,item.tradeDate,JSON.stringify(item.quoteComponents||[]),rowStatus(item),item.retrievedAt||state.data.reportDate,item.attemptedAt,item.source,item.additionalSources?.join(' | '),JSON.stringify(item.comparisonSources||{}),[item.note,item.refreshError].filter(Boolean).join(' · ')])].map(row=>row.map(quote).join(',')).join('\r\n');
-  const url=URL.createObjectURL(new Blob(['\uFEFF'+content],{type:'text/csv;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download=`econodash-${(state.lastRun?.completedAt||state.data.reportDate).slice(0,10)}-${state.category}.csv`;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);toast(`${rows.length}개 지표를 기준일·출처와 함께 내보냈습니다.`);
+async function exportReport() {
+  if(!state.data)return;
+  const button=$('#export-button');button.disabled=true;button.setAttribute('aria-busy','true');
+  try {
+    const {openReport}=await import('./pdf-report.js');
+    openReport({data:state.data,selected:state.selected,compared:state.compared,chartStart:state.chartStart,pulsePeriod:state.pulsePeriod,lastRun:state.lastRun});
+  } catch {toast('보고서를 열지 못했습니다. 다시 시도해 주세요.');}
+  finally {button.disabled=false;button.removeAttribute('aria-busy');}
 }
 async function refreshMarkets(automatic=false) {
   if(state.refreshing||!state.data)return;
@@ -202,7 +204,7 @@ $('#chart-select-second').addEventListener('change',event=>{state.compared=event
 $('#chart-start-period').addEventListener('change',event=>{if(chartPeriods.slice(0,-1).includes(event.target.value)){state.chartStart=event.target.value;storage.set('econodash-chart-start',state.chartStart);renderChart();}});
 for(const event of ['pointerover','focusin','click'])$('#chart-container').addEventListener(event,event=>showChartPoint(event.target));
 $('#theme-button').addEventListener('click',()=>{const theme=document.documentElement.dataset.theme==='dark'?'light':'dark';applyTheme(theme);storage.set('econodash-theme',theme);});
-$('#export-button').addEventListener('click',exportCsv);$('#refresh-button').addEventListener('click',()=>refreshMarkets());
+$('#export-button').addEventListener('click',exportReport);$('#refresh-button').addEventListener('click',()=>refreshMarkets());
 for(const id of ['method-button','footer-method'])$('#'+id).addEventListener('click',()=>$('#method-dialog').showModal());
 for(const dialog of document.querySelectorAll('dialog'))dialog.addEventListener('click',event=>{if(event.target===dialog){const box=dialog.getBoundingClientRect();if(event.clientX<box.left||event.clientX>box.right||event.clientY<box.top||event.clientY>box.bottom)dialog.close();}});
 new ResizeObserver(()=>renderChart()).observe($('#chart-container'));

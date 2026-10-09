@@ -5,7 +5,7 @@
   "type": "module",
   "engines": { "node": ">=22" },
   "scripts": {
-    "test": "node scripts/test-market-data.mjs && node scripts/test-refresh-api.mjs && node scripts/test-chart-comparison.mjs",
+    "test": "node scripts/test-market-data.mjs && node scripts/test-refresh-api.mjs && node scripts/test-chart-comparison.mjs && node scripts/test-pdf-report.mjs",
     "build": "node scripts/build-pages.mjs",
     "dev": "node scripts/preview.mjs"
   }
