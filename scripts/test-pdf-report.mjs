@@ -19,7 +19,7 @@ const btc=broken.indicators.find(i=>i.id==='btc');
 btc.name='<img src=x onerror="alert(1)">';btc.refreshError='Timed out';btc.values.quarter=null;btc.dates.quarter=null;
 const missing=buildReport({...options,data:broken});
 assert.ok(missing.includes('조회 실패 1개는 이전 확인값 사용'));
-assert.ok(missing.includes('조회 실패 · 이전 확인값'));
+assert.ok(missing.includes('report-error report-failed">조회 실패'));
 assert.ok(missing.includes('3개월 전 기준값이 없거나 0이므로'));
 assert.ok(!missing.includes('data-report-series='),'Missing comparison baseline must not draw a misleading chart');
 assert.ok(missing.includes('&lt;img src=x onerror=&quot;alert(1)&quot;&gt;'));
