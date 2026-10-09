@@ -12,35 +12,38 @@
       "country": "KR",
       "unit": "pt",
       "decimals": 2,
-      "source": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?range=6mo&interval=1d",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?range=2y&interval=1d",
       "contract": null,
       "values": {
         "current": 6625.93,
         "previous": 6803.89990234375,
         "week": 6971.35009765625,
         "month": 6954.52001953125,
-        "quarter": 7246.7900390625
+        "quarter": 7246.7900390625,
+        "year": 3549.2099609375
       },
       "dates": {
-        "current": "2026-10-08T06:32:50.000Z",
+        "current": "2026-10-08T11:05:40.000Z",
         "previous": "2026-10-07",
         "week": "2026-10-01",
         "month": "2026-09-08",
-        "quarter": "2026-07-08"
+        "quarter": "2026-07-08",
+        "year": "2025-10-02"
       },
       "note": "Yahoo Finance의 최신 시세(장중 포함)를 직전 거래일 완료 종가와 비교합니다. 현재 시세의 실제 기준 시각을 표시하며 출처의 지연 시세일 수 있습니다. 시장이 닫혀 있으면 마지막 거래 시세를 표시합니다.",
       "comparisonSources": {
-        "current": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?range=6mo&interval=1d",
-        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?range=6mo&interval=1d",
-        "week": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?range=6mo&interval=1d",
-        "month": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?range=6mo&interval=1d",
-        "quarter": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?range=6mo&interval=1d"
+        "current": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?range=2y&interval=1d",
+        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?range=2y&interval=1d",
+        "week": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?range=2y&interval=1d",
+        "month": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?range=2y&interval=1d",
+        "quarter": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?range=2y&interval=1d",
+        "year": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?range=2y&interval=1d"
       },
       "live": true,
       "additionalSources": [],
       "provider": "Yahoo Finance",
-      "retrievedAt": "2026-10-08T10:27:51.136Z",
-      "attemptedAt": "2026-10-08T10:27:52.154Z",
+      "retrievedAt": "2026-10-09T02:07:23.432Z",
+      "attemptedAt": "2026-10-09T02:07:26.348Z",
       "priceKind": "market",
       "marketState": "closed",
       "tradeDate": "2026-10-08",
@@ -55,35 +58,38 @@
       "country": "KR",
       "unit": "pt",
       "decimals": 2,
-      "source": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?range=6mo&interval=1d",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?range=2y&interval=1d",
       "contract": null,
       "values": {
         "current": 892.27,
         "previous": 898.4299926757812,
         "week": 894.2899780273438,
         "month": 811.8800048828125,
-        "quarter": 785
+        "quarter": 785,
+        "year": 854.25
       },
       "dates": {
-        "current": "2026-10-08T06:33:00.000Z",
+        "current": "2026-10-08T11:05:40.000Z",
         "previous": "2026-10-07",
         "week": "2026-10-01",
         "month": "2026-09-08",
-        "quarter": "2026-07-08"
+        "quarter": "2026-07-08",
+        "year": "2025-10-02"
       },
       "note": "Yahoo Finance의 최신 시세(장중 포함)를 직전 거래일 완료 종가와 비교합니다. 현재 시세의 실제 기준 시각을 표시하며 출처의 지연 시세일 수 있습니다. 시장이 닫혀 있으면 마지막 거래 시세를 표시합니다.",
       "comparisonSources": {
-        "current": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?range=6mo&interval=1d",
-        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?range=6mo&interval=1d",
-        "week": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?range=6mo&interval=1d",
-        "month": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?range=6mo&interval=1d",
-        "quarter": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?range=6mo&interval=1d"
+        "current": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?range=2y&interval=1d",
+        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?range=2y&interval=1d",
+        "week": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?range=2y&interval=1d",
+        "month": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?range=2y&interval=1d",
+        "quarter": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?range=2y&interval=1d",
+        "year": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?range=2y&interval=1d"
       },
       "live": true,
       "additionalSources": [],
       "provider": "Yahoo Finance",
-      "retrievedAt": "2026-10-08T10:27:51.125Z",
-      "attemptedAt": "2026-10-08T10:27:52.154Z",
+      "retrievedAt": "2026-10-09T02:07:23.316Z",
+      "attemptedAt": "2026-10-09T02:07:26.348Z",
       "priceKind": "market",
       "marketState": "closed",
       "tradeDate": "2026-10-08",
@@ -98,38 +104,41 @@
       "country": "US",
       "unit": "pt",
       "decimals": 2,
-      "source": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?range=6mo&interval=1d",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?range=2y&interval=1d",
       "contract": null,
       "values": {
-        "current": 7801.77,
-        "previous": 7818.93017578125,
-        "week": 7651.5400390625,
-        "month": 7718.60009765625,
-        "quarter": 7503.85009765625
+        "current": 7765.36,
+        "previous": 7801.77001953125,
+        "week": 7666.4501953125,
+        "month": 7673.52001953125,
+        "quarter": 7482.7099609375,
+        "year": 6753.72021484375
       },
       "dates": {
-        "current": "2026-10-07T20:55:18.000Z",
-        "previous": "2026-10-06",
-        "week": "2026-09-30",
-        "month": "2026-09-04",
-        "quarter": "2026-07-07"
+        "current": "2026-10-08T20:46:43.000Z",
+        "previous": "2026-10-07",
+        "week": "2026-10-01",
+        "month": "2026-09-08",
+        "quarter": "2026-07-08",
+        "year": "2025-10-08"
       },
       "note": "Yahoo Finance의 최신 시세(장중 포함)를 직전 거래일 완료 종가와 비교합니다. 현재 시세의 실제 기준 시각을 표시하며 출처의 지연 시세일 수 있습니다. 시장이 닫혀 있으면 마지막 거래 시세를 표시합니다.",
       "comparisonSources": {
-        "current": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?range=6mo&interval=1d",
-        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?range=6mo&interval=1d",
-        "week": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?range=6mo&interval=1d",
-        "month": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?range=6mo&interval=1d",
-        "quarter": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?range=6mo&interval=1d"
+        "current": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?range=2y&interval=1d",
+        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?range=2y&interval=1d",
+        "week": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?range=2y&interval=1d",
+        "month": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?range=2y&interval=1d",
+        "quarter": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?range=2y&interval=1d",
+        "year": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?range=2y&interval=1d"
       },
       "live": true,
       "additionalSources": [],
       "provider": "Yahoo Finance",
-      "retrievedAt": "2026-10-08T10:27:51.146Z",
-      "attemptedAt": "2026-10-08T10:27:52.154Z",
+      "retrievedAt": "2026-10-09T02:07:23.354Z",
+      "attemptedAt": "2026-10-09T02:07:26.348Z",
       "priceKind": "market",
       "marketState": "closed",
-      "tradeDate": "2026-10-07",
+      "tradeDate": "2026-10-08",
       "missing": [],
       "refreshError": ""
     },
@@ -141,38 +150,41 @@
       "country": "US",
       "unit": "pt",
       "decimals": 2,
-      "source": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?range=6mo&interval=1d",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?range=2y&interval=1d",
       "contract": null,
       "values": {
-        "current": 27538.691,
-        "previous": 27599.7890625,
-        "week": 26861.060546875,
-        "month": 26506.990234375,
-        "quarter": 25818.689453125
+        "current": 27193.34,
+        "previous": 27538.689453125,
+        "week": 26871.599609375,
+        "month": 26421.41015625,
+        "quarter": 25870.650390625,
+        "year": 23043.380859375
       },
       "dates": {
-        "current": "2026-10-07T21:15:59.000Z",
-        "previous": "2026-10-06",
-        "week": "2026-09-30",
-        "month": "2026-09-04",
-        "quarter": "2026-07-07"
+        "current": "2026-10-08T21:15:59.000Z",
+        "previous": "2026-10-07",
+        "week": "2026-10-01",
+        "month": "2026-09-08",
+        "quarter": "2026-07-08",
+        "year": "2025-10-08"
       },
       "note": "Yahoo Finance의 최신 시세(장중 포함)를 직전 거래일 완료 종가와 비교합니다. 현재 시세의 실제 기준 시각을 표시하며 출처의 지연 시세일 수 있습니다. 시장이 닫혀 있으면 마지막 거래 시세를 표시합니다.",
       "comparisonSources": {
-        "current": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?range=6mo&interval=1d",
-        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?range=6mo&interval=1d",
-        "week": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?range=6mo&interval=1d",
-        "month": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?range=6mo&interval=1d",
-        "quarter": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?range=6mo&interval=1d"
+        "current": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?range=2y&interval=1d",
+        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?range=2y&interval=1d",
+        "week": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?range=2y&interval=1d",
+        "month": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?range=2y&interval=1d",
+        "quarter": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?range=2y&interval=1d",
+        "year": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?range=2y&interval=1d"
       },
       "live": true,
       "additionalSources": [],
       "provider": "Yahoo Finance",
-      "retrievedAt": "2026-10-08T10:27:51.110Z",
-      "attemptedAt": "2026-10-08T10:27:52.154Z",
+      "retrievedAt": "2026-10-09T02:07:23.275Z",
+      "attemptedAt": "2026-10-09T02:07:26.348Z",
       "priceKind": "market",
       "marketState": "closed",
-      "tradeDate": "2026-10-07",
+      "tradeDate": "2026-10-08",
       "missing": [],
       "refreshError": ""
     },
@@ -184,38 +196,41 @@
       "country": "US",
       "unit": "pt",
       "decimals": 2,
-      "source": "https://query1.finance.yahoo.com/v8/finance/chart/%5EDJI?range=6mo&interval=1d",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/%5EDJI?range=2y&interval=1d",
       "contract": null,
       "values": {
-        "current": 51179.87,
-        "previous": 51521.28125,
-        "week": 50906.05078125,
-        "month": 53414.25,
-        "quarter": 52925.1484375
+        "current": 51231.64,
+        "previous": 51179.87109375,
+        "week": 50926.55859375,
+        "month": 52786.0703125,
+        "quarter": 52348.390625,
+        "year": 46601.78125
       },
       "dates": {
-        "current": "2026-10-07T20:55:25.000Z",
-        "previous": "2026-10-06",
-        "week": "2026-09-30",
-        "month": "2026-09-04",
-        "quarter": "2026-07-07"
+        "current": "2026-10-08T20:46:52.000Z",
+        "previous": "2026-10-07",
+        "week": "2026-10-01",
+        "month": "2026-09-08",
+        "quarter": "2026-07-08",
+        "year": "2025-10-08"
       },
       "note": "Yahoo Finance의 최신 시세(장중 포함)를 직전 거래일 완료 종가와 비교합니다. 현재 시세의 실제 기준 시각을 표시하며 출처의 지연 시세일 수 있습니다. 시장이 닫혀 있으면 마지막 거래 시세를 표시합니다.",
       "comparisonSources": {
-        "current": "https://query1.finance.yahoo.com/v8/finance/chart/%5EDJI?range=6mo&interval=1d",
-        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/%5EDJI?range=6mo&interval=1d",
-        "week": "https://query1.finance.yahoo.com/v8/finance/chart/%5EDJI?range=6mo&interval=1d",
-        "month": "https://query1.finance.yahoo.com/v8/finance/chart/%5EDJI?range=6mo&interval=1d",
-        "quarter": "https://query1.finance.yahoo.com/v8/finance/chart/%5EDJI?range=6mo&interval=1d"
+        "current": "https://query1.finance.yahoo.com/v8/finance/chart/%5EDJI?range=2y&interval=1d",
+        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/%5EDJI?range=2y&interval=1d",
+        "week": "https://query1.finance.yahoo.com/v8/finance/chart/%5EDJI?range=2y&interval=1d",
+        "month": "https://query1.finance.yahoo.com/v8/finance/chart/%5EDJI?range=2y&interval=1d",
+        "quarter": "https://query1.finance.yahoo.com/v8/finance/chart/%5EDJI?range=2y&interval=1d",
+        "year": "https://query1.finance.yahoo.com/v8/finance/chart/%5EDJI?range=2y&interval=1d"
       },
       "live": true,
       "additionalSources": [],
       "provider": "Yahoo Finance",
-      "retrievedAt": "2026-10-08T10:27:51.249Z",
-      "attemptedAt": "2026-10-08T10:27:52.154Z",
+      "retrievedAt": "2026-10-09T02:07:23.492Z",
+      "attemptedAt": "2026-10-09T02:07:26.348Z",
       "priceKind": "market",
       "marketState": "closed",
-      "tradeDate": "2026-10-07",
+      "tradeDate": "2026-10-08",
       "missing": [],
       "refreshError": ""
     },
@@ -227,38 +242,41 @@
       "country": "CN",
       "unit": "pt",
       "decimals": 2,
-      "source": "https://query1.finance.yahoo.com/v8/finance/chart/000001.SS?range=6mo&interval=1d",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/000001.SS?range=2y&interval=1d",
       "contract": null,
       "values": {
-        "current": 3811.9043,
-        "previous": 3842.195068359375,
+        "current": 3796.7395,
+        "previous": 3811.904052734375,
         "week": 3842.195068359375,
-        "month": 3940.551025390625,
-        "quarter": 3970.8798828125
+        "month": 3951.507080078125,
+        "quarter": 4036.587890625,
+        "year": 3933.971923828125
       },
       "dates": {
-        "current": "2026-10-08T07:00:24.000Z",
-        "previous": "2026-09-30",
+        "current": "2026-10-09T01:52:15.000Z",
+        "previous": "2026-10-08",
         "week": "2026-09-30",
-        "month": "2026-09-08",
-        "quarter": "2026-07-08"
+        "month": "2026-09-09",
+        "quarter": "2026-07-09",
+        "year": "2025-10-09"
       },
       "note": "Yahoo Finance의 최신 시세(장중 포함)를 직전 거래일 완료 종가와 비교합니다. 현재 시세의 실제 기준 시각을 표시하며 출처의 지연 시세일 수 있습니다. 시장이 닫혀 있으면 마지막 거래 시세를 표시합니다.",
       "comparisonSources": {
-        "current": "https://query1.finance.yahoo.com/v8/finance/chart/000001.SS?range=6mo&interval=1d",
-        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/000001.SS?range=6mo&interval=1d",
-        "week": "https://query1.finance.yahoo.com/v8/finance/chart/000001.SS?range=6mo&interval=1d",
-        "month": "https://query1.finance.yahoo.com/v8/finance/chart/000001.SS?range=6mo&interval=1d",
-        "quarter": "https://query1.finance.yahoo.com/v8/finance/chart/000001.SS?range=6mo&interval=1d"
+        "current": "https://query1.finance.yahoo.com/v8/finance/chart/000001.SS?range=2y&interval=1d",
+        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/000001.SS?range=2y&interval=1d",
+        "week": "https://query1.finance.yahoo.com/v8/finance/chart/000001.SS?range=2y&interval=1d",
+        "month": "https://query1.finance.yahoo.com/v8/finance/chart/000001.SS?range=2y&interval=1d",
+        "quarter": "https://query1.finance.yahoo.com/v8/finance/chart/000001.SS?range=2y&interval=1d",
+        "year": "https://query1.finance.yahoo.com/v8/finance/chart/000001.SS?range=2y&interval=1d"
       },
       "live": true,
       "additionalSources": [],
       "provider": "Yahoo Finance",
-      "retrievedAt": "2026-10-08T10:27:51.260Z",
-      "attemptedAt": "2026-10-08T10:27:52.154Z",
+      "retrievedAt": "2026-10-09T02:07:23.572Z",
+      "attemptedAt": "2026-10-09T02:07:26.348Z",
       "priceKind": "market",
-      "marketState": "closed",
-      "tradeDate": "2026-10-08",
+      "marketState": "trading",
+      "tradeDate": "2026-10-09",
       "missing": [],
       "refreshError": ""
     },
@@ -270,37 +288,40 @@
       "country": "CN",
       "unit": "pt",
       "decimals": 2,
-      "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz399106,day,,,100,qfq",
+      "source": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz399106,day,,,400,qfq",
       "contract": null,
       "values": {
-        "current": 2365.35,
-        "previous": 2404.48,
+        "current": 2320.49,
+        "previous": 2365.35,
         "week": 2404.48,
-        "month": 2526.93,
-        "quarter": 2650.43
+        "month": 2526.15,
+        "quarter": 2709.18,
+        "year": 2549.96
       },
       "dates": {
-        "current": "2026-10-08T08:14:24.000Z",
-        "previous": "2026-09-30",
+        "current": "2026-10-09T02:07:15.000Z",
+        "previous": "2026-10-08",
         "week": "2026-09-30",
-        "month": "2026-09-08",
-        "quarter": "2026-07-08"
+        "month": "2026-09-09",
+        "quarter": "2026-07-09",
+        "year": "2025-10-09"
       },
-      "note": "선전 종합지수(SZSE Composite, 399106)의 최신 시세(장중 포함)를 직전 완료 종가와 비교합니다. 현재·직전·1주·1개월·3개월은 모두 같은 출처이며 장중 일봉을 직전 종가로 사용하지 않습니다. 출처의 시세 지연이 있을 수 있습니다.",
+      "note": "선전 종합지수(SZSE Composite, 399106)의 최신 시세(장중 포함)를 직전 완료 종가와 비교합니다. 현재·직전·1주·1개월·3개월·12개월은 모두 같은 출처이며 장중 일봉을 직전 종가로 사용하지 않습니다. 출처의 시세 지연이 있을 수 있습니다.",
       "comparisonSources": {
-        "current": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz399106,day,,,100,qfq",
-        "previous": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz399106,day,,,100,qfq",
-        "week": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz399106,day,,,100,qfq",
-        "month": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz399106,day,,,100,qfq",
-        "quarter": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz399106,day,,,100,qfq"
+        "current": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz399106,day,,,400,qfq",
+        "previous": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz399106,day,,,400,qfq",
+        "week": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz399106,day,,,400,qfq",
+        "month": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz399106,day,,,400,qfq",
+        "quarter": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz399106,day,,,400,qfq",
+        "year": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz399106,day,,,400,qfq"
       },
       "live": true,
       "additionalSources": [],
       "provider": "Tencent Finance",
-      "retrievedAt": "2026-10-08T10:27:51.752Z",
-      "attemptedAt": "2026-10-08T10:27:52.154Z",
+      "retrievedAt": "2026-10-09T02:07:24.048Z",
+      "attemptedAt": "2026-10-09T02:07:26.348Z",
       "priceKind": "market",
-      "tradeDate": "2026-10-08",
+      "tradeDate": "2026-10-09",
       "missing": [],
       "refreshError": ""
     },
@@ -312,38 +333,41 @@
       "country": "JP",
       "unit": "pt",
       "decimals": 2,
-      "source": "https://query1.finance.yahoo.com/v8/finance/chart/%5EN225?range=6mo&interval=1d",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/%5EN225?range=2y&interval=1d",
       "contract": null,
       "values": {
-        "current": 69042.11,
-        "previous": 70035.7109375,
-        "week": 68956.71875,
-        "month": 65269.328125,
-        "quarter": 66819.046875
+        "current": 68584.87,
+        "previous": 69042.109375,
+        "week": 68309.4609375,
+        "month": 65142.78125,
+        "quarter": 67743.8515625,
+        "year": 48580.44140625
       },
       "dates": {
-        "current": "2026-10-08T06:45:03.000Z",
-        "previous": "2026-10-07",
-        "week": "2026-10-01",
-        "month": "2026-09-08",
-        "quarter": "2026-07-08"
+        "current": "2026-10-09T01:52:15.000Z",
+        "previous": "2026-10-08",
+        "week": "2026-10-02",
+        "month": "2026-09-09",
+        "quarter": "2026-07-09",
+        "year": "2025-10-09"
       },
       "note": "Yahoo Finance의 최신 시세(장중 포함)를 직전 거래일 완료 종가와 비교합니다. 현재 시세의 실제 기준 시각을 표시하며 출처의 지연 시세일 수 있습니다. 시장이 닫혀 있으면 마지막 거래 시세를 표시합니다.",
       "comparisonSources": {
-        "current": "https://query1.finance.yahoo.com/v8/finance/chart/%5EN225?range=6mo&interval=1d",
-        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/%5EN225?range=6mo&interval=1d",
-        "week": "https://query1.finance.yahoo.com/v8/finance/chart/%5EN225?range=6mo&interval=1d",
-        "month": "https://query1.finance.yahoo.com/v8/finance/chart/%5EN225?range=6mo&interval=1d",
-        "quarter": "https://query1.finance.yahoo.com/v8/finance/chart/%5EN225?range=6mo&interval=1d"
+        "current": "https://query1.finance.yahoo.com/v8/finance/chart/%5EN225?range=2y&interval=1d",
+        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/%5EN225?range=2y&interval=1d",
+        "week": "https://query1.finance.yahoo.com/v8/finance/chart/%5EN225?range=2y&interval=1d",
+        "month": "https://query1.finance.yahoo.com/v8/finance/chart/%5EN225?range=2y&interval=1d",
+        "quarter": "https://query1.finance.yahoo.com/v8/finance/chart/%5EN225?range=2y&interval=1d",
+        "year": "https://query1.finance.yahoo.com/v8/finance/chart/%5EN225?range=2y&interval=1d"
       },
       "live": true,
       "additionalSources": [],
       "provider": "Yahoo Finance",
-      "retrievedAt": "2026-10-08T10:27:51.281Z",
-      "attemptedAt": "2026-10-08T10:27:52.154Z",
+      "retrievedAt": "2026-10-09T02:07:23.537Z",
+      "attemptedAt": "2026-10-09T02:07:26.348Z",
       "priceKind": "market",
-      "marketState": "closed",
-      "tradeDate": "2026-10-08",
+      "marketState": "trading",
+      "tradeDate": "2026-10-09",
       "missing": [],
       "refreshError": ""
     },
@@ -355,38 +379,41 @@
       "country": "HK",
       "unit": "pt",
       "decimals": 2,
-      "source": "https://query1.finance.yahoo.com/v8/finance/chart/%5EHSI?range=6mo&interval=1d",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/%5EHSI?range=2y&interval=1d",
       "contract": null,
       "values": {
-        "current": 23785.79,
-        "previous": 24130.5,
-        "week": 24613.26953125,
-        "month": 25317.1796875,
-        "quarter": 24199.4609375
+        "current": 24098.22,
+        "previous": 23785.7890625,
+        "week": 23972.2890625,
+        "month": 25274.9609375,
+        "quarter": 24030.1796875,
+        "year": 26752.58984375
       },
       "dates": {
-        "current": "2026-10-08T08:08:40.000Z",
-        "previous": "2026-10-07",
-        "week": "2026-09-30",
-        "month": "2026-09-08",
-        "quarter": "2026-07-08"
+        "current": "2026-10-09T01:52:18.000Z",
+        "previous": "2026-10-08",
+        "week": "2026-10-02",
+        "month": "2026-09-09",
+        "quarter": "2026-07-09",
+        "year": "2025-10-09"
       },
       "note": "Yahoo Finance의 최신 시세(장중 포함)를 직전 거래일 완료 종가와 비교합니다. 현재 시세의 실제 기준 시각을 표시하며 출처의 지연 시세일 수 있습니다. 시장이 닫혀 있으면 마지막 거래 시세를 표시합니다.",
       "comparisonSources": {
-        "current": "https://query1.finance.yahoo.com/v8/finance/chart/%5EHSI?range=6mo&interval=1d",
-        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/%5EHSI?range=6mo&interval=1d",
-        "week": "https://query1.finance.yahoo.com/v8/finance/chart/%5EHSI?range=6mo&interval=1d",
-        "month": "https://query1.finance.yahoo.com/v8/finance/chart/%5EHSI?range=6mo&interval=1d",
-        "quarter": "https://query1.finance.yahoo.com/v8/finance/chart/%5EHSI?range=6mo&interval=1d"
+        "current": "https://query1.finance.yahoo.com/v8/finance/chart/%5EHSI?range=2y&interval=1d",
+        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/%5EHSI?range=2y&interval=1d",
+        "week": "https://query1.finance.yahoo.com/v8/finance/chart/%5EHSI?range=2y&interval=1d",
+        "month": "https://query1.finance.yahoo.com/v8/finance/chart/%5EHSI?range=2y&interval=1d",
+        "quarter": "https://query1.finance.yahoo.com/v8/finance/chart/%5EHSI?range=2y&interval=1d",
+        "year": "https://query1.finance.yahoo.com/v8/finance/chart/%5EHSI?range=2y&interval=1d"
       },
       "live": true,
       "additionalSources": [],
       "provider": "Yahoo Finance",
-      "retrievedAt": "2026-10-08T10:27:51.336Z",
-      "attemptedAt": "2026-10-08T10:27:52.154Z",
+      "retrievedAt": "2026-10-09T02:07:23.608Z",
+      "attemptedAt": "2026-10-09T02:07:26.348Z",
       "priceKind": "market",
-      "marketState": "closed",
-      "tradeDate": "2026-10-08",
+      "marketState": "trading",
+      "tradeDate": "2026-10-09",
       "missing": [],
       "refreshError": ""
     },
@@ -405,34 +432,40 @@
         "previous": 3.741,
         "week": 3.814,
         "month": 3.595,
-        "quarter": 3.528
+        "quarter": 3.528,
+        "year": 2.316
       },
       "dates": {
         "current": "2026-10-08T09:46:28.000Z",
         "previous": "2026-10-07",
         "week": "2026-10-01",
         "month": "2026-09-08",
-        "quarter": "2026-07-08"
+        "quarter": "2026-07-08",
+        "year": "2025-10-02"
       },
-      "note": "네이버 증권의 한국 국채 1년(KR1YT=RR) 시장 수익률, 연% 기준입니다. 출처가 표시한 시세 지연은 0분이며 현재 수치의 실제 기준 시각을 별도로 표시합니다. 현재·직전·1주·1개월·3개월을 같은 네이버 시장 수익률 계열로 비교하고 장중 일봉은 직전 종가에서 제외합니다. 기존 한국은행·일본 재무성 공식 일별 통계와 수치가 다를 수 있습니다.",
+      "note": "네이버 증권의 한국 국채 1년(KR1YT=RR) 시장 수익률, 연% 기준입니다. 출처가 표시한 시세 지연은 0분이며 현재 수치의 실제 기준 시각을 별도로 표시합니다. 현재·직전·1주·1개월·3개월·12개월을 같은 네이버 시장 수익률 계열로 비교하고 장중 일봉은 직전 종가에서 제외합니다. 기존 한국은행·일본 재무성 공식 일별 통계와 수치가 다를 수 있습니다.",
       "comparisonSources": {
         "current": "https://stock.naver.com/api/securityService/economic/bond/KR1YT%3DRR",
         "previous": "https://stock.naver.com/api/securityService/marketindex/bond/KR1YT%3DRR/prices?page=1&pageSize=60",
         "week": "https://stock.naver.com/api/securityService/marketindex/bond/KR1YT%3DRR/prices?page=1&pageSize=60",
         "month": "https://stock.naver.com/api/securityService/marketindex/bond/KR1YT%3DRR/prices?page=1&pageSize=60",
-        "quarter": "https://stock.naver.com/api/securityService/marketindex/bond/KR1YT%3DRR/prices?page=2&pageSize=60"
+        "quarter": "https://stock.naver.com/api/securityService/marketindex/bond/KR1YT%3DRR/prices?page=2&pageSize=60",
+        "year": "https://stock.naver.com/api/securityService/marketindex/bond/KR1YT%3DRR/prices?page=5&pageSize=60"
       },
       "live": true,
       "additionalSources": [
         "https://stock.naver.com/api/securityService/economic/bond/KR1YT%3DRR",
         "https://stock.naver.com/api/securityService/marketindex/bond/KR1YT%3DRR/prices?page=1&pageSize=60",
-        "https://stock.naver.com/api/securityService/marketindex/bond/KR1YT%3DRR/prices?page=2&pageSize=60"
+        "https://stock.naver.com/api/securityService/marketindex/bond/KR1YT%3DRR/prices?page=2&pageSize=60",
+        "https://stock.naver.com/api/securityService/marketindex/bond/KR1YT%3DRR/prices?page=3&pageSize=60",
+        "https://stock.naver.com/api/securityService/marketindex/bond/KR1YT%3DRR/prices?page=4&pageSize=60",
+        "https://stock.naver.com/api/securityService/marketindex/bond/KR1YT%3DRR/prices?page=5&pageSize=60"
       ],
       "provider": "네이버 증권",
-      "retrievedAt": "2026-10-08T10:27:51.575Z",
-      "attemptedAt": "2026-10-08T10:27:52.154Z",
+      "retrievedAt": "2026-10-09T02:07:24.272Z",
+      "attemptedAt": "2026-10-09T02:07:26.348Z",
       "priceKind": "market",
-      "marketState": "trading",
+      "marketState": "closed",
       "tradeDate": "2026-10-08",
       "delayMinutes": 0,
       "missing": [],
@@ -453,34 +486,40 @@
         "previous": 3.945,
         "week": 4.017,
         "month": 3.903,
-        "quarter": 3.776
+        "quarter": 3.776,
+        "year": 2.578
       },
       "dates": {
         "current": "2026-10-08T07:19:01.000Z",
         "previous": "2026-10-07",
         "week": "2026-10-01",
         "month": "2026-09-08",
-        "quarter": "2026-07-08"
+        "quarter": "2026-07-08",
+        "year": "2025-10-02"
       },
-      "note": "네이버 증권의 한국 국채 3년(KR3YT=RR) 시장 수익률, 연% 기준입니다. 출처가 표시한 시세 지연은 0분이며 현재 수치의 실제 기준 시각을 별도로 표시합니다. 현재·직전·1주·1개월·3개월을 같은 네이버 시장 수익률 계열로 비교하고 장중 일봉은 직전 종가에서 제외합니다. 기존 한국은행·일본 재무성 공식 일별 통계와 수치가 다를 수 있습니다.",
+      "note": "네이버 증권의 한국 국채 3년(KR3YT=RR) 시장 수익률, 연% 기준입니다. 출처가 표시한 시세 지연은 0분이며 현재 수치의 실제 기준 시각을 별도로 표시합니다. 현재·직전·1주·1개월·3개월·12개월을 같은 네이버 시장 수익률 계열로 비교하고 장중 일봉은 직전 종가에서 제외합니다. 기존 한국은행·일본 재무성 공식 일별 통계와 수치가 다를 수 있습니다.",
       "comparisonSources": {
         "current": "https://stock.naver.com/api/securityService/economic/bond/KR3YT%3DRR",
         "previous": "https://stock.naver.com/api/securityService/marketindex/bond/KR3YT%3DRR/prices?page=1&pageSize=60",
         "week": "https://stock.naver.com/api/securityService/marketindex/bond/KR3YT%3DRR/prices?page=1&pageSize=60",
         "month": "https://stock.naver.com/api/securityService/marketindex/bond/KR3YT%3DRR/prices?page=1&pageSize=60",
-        "quarter": "https://stock.naver.com/api/securityService/marketindex/bond/KR3YT%3DRR/prices?page=2&pageSize=60"
+        "quarter": "https://stock.naver.com/api/securityService/marketindex/bond/KR3YT%3DRR/prices?page=2&pageSize=60",
+        "year": "https://stock.naver.com/api/securityService/marketindex/bond/KR3YT%3DRR/prices?page=5&pageSize=60"
       },
       "live": true,
       "additionalSources": [
         "https://stock.naver.com/api/securityService/economic/bond/KR3YT%3DRR",
         "https://stock.naver.com/api/securityService/marketindex/bond/KR3YT%3DRR/prices?page=1&pageSize=60",
-        "https://stock.naver.com/api/securityService/marketindex/bond/KR3YT%3DRR/prices?page=2&pageSize=60"
+        "https://stock.naver.com/api/securityService/marketindex/bond/KR3YT%3DRR/prices?page=2&pageSize=60",
+        "https://stock.naver.com/api/securityService/marketindex/bond/KR3YT%3DRR/prices?page=3&pageSize=60",
+        "https://stock.naver.com/api/securityService/marketindex/bond/KR3YT%3DRR/prices?page=4&pageSize=60",
+        "https://stock.naver.com/api/securityService/marketindex/bond/KR3YT%3DRR/prices?page=5&pageSize=60"
       ],
       "provider": "네이버 증권",
-      "retrievedAt": "2026-10-08T10:27:51.676Z",
-      "attemptedAt": "2026-10-08T10:27:52.154Z",
+      "retrievedAt": "2026-10-09T02:07:24.420Z",
+      "attemptedAt": "2026-10-09T02:07:26.348Z",
       "priceKind": "market",
-      "marketState": "trading",
+      "marketState": "closed",
       "tradeDate": "2026-10-08",
       "delayMinutes": 0,
       "missing": [],
@@ -501,34 +540,40 @@
         "previous": 4.391,
         "week": 4.439,
         "month": 4.39,
-        "quarter": 4.248
+        "quarter": 4.248,
+        "year": 2.957
       },
       "dates": {
         "current": "2026-10-08T06:49:57.000Z",
         "previous": "2026-10-07",
         "week": "2026-10-01",
         "month": "2026-09-08",
-        "quarter": "2026-07-08"
+        "quarter": "2026-07-08",
+        "year": "2025-10-02"
       },
-      "note": "네이버 증권의 한국 국채 10년(KR10YT=RR) 시장 수익률, 연% 기준입니다. 출처가 표시한 시세 지연은 0분이며 현재 수치의 실제 기준 시각을 별도로 표시합니다. 현재·직전·1주·1개월·3개월을 같은 네이버 시장 수익률 계열로 비교하고 장중 일봉은 직전 종가에서 제외합니다. 기존 한국은행·일본 재무성 공식 일별 통계와 수치가 다를 수 있습니다.",
+      "note": "네이버 증권의 한국 국채 10년(KR10YT=RR) 시장 수익률, 연% 기준입니다. 출처가 표시한 시세 지연은 0분이며 현재 수치의 실제 기준 시각을 별도로 표시합니다. 현재·직전·1주·1개월·3개월·12개월을 같은 네이버 시장 수익률 계열로 비교하고 장중 일봉은 직전 종가에서 제외합니다. 기존 한국은행·일본 재무성 공식 일별 통계와 수치가 다를 수 있습니다.",
       "comparisonSources": {
         "current": "https://stock.naver.com/api/securityService/economic/bond/KR10YT%3DRR",
         "previous": "https://stock.naver.com/api/securityService/marketindex/bond/KR10YT%3DRR/prices?page=1&pageSize=60",
         "week": "https://stock.naver.com/api/securityService/marketindex/bond/KR10YT%3DRR/prices?page=1&pageSize=60",
         "month": "https://stock.naver.com/api/securityService/marketindex/bond/KR10YT%3DRR/prices?page=1&pageSize=60",
-        "quarter": "https://stock.naver.com/api/securityService/marketindex/bond/KR10YT%3DRR/prices?page=2&pageSize=60"
+        "quarter": "https://stock.naver.com/api/securityService/marketindex/bond/KR10YT%3DRR/prices?page=2&pageSize=60",
+        "year": "https://stock.naver.com/api/securityService/marketindex/bond/KR10YT%3DRR/prices?page=5&pageSize=60"
       },
       "live": true,
       "additionalSources": [
         "https://stock.naver.com/api/securityService/economic/bond/KR10YT%3DRR",
         "https://stock.naver.com/api/securityService/marketindex/bond/KR10YT%3DRR/prices?page=1&pageSize=60",
-        "https://stock.naver.com/api/securityService/marketindex/bond/KR10YT%3DRR/prices?page=2&pageSize=60"
+        "https://stock.naver.com/api/securityService/marketindex/bond/KR10YT%3DRR/prices?page=2&pageSize=60",
+        "https://stock.naver.com/api/securityService/marketindex/bond/KR10YT%3DRR/prices?page=3&pageSize=60",
+        "https://stock.naver.com/api/securityService/marketindex/bond/KR10YT%3DRR/prices?page=4&pageSize=60",
+        "https://stock.naver.com/api/securityService/marketindex/bond/KR10YT%3DRR/prices?page=5&pageSize=60"
       ],
       "provider": "네이버 증권",
-      "retrievedAt": "2026-10-08T10:27:51.643Z",
-      "attemptedAt": "2026-10-08T10:27:52.154Z",
+      "retrievedAt": "2026-10-09T02:07:24.602Z",
+      "attemptedAt": "2026-10-09T02:07:26.348Z",
       "priceKind": "market",
-      "marketState": "trading",
+      "marketState": "closed",
       "tradeDate": "2026-10-08",
       "delayMinutes": 0,
       "missing": [],
@@ -549,34 +594,40 @@
         "previous": 4.49,
         "week": 4.539,
         "month": 4.64,
-        "quarter": 4.467
+        "quarter": 4.467,
+        "year": 2.82
       },
       "dates": {
         "current": "2026-10-08T07:19:01.000Z",
         "previous": "2026-10-07",
         "week": "2026-10-01",
         "month": "2026-09-08",
-        "quarter": "2026-07-08"
+        "quarter": "2026-07-08",
+        "year": "2025-10-02"
       },
-      "note": "네이버 증권의 한국 국채 30년(KR30YT=RR) 시장 수익률, 연% 기준입니다. 출처가 표시한 시세 지연은 0분이며 현재 수치의 실제 기준 시각을 별도로 표시합니다. 현재·직전·1주·1개월·3개월을 같은 네이버 시장 수익률 계열로 비교하고 장중 일봉은 직전 종가에서 제외합니다. 기존 한국은행·일본 재무성 공식 일별 통계와 수치가 다를 수 있습니다.",
+      "note": "네이버 증권의 한국 국채 30년(KR30YT=RR) 시장 수익률, 연% 기준입니다. 출처가 표시한 시세 지연은 0분이며 현재 수치의 실제 기준 시각을 별도로 표시합니다. 현재·직전·1주·1개월·3개월·12개월을 같은 네이버 시장 수익률 계열로 비교하고 장중 일봉은 직전 종가에서 제외합니다. 기존 한국은행·일본 재무성 공식 일별 통계와 수치가 다를 수 있습니다.",
       "comparisonSources": {
         "current": "https://stock.naver.com/api/securityService/economic/bond/KR30YT%3DRR",
         "previous": "https://stock.naver.com/api/securityService/marketindex/bond/KR30YT%3DRR/prices?page=1&pageSize=60",
         "week": "https://stock.naver.com/api/securityService/marketindex/bond/KR30YT%3DRR/prices?page=1&pageSize=60",
         "month": "https://stock.naver.com/api/securityService/marketindex/bond/KR30YT%3DRR/prices?page=1&pageSize=60",
-        "quarter": "https://stock.naver.com/api/securityService/marketindex/bond/KR30YT%3DRR/prices?page=2&pageSize=60"
+        "quarter": "https://stock.naver.com/api/securityService/marketindex/bond/KR30YT%3DRR/prices?page=2&pageSize=60",
+        "year": "https://stock.naver.com/api/securityService/marketindex/bond/KR30YT%3DRR/prices?page=5&pageSize=60"
       },
       "live": true,
       "additionalSources": [
         "https://stock.naver.com/api/securityService/economic/bond/KR30YT%3DRR",
         "https://stock.naver.com/api/securityService/marketindex/bond/KR30YT%3DRR/prices?page=1&pageSize=60",
-        "https://stock.naver.com/api/securityService/marketindex/bond/KR30YT%3DRR/prices?page=2&pageSize=60"
+        "https://stock.naver.com/api/securityService/marketindex/bond/KR30YT%3DRR/prices?page=2&pageSize=60",
+        "https://stock.naver.com/api/securityService/marketindex/bond/KR30YT%3DRR/prices?page=3&pageSize=60",
+        "https://stock.naver.com/api/securityService/marketindex/bond/KR30YT%3DRR/prices?page=4&pageSize=60",
+        "https://stock.naver.com/api/securityService/marketindex/bond/KR30YT%3DRR/prices?page=5&pageSize=60"
       ],
       "provider": "네이버 증권",
-      "retrievedAt": "2026-10-08T10:27:51.689Z",
-      "attemptedAt": "2026-10-08T10:27:52.154Z",
+      "retrievedAt": "2026-10-09T02:07:24.846Z",
+      "attemptedAt": "2026-10-09T02:07:26.348Z",
       "priceKind": "market",
-      "marketState": "trading",
+      "marketState": "closed",
       "tradeDate": "2026-10-08",
       "delayMinutes": 0,
       "missing": [],
@@ -593,41 +644,49 @@
       "source": "https://stock.naver.com/marketindex/bond/US1YT%3DRR/price",
       "contract": null,
       "values": {
-        "current": 4.444,
-        "previous": 4.412,
+        "current": 4.45,
+        "previous": null,
         "week": 4.434,
         "month": 4.146,
-        "quarter": 4.062
+        "quarter": 4.062,
+        "year": 3.657
       },
       "dates": {
-        "current": "2026-10-08T09:25:43.000Z",
-        "previous": "2026-10-07",
+        "current": "2026-10-09T00:39:09.000Z",
+        "previous": null,
         "week": "2026-10-01",
         "month": "2026-09-08",
-        "quarter": "2026-07-08"
+        "quarter": "2026-07-08",
+        "year": "2025-10-08"
       },
-      "note": "네이버 증권의 미국 국채 1년(US1YT=RR) 시장 수익률, 연% 기준입니다. 출처가 표시한 시세 지연은 0분이며 현재 수치의 실제 기준 시각을 별도로 표시합니다. 현재·직전·1주·1개월·3개월을 같은 네이버 시장 수익률 계열로 비교하고 장중 일봉은 직전 종가에서 제외합니다. 기존 한국은행·일본 재무성 공식 일별 통계와 수치가 다를 수 있습니다.",
+      "note": "네이버 증권의 미국 국채 1년(US1YT=RR) 시장 수익률, 연% 기준입니다. 출처가 표시한 시세 지연은 0분이며 현재 수치의 실제 기준 시각을 별도로 표시합니다. 현재·직전·1주·1개월·3개월·12개월을 같은 네이버 시장 수익률 계열로 비교하고 장중 일봉은 직전 종가에서 제외합니다. 기존 한국은행·일본 재무성 공식 일별 통계와 수치가 다를 수 있습니다. 출처의 직전 종가와 일별 자료가 일치하지 않아 직전 비교만 확인 불가로 표시합니다. 다른 비교값은 해당 기준일의 일별 자료를 사용합니다.",
       "comparisonSources": {
         "current": "https://stock.naver.com/api/securityService/economic/bond/US1YT%3DRR",
-        "previous": "https://stock.naver.com/api/securityService/marketindex/bond/US1YT%3DRR/prices?page=1&pageSize=60",
+        "previous": null,
         "week": "https://stock.naver.com/api/securityService/marketindex/bond/US1YT%3DRR/prices?page=1&pageSize=60",
         "month": "https://stock.naver.com/api/securityService/marketindex/bond/US1YT%3DRR/prices?page=1&pageSize=60",
-        "quarter": "https://stock.naver.com/api/securityService/marketindex/bond/US1YT%3DRR/prices?page=2&pageSize=60"
+        "quarter": "https://stock.naver.com/api/securityService/marketindex/bond/US1YT%3DRR/prices?page=2&pageSize=60",
+        "year": "https://stock.naver.com/api/securityService/marketindex/bond/US1YT%3DRR/prices?page=5&pageSize=60"
       },
       "live": true,
       "additionalSources": [
         "https://stock.naver.com/api/securityService/economic/bond/US1YT%3DRR",
         "https://stock.naver.com/api/securityService/marketindex/bond/US1YT%3DRR/prices?page=1&pageSize=60",
-        "https://stock.naver.com/api/securityService/marketindex/bond/US1YT%3DRR/prices?page=2&pageSize=60"
+        "https://stock.naver.com/api/securityService/marketindex/bond/US1YT%3DRR/prices?page=2&pageSize=60",
+        "https://stock.naver.com/api/securityService/marketindex/bond/US1YT%3DRR/prices?page=3&pageSize=60",
+        "https://stock.naver.com/api/securityService/marketindex/bond/US1YT%3DRR/prices?page=4&pageSize=60",
+        "https://stock.naver.com/api/securityService/marketindex/bond/US1YT%3DRR/prices?page=5&pageSize=60"
       ],
       "provider": "네이버 증권",
-      "retrievedAt": "2026-10-08T10:27:51.738Z",
-      "attemptedAt": "2026-10-08T10:27:52.154Z",
+      "retrievedAt": "2026-10-09T02:07:24.930Z",
+      "attemptedAt": "2026-10-09T02:07:26.348Z",
       "priceKind": "market",
       "marketState": "trading",
       "tradeDate": "2026-10-08",
       "delayMinutes": 0,
-      "missing": [],
+      "missing": [
+        "previous"
+      ],
       "refreshError": ""
     },
     {
@@ -641,41 +700,49 @@
       "source": "https://stock.naver.com/marketindex/bond/US3YT%3DRR/price",
       "contract": null,
       "values": {
-        "current": 4.966,
-        "previous": 4.906,
+        "current": 4.879,
+        "previous": null,
         "week": 4.904,
         "month": 4.473,
-        "quarter": 4.241
+        "quarter": 4.241,
+        "year": 3.598
       },
       "dates": {
-        "current": "2026-10-08T10:19:45.000Z",
-        "previous": "2026-10-07",
+        "current": "2026-10-09T01:59:56.000Z",
+        "previous": null,
         "week": "2026-10-01",
         "month": "2026-09-08",
-        "quarter": "2026-07-08"
+        "quarter": "2026-07-08",
+        "year": "2025-10-08"
       },
-      "note": "네이버 증권의 미국 국채 3년(US3YT=RR) 시장 수익률, 연% 기준입니다. 출처가 표시한 시세 지연은 0분이며 현재 수치의 실제 기준 시각을 별도로 표시합니다. 현재·직전·1주·1개월·3개월을 같은 네이버 시장 수익률 계열로 비교하고 장중 일봉은 직전 종가에서 제외합니다. 기존 한국은행·일본 재무성 공식 일별 통계와 수치가 다를 수 있습니다.",
+      "note": "네이버 증권의 미국 국채 3년(US3YT=RR) 시장 수익률, 연% 기준입니다. 출처가 표시한 시세 지연은 0분이며 현재 수치의 실제 기준 시각을 별도로 표시합니다. 현재·직전·1주·1개월·3개월·12개월을 같은 네이버 시장 수익률 계열로 비교하고 장중 일봉은 직전 종가에서 제외합니다. 기존 한국은행·일본 재무성 공식 일별 통계와 수치가 다를 수 있습니다. 출처의 직전 종가와 일별 자료가 일치하지 않아 직전 비교만 확인 불가로 표시합니다. 다른 비교값은 해당 기준일의 일별 자료를 사용합니다.",
       "comparisonSources": {
         "current": "https://stock.naver.com/api/securityService/economic/bond/US3YT%3DRR",
-        "previous": "https://stock.naver.com/api/securityService/marketindex/bond/US3YT%3DRR/prices?page=1&pageSize=60",
+        "previous": null,
         "week": "https://stock.naver.com/api/securityService/marketindex/bond/US3YT%3DRR/prices?page=1&pageSize=60",
         "month": "https://stock.naver.com/api/securityService/marketindex/bond/US3YT%3DRR/prices?page=1&pageSize=60",
-        "quarter": "https://stock.naver.com/api/securityService/marketindex/bond/US3YT%3DRR/prices?page=2&pageSize=60"
+        "quarter": "https://stock.naver.com/api/securityService/marketindex/bond/US3YT%3DRR/prices?page=2&pageSize=60",
+        "year": "https://stock.naver.com/api/securityService/marketindex/bond/US3YT%3DRR/prices?page=5&pageSize=60"
       },
       "live": true,
       "additionalSources": [
         "https://stock.naver.com/api/securityService/economic/bond/US3YT%3DRR",
         "https://stock.naver.com/api/securityService/marketindex/bond/US3YT%3DRR/prices?page=1&pageSize=60",
-        "https://stock.naver.com/api/securityService/marketindex/bond/US3YT%3DRR/prices?page=2&pageSize=60"
+        "https://stock.naver.com/api/securityService/marketindex/bond/US3YT%3DRR/prices?page=2&pageSize=60",
+        "https://stock.naver.com/api/securityService/marketindex/bond/US3YT%3DRR/prices?page=3&pageSize=60",
+        "https://stock.naver.com/api/securityService/marketindex/bond/US3YT%3DRR/prices?page=4&pageSize=60",
+        "https://stock.naver.com/api/securityService/marketindex/bond/US3YT%3DRR/prices?page=5&pageSize=60"
       ],
       "provider": "네이버 증권",
-      "retrievedAt": "2026-10-08T10:27:51.751Z",
-      "attemptedAt": "2026-10-08T10:27:52.154Z",
+      "retrievedAt": "2026-10-09T02:07:25.070Z",
+      "attemptedAt": "2026-10-09T02:07:26.348Z",
       "priceKind": "market",
       "marketState": "trading",
       "tradeDate": "2026-10-08",
       "delayMinutes": 0,
-      "missing": [],
+      "missing": [
+        "previous"
+      ],
       "refreshError": ""
     },
     {
@@ -686,38 +753,41 @@
       "country": "US",
       "unit": "%",
       "decimals": 3,
-      "source": "https://query1.finance.yahoo.com/v8/finance/chart/%5ETNX?range=6mo&interval=1d",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/%5ETNX?range=2y&interval=1d",
       "contract": null,
       "values": {
-        "current": 5.277,
-        "previous": 5.269000053405762,
-        "week": 5.293000221252441,
-        "month": 4.783999919891357,
-        "quarter": 4.5289998054504395
+        "current": 5.231,
+        "previous": 5.2769999504089355,
+        "week": 5.236999988555908,
+        "month": 4.806000232696533,
+        "quarter": 4.568999767303467,
+        "year": 4.129000186920166
       },
       "dates": {
-        "current": "2026-10-07T18:59:54.000Z",
-        "previous": "2026-10-06",
-        "week": "2026-09-30",
-        "month": "2026-09-04",
-        "quarter": "2026-07-07"
+        "current": "2026-10-08T18:59:55.000Z",
+        "previous": "2026-10-07",
+        "week": "2026-10-01",
+        "month": "2026-09-08",
+        "quarter": "2026-07-08",
+        "year": "2025-10-08"
       },
       "note": "Yahoo Finance의 최신 시세(장중 포함)를 직전 거래일 완료 종가와 비교합니다. 현재 시세의 실제 기준 시각을 표시하며 출처의 지연 시세일 수 있습니다. 시장이 닫혀 있으면 마지막 거래 시세를 표시합니다. 미국 10년물은 CBOE 10년 국채 수익률 지수(^TNX) 기준입니다.",
       "comparisonSources": {
-        "current": "https://query1.finance.yahoo.com/v8/finance/chart/%5ETNX?range=6mo&interval=1d",
-        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/%5ETNX?range=6mo&interval=1d",
-        "week": "https://query1.finance.yahoo.com/v8/finance/chart/%5ETNX?range=6mo&interval=1d",
-        "month": "https://query1.finance.yahoo.com/v8/finance/chart/%5ETNX?range=6mo&interval=1d",
-        "quarter": "https://query1.finance.yahoo.com/v8/finance/chart/%5ETNX?range=6mo&interval=1d"
+        "current": "https://query1.finance.yahoo.com/v8/finance/chart/%5ETNX?range=2y&interval=1d",
+        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/%5ETNX?range=2y&interval=1d",
+        "week": "https://query1.finance.yahoo.com/v8/finance/chart/%5ETNX?range=2y&interval=1d",
+        "month": "https://query1.finance.yahoo.com/v8/finance/chart/%5ETNX?range=2y&interval=1d",
+        "quarter": "https://query1.finance.yahoo.com/v8/finance/chart/%5ETNX?range=2y&interval=1d",
+        "year": "https://query1.finance.yahoo.com/v8/finance/chart/%5ETNX?range=2y&interval=1d"
       },
       "live": true,
       "additionalSources": [],
       "provider": "Yahoo Finance",
-      "retrievedAt": "2026-10-08T10:27:51.413Z",
-      "attemptedAt": "2026-10-08T10:27:52.154Z",
+      "retrievedAt": "2026-10-09T02:07:23.667Z",
+      "attemptedAt": "2026-10-09T02:07:26.348Z",
       "priceKind": "market",
       "marketState": "closed",
-      "tradeDate": "2026-10-07",
+      "tradeDate": "2026-10-08",
       "missing": [],
       "refreshError": ""
     },
@@ -732,41 +802,49 @@
       "source": "https://stock.naver.com/marketindex/bond/US30YT%3DRR/price",
       "contract": null,
       "values": {
-        "current": 5.726,
-        "previous": 5.661,
+        "current": 5.604,
+        "previous": null,
         "week": 5.603,
         "month": 5.264,
-        "quarter": 5.064
+        "quarter": 5.064,
+        "year": 4.724
       },
       "dates": {
-        "current": "2026-10-08T10:19:54.000Z",
-        "previous": "2026-10-07",
+        "current": "2026-10-09T01:59:29.000Z",
+        "previous": null,
         "week": "2026-10-01",
         "month": "2026-09-08",
-        "quarter": "2026-07-08"
+        "quarter": "2026-07-08",
+        "year": "2025-10-08"
       },
-      "note": "네이버 증권의 미국 국채 30년(US30YT=RR) 시장 수익률, 연% 기준입니다. 출처가 표시한 시세 지연은 0분이며 현재 수치의 실제 기준 시각을 별도로 표시합니다. 현재·직전·1주·1개월·3개월을 같은 네이버 시장 수익률 계열로 비교하고 장중 일봉은 직전 종가에서 제외합니다. 기존 한국은행·일본 재무성 공식 일별 통계와 수치가 다를 수 있습니다.",
+      "note": "네이버 증권의 미국 국채 30년(US30YT=RR) 시장 수익률, 연% 기준입니다. 출처가 표시한 시세 지연은 0분이며 현재 수치의 실제 기준 시각을 별도로 표시합니다. 현재·직전·1주·1개월·3개월·12개월을 같은 네이버 시장 수익률 계열로 비교하고 장중 일봉은 직전 종가에서 제외합니다. 기존 한국은행·일본 재무성 공식 일별 통계와 수치가 다를 수 있습니다. 출처의 직전 종가와 일별 자료가 일치하지 않아 직전 비교만 확인 불가로 표시합니다. 다른 비교값은 해당 기준일의 일별 자료를 사용합니다.",
       "comparisonSources": {
         "current": "https://stock.naver.com/api/securityService/economic/bond/US30YT%3DRR",
-        "previous": "https://stock.naver.com/api/securityService/marketindex/bond/US30YT%3DRR/prices?page=1&pageSize=60",
+        "previous": null,
         "week": "https://stock.naver.com/api/securityService/marketindex/bond/US30YT%3DRR/prices?page=1&pageSize=60",
         "month": "https://stock.naver.com/api/securityService/marketindex/bond/US30YT%3DRR/prices?page=1&pageSize=60",
-        "quarter": "https://stock.naver.com/api/securityService/marketindex/bond/US30YT%3DRR/prices?page=2&pageSize=60"
+        "quarter": "https://stock.naver.com/api/securityService/marketindex/bond/US30YT%3DRR/prices?page=2&pageSize=60",
+        "year": "https://stock.naver.com/api/securityService/marketindex/bond/US30YT%3DRR/prices?page=5&pageSize=60"
       },
       "live": true,
       "additionalSources": [
         "https://stock.naver.com/api/securityService/economic/bond/US30YT%3DRR",
         "https://stock.naver.com/api/securityService/marketindex/bond/US30YT%3DRR/prices?page=1&pageSize=60",
-        "https://stock.naver.com/api/securityService/marketindex/bond/US30YT%3DRR/prices?page=2&pageSize=60"
+        "https://stock.naver.com/api/securityService/marketindex/bond/US30YT%3DRR/prices?page=2&pageSize=60",
+        "https://stock.naver.com/api/securityService/marketindex/bond/US30YT%3DRR/prices?page=3&pageSize=60",
+        "https://stock.naver.com/api/securityService/marketindex/bond/US30YT%3DRR/prices?page=4&pageSize=60",
+        "https://stock.naver.com/api/securityService/marketindex/bond/US30YT%3DRR/prices?page=5&pageSize=60"
       ],
       "provider": "네이버 증권",
-      "retrievedAt": "2026-10-08T10:27:51.795Z",
-      "attemptedAt": "2026-10-08T10:27:52.154Z",
+      "retrievedAt": "2026-10-09T02:07:25.294Z",
+      "attemptedAt": "2026-10-09T02:07:26.348Z",
       "priceKind": "market",
       "marketState": "trading",
       "tradeDate": "2026-10-08",
       "delayMinutes": 0,
-      "missing": [],
+      "missing": [
+        "previous"
+      ],
       "refreshError": ""
     },
     {
@@ -780,39 +858,45 @@
       "source": "https://stock.naver.com/marketindex/bond/JP1YT%3DRR/price",
       "contract": null,
       "values": {
-        "current": 1.73,
-        "previous": 1.732,
-        "week": 1.736,
-        "month": 1.55,
-        "quarter": 1.229
+        "current": 1.704,
+        "previous": 1.722,
+        "week": 1.713,
+        "month": 1.545,
+        "quarter": 1.236,
+        "year": 0.8
       },
       "dates": {
-        "current": "2026-10-08T08:07:00.000Z",
-        "previous": "2026-10-07",
-        "week": "2026-10-01",
-        "month": "2026-09-08",
-        "quarter": "2026-07-08"
+        "current": "2026-10-08T23:59:47.000Z",
+        "previous": "2026-10-08",
+        "week": "2026-10-02",
+        "month": "2026-09-09",
+        "quarter": "2026-07-09",
+        "year": "2025-10-09"
       },
-      "note": "네이버 증권의 일본 국채 1년(JP1YT=RR) 시장 수익률, 연% 기준입니다. 출처가 표시한 시세 지연은 120분이며 현재 수치의 실제 기준 시각을 별도로 표시합니다. 현재·직전·1주·1개월·3개월을 같은 네이버 시장 수익률 계열로 비교하고 장중 일봉은 직전 종가에서 제외합니다. 기존 한국은행·일본 재무성 공식 일별 통계와 수치가 다를 수 있습니다.",
+      "note": "네이버 증권의 일본 국채 1년(JP1YT=RR) 시장 수익률, 연% 기준입니다. 출처가 표시한 시세 지연은 120분이며 현재 수치의 실제 기준 시각을 별도로 표시합니다. 현재·직전·1주·1개월·3개월·12개월을 같은 네이버 시장 수익률 계열로 비교하고 장중 일봉은 직전 종가에서 제외합니다. 기존 한국은행·일본 재무성 공식 일별 통계와 수치가 다를 수 있습니다.",
       "comparisonSources": {
         "current": "https://stock.naver.com/api/securityService/economic/bond/JP1YT%3DRR",
         "previous": "https://stock.naver.com/api/securityService/marketindex/bond/JP1YT%3DRR/prices?page=1&pageSize=60",
         "week": "https://stock.naver.com/api/securityService/marketindex/bond/JP1YT%3DRR/prices?page=1&pageSize=60",
         "month": "https://stock.naver.com/api/securityService/marketindex/bond/JP1YT%3DRR/prices?page=1&pageSize=60",
-        "quarter": "https://stock.naver.com/api/securityService/marketindex/bond/JP1YT%3DRR/prices?page=2&pageSize=60"
+        "quarter": "https://stock.naver.com/api/securityService/marketindex/bond/JP1YT%3DRR/prices?page=2&pageSize=60",
+        "year": "https://stock.naver.com/api/securityService/marketindex/bond/JP1YT%3DRR/prices?page=5&pageSize=60"
       },
       "live": true,
       "additionalSources": [
         "https://stock.naver.com/api/securityService/economic/bond/JP1YT%3DRR",
         "https://stock.naver.com/api/securityService/marketindex/bond/JP1YT%3DRR/prices?page=1&pageSize=60",
-        "https://stock.naver.com/api/securityService/marketindex/bond/JP1YT%3DRR/prices?page=2&pageSize=60"
+        "https://stock.naver.com/api/securityService/marketindex/bond/JP1YT%3DRR/prices?page=2&pageSize=60",
+        "https://stock.naver.com/api/securityService/marketindex/bond/JP1YT%3DRR/prices?page=3&pageSize=60",
+        "https://stock.naver.com/api/securityService/marketindex/bond/JP1YT%3DRR/prices?page=4&pageSize=60",
+        "https://stock.naver.com/api/securityService/marketindex/bond/JP1YT%3DRR/prices?page=5&pageSize=60"
       ],
       "provider": "네이버 증권",
-      "retrievedAt": "2026-10-08T10:27:51.783Z",
-      "attemptedAt": "2026-10-08T10:27:52.154Z",
+      "retrievedAt": "2026-10-09T02:07:25.466Z",
+      "attemptedAt": "2026-10-09T02:07:26.348Z",
       "priceKind": "market",
       "marketState": "trading",
-      "tradeDate": "2026-10-08",
+      "tradeDate": "2026-10-09",
       "delayMinutes": 120,
       "missing": [],
       "refreshError": ""
@@ -828,39 +912,45 @@
       "source": "https://stock.naver.com/marketindex/bond/JP3YT%3DRR/price",
       "contract": null,
       "values": {
-        "current": 2.167,
-        "previous": 2.172,
-        "week": 2.16,
-        "month": 2.009,
-        "quarter": 1.671
+        "current": 2.136,
+        "previous": 2.161,
+        "week": 2.14,
+        "month": 1.999,
+        "quarter": 1.673,
+        "year": 1.047
       },
       "dates": {
-        "current": "2026-10-08T08:11:11.000Z",
-        "previous": "2026-10-07",
-        "week": "2026-10-01",
-        "month": "2026-09-08",
-        "quarter": "2026-07-08"
+        "current": "2026-10-08T23:59:48.000Z",
+        "previous": "2026-10-08",
+        "week": "2026-10-02",
+        "month": "2026-09-09",
+        "quarter": "2026-07-09",
+        "year": "2025-10-09"
       },
-      "note": "네이버 증권의 일본 국채 3년(JP3YT=RR) 시장 수익률, 연% 기준입니다. 출처가 표시한 시세 지연은 120분이며 현재 수치의 실제 기준 시각을 별도로 표시합니다. 현재·직전·1주·1개월·3개월을 같은 네이버 시장 수익률 계열로 비교하고 장중 일봉은 직전 종가에서 제외합니다. 기존 한국은행·일본 재무성 공식 일별 통계와 수치가 다를 수 있습니다.",
+      "note": "네이버 증권의 일본 국채 3년(JP3YT=RR) 시장 수익률, 연% 기준입니다. 출처가 표시한 시세 지연은 120분이며 현재 수치의 실제 기준 시각을 별도로 표시합니다. 현재·직전·1주·1개월·3개월·12개월을 같은 네이버 시장 수익률 계열로 비교하고 장중 일봉은 직전 종가에서 제외합니다. 기존 한국은행·일본 재무성 공식 일별 통계와 수치가 다를 수 있습니다.",
       "comparisonSources": {
         "current": "https://stock.naver.com/api/securityService/economic/bond/JP3YT%3DRR",
         "previous": "https://stock.naver.com/api/securityService/marketindex/bond/JP3YT%3DRR/prices?page=1&pageSize=60",
         "week": "https://stock.naver.com/api/securityService/marketindex/bond/JP3YT%3DRR/prices?page=1&pageSize=60",
         "month": "https://stock.naver.com/api/securityService/marketindex/bond/JP3YT%3DRR/prices?page=1&pageSize=60",
-        "quarter": "https://stock.naver.com/api/securityService/marketindex/bond/JP3YT%3DRR/prices?page=2&pageSize=60"
+        "quarter": "https://stock.naver.com/api/securityService/marketindex/bond/JP3YT%3DRR/prices?page=2&pageSize=60",
+        "year": "https://stock.naver.com/api/securityService/marketindex/bond/JP3YT%3DRR/prices?page=5&pageSize=60"
       },
       "live": true,
       "additionalSources": [
         "https://stock.naver.com/api/securityService/economic/bond/JP3YT%3DRR",
         "https://stock.naver.com/api/securityService/marketindex/bond/JP3YT%3DRR/prices?page=1&pageSize=60",
-        "https://stock.naver.com/api/securityService/marketindex/bond/JP3YT%3DRR/prices?page=2&pageSize=60"
+        "https://stock.naver.com/api/securityService/marketindex/bond/JP3YT%3DRR/prices?page=2&pageSize=60",
+        "https://stock.naver.com/api/securityService/marketindex/bond/JP3YT%3DRR/prices?page=3&pageSize=60",
+        "https://stock.naver.com/api/securityService/marketindex/bond/JP3YT%3DRR/prices?page=4&pageSize=60",
+        "https://stock.naver.com/api/securityService/marketindex/bond/JP3YT%3DRR/prices?page=5&pageSize=60"
       ],
       "provider": "네이버 증권",
-      "retrievedAt": "2026-10-08T10:27:51.810Z",
-      "attemptedAt": "2026-10-08T10:27:52.154Z",
+      "retrievedAt": "2026-10-09T02:07:25.543Z",
+      "attemptedAt": "2026-10-09T02:07:26.348Z",
       "priceKind": "market",
       "marketState": "trading",
-      "tradeDate": "2026-10-08",
+      "tradeDate": "2026-10-09",
       "delayMinutes": 120,
       "missing": [],
       "refreshError": ""
@@ -876,39 +966,45 @@
       "source": "https://stock.naver.com/marketindex/bond/JP10YT%3DRR/price",
       "contract": null,
       "values": {
-        "current": 3.09,
-        "previous": 3.109,
-        "week": 3.097,
-        "month": 2.887,
-        "quarter": 2.87
+        "current": 3.038,
+        "previous": 3.084,
+        "week": 3.105,
+        "month": 2.881,
+        "quarter": 2.876,
+        "year": 1.694
       },
       "dates": {
-        "current": "2026-10-08T08:14:49.000Z",
-        "previous": "2026-10-07",
-        "week": "2026-10-01",
-        "month": "2026-09-08",
-        "quarter": "2026-07-08"
+        "current": "2026-10-08T23:59:52.000Z",
+        "previous": "2026-10-08",
+        "week": "2026-10-02",
+        "month": "2026-09-09",
+        "quarter": "2026-07-09",
+        "year": "2025-10-09"
       },
-      "note": "네이버 증권의 일본 국채 10년(JP10YT=RR) 시장 수익률, 연% 기준입니다. 출처가 표시한 시세 지연은 120분이며 현재 수치의 실제 기준 시각을 별도로 표시합니다. 현재·직전·1주·1개월·3개월을 같은 네이버 시장 수익률 계열로 비교하고 장중 일봉은 직전 종가에서 제외합니다. 기존 한국은행·일본 재무성 공식 일별 통계와 수치가 다를 수 있습니다.",
+      "note": "네이버 증권의 일본 국채 10년(JP10YT=RR) 시장 수익률, 연% 기준입니다. 출처가 표시한 시세 지연은 120분이며 현재 수치의 실제 기준 시각을 별도로 표시합니다. 현재·직전·1주·1개월·3개월·12개월을 같은 네이버 시장 수익률 계열로 비교하고 장중 일봉은 직전 종가에서 제외합니다. 기존 한국은행·일본 재무성 공식 일별 통계와 수치가 다를 수 있습니다.",
       "comparisonSources": {
         "current": "https://stock.naver.com/api/securityService/economic/bond/JP10YT%3DRR",
         "previous": "https://stock.naver.com/api/securityService/marketindex/bond/JP10YT%3DRR/prices?page=1&pageSize=60",
         "week": "https://stock.naver.com/api/securityService/marketindex/bond/JP10YT%3DRR/prices?page=1&pageSize=60",
         "month": "https://stock.naver.com/api/securityService/marketindex/bond/JP10YT%3DRR/prices?page=1&pageSize=60",
-        "quarter": "https://stock.naver.com/api/securityService/marketindex/bond/JP10YT%3DRR/prices?page=2&pageSize=60"
+        "quarter": "https://stock.naver.com/api/securityService/marketindex/bond/JP10YT%3DRR/prices?page=2&pageSize=60",
+        "year": "https://stock.naver.com/api/securityService/marketindex/bond/JP10YT%3DRR/prices?page=5&pageSize=60"
       },
       "live": true,
       "additionalSources": [
         "https://stock.naver.com/api/securityService/economic/bond/JP10YT%3DRR",
         "https://stock.naver.com/api/securityService/marketindex/bond/JP10YT%3DRR/prices?page=1&pageSize=60",
-        "https://stock.naver.com/api/securityService/marketindex/bond/JP10YT%3DRR/prices?page=2&pageSize=60"
+        "https://stock.naver.com/api/securityService/marketindex/bond/JP10YT%3DRR/prices?page=2&pageSize=60",
+        "https://stock.naver.com/api/securityService/marketindex/bond/JP10YT%3DRR/prices?page=3&pageSize=60",
+        "https://stock.naver.com/api/securityService/marketindex/bond/JP10YT%3DRR/prices?page=4&pageSize=60",
+        "https://stock.naver.com/api/securityService/marketindex/bond/JP10YT%3DRR/prices?page=5&pageSize=60"
       ],
       "provider": "네이버 증권",
-      "retrievedAt": "2026-10-08T10:27:51.820Z",
-      "attemptedAt": "2026-10-08T10:27:52.154Z",
+      "retrievedAt": "2026-10-09T02:07:25.664Z",
+      "attemptedAt": "2026-10-09T02:07:26.348Z",
       "priceKind": "market",
       "marketState": "trading",
-      "tradeDate": "2026-10-08",
+      "tradeDate": "2026-10-09",
       "delayMinutes": 120,
       "missing": [],
       "refreshError": ""
@@ -924,41 +1020,49 @@
       "source": "https://stock.naver.com/marketindex/bond/JP30YT%3DRR/price",
       "contract": null,
       "values": {
-        "current": 4.194,
-        "previous": 4.21,
-        "week": 4.175,
-        "month": 3.959,
-        "quarter": 3.998
+        "current": 4.073,
+        "previous": null,
+        "week": 4.203,
+        "month": 3.958,
+        "quarter": 4.017,
+        "year": 3.184
       },
       "dates": {
-        "current": "2026-10-08T08:14:48.000Z",
-        "previous": "2026-10-07",
-        "week": "2026-10-01",
-        "month": "2026-09-08",
-        "quarter": "2026-07-08"
+        "current": "2026-10-08T23:59:54.000Z",
+        "previous": null,
+        "week": "2026-10-02",
+        "month": "2026-09-09",
+        "quarter": "2026-07-09",
+        "year": "2025-10-09"
       },
-      "note": "네이버 증권의 일본 국채 30년(JP30YT=RR) 시장 수익률, 연% 기준입니다. 출처가 표시한 시세 지연은 120분이며 현재 수치의 실제 기준 시각을 별도로 표시합니다. 현재·직전·1주·1개월·3개월을 같은 네이버 시장 수익률 계열로 비교하고 장중 일봉은 직전 종가에서 제외합니다. 기존 한국은행·일본 재무성 공식 일별 통계와 수치가 다를 수 있습니다.",
+      "note": "네이버 증권의 일본 국채 30년(JP30YT=RR) 시장 수익률, 연% 기준입니다. 출처가 표시한 시세 지연은 120분이며 현재 수치의 실제 기준 시각을 별도로 표시합니다. 현재·직전·1주·1개월·3개월·12개월을 같은 네이버 시장 수익률 계열로 비교하고 장중 일봉은 직전 종가에서 제외합니다. 기존 한국은행·일본 재무성 공식 일별 통계와 수치가 다를 수 있습니다. 출처의 직전 종가와 일별 자료가 일치하지 않아 직전 비교만 확인 불가로 표시합니다. 다른 비교값은 해당 기준일의 일별 자료를 사용합니다.",
       "comparisonSources": {
         "current": "https://stock.naver.com/api/securityService/economic/bond/JP30YT%3DRR",
-        "previous": "https://stock.naver.com/api/securityService/marketindex/bond/JP30YT%3DRR/prices?page=1&pageSize=60",
+        "previous": null,
         "week": "https://stock.naver.com/api/securityService/marketindex/bond/JP30YT%3DRR/prices?page=1&pageSize=60",
         "month": "https://stock.naver.com/api/securityService/marketindex/bond/JP30YT%3DRR/prices?page=1&pageSize=60",
-        "quarter": "https://stock.naver.com/api/securityService/marketindex/bond/JP30YT%3DRR/prices?page=2&pageSize=60"
+        "quarter": "https://stock.naver.com/api/securityService/marketindex/bond/JP30YT%3DRR/prices?page=2&pageSize=60",
+        "year": "https://stock.naver.com/api/securityService/marketindex/bond/JP30YT%3DRR/prices?page=5&pageSize=60"
       },
       "live": true,
       "additionalSources": [
         "https://stock.naver.com/api/securityService/economic/bond/JP30YT%3DRR",
         "https://stock.naver.com/api/securityService/marketindex/bond/JP30YT%3DRR/prices?page=1&pageSize=60",
-        "https://stock.naver.com/api/securityService/marketindex/bond/JP30YT%3DRR/prices?page=2&pageSize=60"
+        "https://stock.naver.com/api/securityService/marketindex/bond/JP30YT%3DRR/prices?page=2&pageSize=60",
+        "https://stock.naver.com/api/securityService/marketindex/bond/JP30YT%3DRR/prices?page=3&pageSize=60",
+        "https://stock.naver.com/api/securityService/marketindex/bond/JP30YT%3DRR/prices?page=4&pageSize=60",
+        "https://stock.naver.com/api/securityService/marketindex/bond/JP30YT%3DRR/prices?page=5&pageSize=60"
       ],
       "provider": "네이버 증권",
-      "retrievedAt": "2026-10-08T10:27:51.838Z",
-      "attemptedAt": "2026-10-08T10:27:52.154Z",
+      "retrievedAt": "2026-10-09T02:07:25.935Z",
+      "attemptedAt": "2026-10-09T02:07:26.348Z",
       "priceKind": "market",
       "marketState": "trading",
-      "tradeDate": "2026-10-08",
+      "tradeDate": "2026-10-09",
       "delayMinutes": 120,
-      "missing": [],
+      "missing": [
+        "previous"
+      ],
       "refreshError": ""
     },
     {
@@ -969,38 +1073,41 @@
       "country": "US",
       "unit": "$/트로이온스",
       "decimals": 2,
-      "source": "https://query1.finance.yahoo.com/v8/finance/chart/GCZ26.CMX?range=6mo&interval=1d",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/GCZ26.CMX?range=2y&interval=1d",
       "contract": "2026년 12월물",
       "values": {
-        "current": 4146.6,
+        "current": 4196.7,
         "previous": 4140.7001953125,
-        "week": 4202.2998046875,
-        "month": 4439,
-        "quarter": 4142.10009765625
+        "week": 4162.2998046875,
+        "month": 4460.7001953125,
+        "quarter": 4201.39990234375,
+        "year": 4146.89990234375
       },
       "dates": {
-        "current": "2026-10-08T10:17:34.000Z",
+        "current": "2026-10-09T01:57:16.000Z",
         "previous": "2026-10-07",
-        "week": "2026-10-01",
-        "month": "2026-09-08",
-        "quarter": "2026-07-08"
+        "week": "2026-10-02",
+        "month": "2026-09-09",
+        "quarter": "2026-07-09",
+        "year": "2025-10-09"
       },
-      "note": "2026년 12월물(GCZ26.CMX)의 최신 시세(장중 포함)를 직전 거래일 완료 종가와 비교합니다. 선물의 저녁 개장 일봉은 다음 거래일 기준으로 표시합니다. 현재·직전·1주·1개월·3개월을 모두 동일 계약으로 비교하며, 출처의 시세 지연이 있을 수 있습니다.",
+      "note": "2026년 12월물(GCZ26.CMX)의 최신 시세(장중 포함)를 직전 거래일 완료 종가와 비교합니다. 선물의 저녁 개장 일봉은 다음 거래일 기준으로 표시합니다. 현재·직전·1주·1개월·3개월·12개월을 모두 동일 계약으로 비교하며, 출처의 시세 지연이 있을 수 있습니다. 계약 상장 전 등 비교 자료가 없는 시점은 확인 불가로 표시합니다.",
       "comparisonSources": {
-        "current": "https://query1.finance.yahoo.com/v8/finance/chart/GCZ26.CMX?range=6mo&interval=1d",
-        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/GCZ26.CMX?range=6mo&interval=1d",
-        "week": "https://query1.finance.yahoo.com/v8/finance/chart/GCZ26.CMX?range=6mo&interval=1d",
-        "month": "https://query1.finance.yahoo.com/v8/finance/chart/GCZ26.CMX?range=6mo&interval=1d",
-        "quarter": "https://query1.finance.yahoo.com/v8/finance/chart/GCZ26.CMX?range=6mo&interval=1d"
+        "current": "https://query1.finance.yahoo.com/v8/finance/chart/GCZ26.CMX?range=2y&interval=1d",
+        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/GCZ26.CMX?range=2y&interval=1d",
+        "week": "https://query1.finance.yahoo.com/v8/finance/chart/GCZ26.CMX?range=2y&interval=1d",
+        "month": "https://query1.finance.yahoo.com/v8/finance/chart/GCZ26.CMX?range=2y&interval=1d",
+        "quarter": "https://query1.finance.yahoo.com/v8/finance/chart/GCZ26.CMX?range=2y&interval=1d",
+        "year": "https://query1.finance.yahoo.com/v8/finance/chart/GCZ26.CMX?range=2y&interval=1d"
       },
       "live": true,
       "additionalSources": [],
       "provider": "Yahoo Finance",
-      "retrievedAt": "2026-10-08T10:27:52.112Z",
-      "attemptedAt": "2026-10-08T10:27:52.154Z",
+      "retrievedAt": "2026-10-09T02:07:25.867Z",
+      "attemptedAt": "2026-10-09T02:07:26.348Z",
       "priceKind": "market",
       "marketState": "trading",
-      "tradeDate": "2026-10-08",
+      "tradeDate": "2026-10-09",
       "missing": [],
       "refreshError": ""
     },
@@ -1012,38 +1119,41 @@
       "country": "US",
       "unit": "$/트로이온스",
       "decimals": 3,
-      "source": "https://query1.finance.yahoo.com/v8/finance/chart/SIZ26.CMX?range=6mo&interval=1d",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/SIZ26.CMX?range=2y&interval=1d",
       "contract": "2026년 12월물",
       "values": {
-        "current": 59.09,
+        "current": 60.36,
         "previous": 60.29399871826172,
-        "week": 61.17499923706055,
-        "month": 67,
-        "quarter": 59.185001373291016
+        "week": 60.415000915527344,
+        "month": 68.64600372314453,
+        "quarter": 61.42100143432617,
+        "year": 49.19200134277344
       },
       "dates": {
-        "current": "2026-10-08T10:17:46.000Z",
+        "current": "2026-10-09T01:56:50.000Z",
         "previous": "2026-10-07",
-        "week": "2026-10-01",
-        "month": "2026-09-08",
-        "quarter": "2026-07-08"
+        "week": "2026-10-02",
+        "month": "2026-09-09",
+        "quarter": "2026-07-09",
+        "year": "2025-10-09"
       },
-      "note": "2026년 12월물(SIZ26.CMX)의 최신 시세(장중 포함)를 직전 거래일 완료 종가와 비교합니다. 선물의 저녁 개장 일봉은 다음 거래일 기준으로 표시합니다. 현재·직전·1주·1개월·3개월을 모두 동일 계약으로 비교하며, 출처의 시세 지연이 있을 수 있습니다.",
+      "note": "2026년 12월물(SIZ26.CMX)의 최신 시세(장중 포함)를 직전 거래일 완료 종가와 비교합니다. 선물의 저녁 개장 일봉은 다음 거래일 기준으로 표시합니다. 현재·직전·1주·1개월·3개월·12개월을 모두 동일 계약으로 비교하며, 출처의 시세 지연이 있을 수 있습니다. 계약 상장 전 등 비교 자료가 없는 시점은 확인 불가로 표시합니다.",
       "comparisonSources": {
-        "current": "https://query1.finance.yahoo.com/v8/finance/chart/SIZ26.CMX?range=6mo&interval=1d",
-        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/SIZ26.CMX?range=6mo&interval=1d",
-        "week": "https://query1.finance.yahoo.com/v8/finance/chart/SIZ26.CMX?range=6mo&interval=1d",
-        "month": "https://query1.finance.yahoo.com/v8/finance/chart/SIZ26.CMX?range=6mo&interval=1d",
-        "quarter": "https://query1.finance.yahoo.com/v8/finance/chart/SIZ26.CMX?range=6mo&interval=1d"
+        "current": "https://query1.finance.yahoo.com/v8/finance/chart/SIZ26.CMX?range=2y&interval=1d",
+        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/SIZ26.CMX?range=2y&interval=1d",
+        "week": "https://query1.finance.yahoo.com/v8/finance/chart/SIZ26.CMX?range=2y&interval=1d",
+        "month": "https://query1.finance.yahoo.com/v8/finance/chart/SIZ26.CMX?range=2y&interval=1d",
+        "quarter": "https://query1.finance.yahoo.com/v8/finance/chart/SIZ26.CMX?range=2y&interval=1d",
+        "year": "https://query1.finance.yahoo.com/v8/finance/chart/SIZ26.CMX?range=2y&interval=1d"
       },
       "live": true,
       "additionalSources": [],
       "provider": "Yahoo Finance",
-      "retrievedAt": "2026-10-08T10:27:52.093Z",
-      "attemptedAt": "2026-10-08T10:27:52.154Z",
+      "retrievedAt": "2026-10-09T02:07:25.999Z",
+      "attemptedAt": "2026-10-09T02:07:26.348Z",
       "priceKind": "market",
       "marketState": "trading",
-      "tradeDate": "2026-10-08",
+      "tradeDate": "2026-10-09",
       "missing": [],
       "refreshError": ""
     },
@@ -1055,38 +1165,41 @@
       "country": "US",
       "unit": "$/파운드",
       "decimals": 4,
-      "source": "https://query1.finance.yahoo.com/v8/finance/chart/HGZ26.CMX?range=6mo&interval=1d",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/HGZ26.CMX?range=2y&interval=1d",
       "contract": "2026년 12월물",
       "values": {
-        "current": 6.655,
+        "current": 6.631,
         "previous": 6.649499893188477,
-        "week": 6.538000106811523,
-        "month": 6.823500156402588,
-        "quarter": 6.197500228881836
+        "week": 6.548999786376953,
+        "month": 6.888500213623047,
+        "quarter": 6.355000019073486,
+        "year": 5.293000221252441
       },
       "dates": {
-        "current": "2026-10-08T10:17:40.000Z",
+        "current": "2026-10-09T01:57:19.000Z",
         "previous": "2026-10-07",
-        "week": "2026-10-01",
-        "month": "2026-09-08",
-        "quarter": "2026-07-08"
+        "week": "2026-10-02",
+        "month": "2026-09-09",
+        "quarter": "2026-07-09",
+        "year": "2025-10-09"
       },
-      "note": "2026년 12월물(HGZ26.CMX)의 최신 시세(장중 포함)를 직전 거래일 완료 종가와 비교합니다. 선물의 저녁 개장 일봉은 다음 거래일 기준으로 표시합니다. 현재·직전·1주·1개월·3개월을 모두 동일 계약으로 비교하며, 출처의 시세 지연이 있을 수 있습니다.",
+      "note": "2026년 12월물(HGZ26.CMX)의 최신 시세(장중 포함)를 직전 거래일 완료 종가와 비교합니다. 선물의 저녁 개장 일봉은 다음 거래일 기준으로 표시합니다. 현재·직전·1주·1개월·3개월·12개월을 모두 동일 계약으로 비교하며, 출처의 시세 지연이 있을 수 있습니다. 계약 상장 전 등 비교 자료가 없는 시점은 확인 불가로 표시합니다.",
       "comparisonSources": {
-        "current": "https://query1.finance.yahoo.com/v8/finance/chart/HGZ26.CMX?range=6mo&interval=1d",
-        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/HGZ26.CMX?range=6mo&interval=1d",
-        "week": "https://query1.finance.yahoo.com/v8/finance/chart/HGZ26.CMX?range=6mo&interval=1d",
-        "month": "https://query1.finance.yahoo.com/v8/finance/chart/HGZ26.CMX?range=6mo&interval=1d",
-        "quarter": "https://query1.finance.yahoo.com/v8/finance/chart/HGZ26.CMX?range=6mo&interval=1d"
+        "current": "https://query1.finance.yahoo.com/v8/finance/chart/HGZ26.CMX?range=2y&interval=1d",
+        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/HGZ26.CMX?range=2y&interval=1d",
+        "week": "https://query1.finance.yahoo.com/v8/finance/chart/HGZ26.CMX?range=2y&interval=1d",
+        "month": "https://query1.finance.yahoo.com/v8/finance/chart/HGZ26.CMX?range=2y&interval=1d",
+        "quarter": "https://query1.finance.yahoo.com/v8/finance/chart/HGZ26.CMX?range=2y&interval=1d",
+        "year": "https://query1.finance.yahoo.com/v8/finance/chart/HGZ26.CMX?range=2y&interval=1d"
       },
       "live": true,
       "additionalSources": [],
       "provider": "Yahoo Finance",
-      "retrievedAt": "2026-10-08T10:27:52.134Z",
-      "attemptedAt": "2026-10-08T10:27:52.154Z",
+      "retrievedAt": "2026-10-09T02:07:26.068Z",
+      "attemptedAt": "2026-10-09T02:07:26.348Z",
       "priceKind": "market",
       "marketState": "trading",
-      "tradeDate": "2026-10-08",
+      "tradeDate": "2026-10-09",
       "missing": [],
       "refreshError": ""
     },
@@ -1098,38 +1211,41 @@
       "country": "US",
       "unit": "$/배럴",
       "decimals": 2,
-      "source": "https://query1.finance.yahoo.com/v8/finance/chart/CLX26.NYM?range=6mo&interval=1d",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/CLX26.NYM?range=2y&interval=1d",
       "contract": "2026년 11월물",
       "values": {
-        "current": 91.92,
+        "current": 90.79,
         "previous": 88.27999877929688,
-        "week": 92.87000274658203,
-        "month": 90.19000244140625,
-        "quarter": 72.19999694824219
+        "week": 91.11000061035156,
+        "month": 92.87000274658203,
+        "quarter": 71.16999816894531,
+        "year": 60.540000915527344
       },
       "dates": {
-        "current": "2026-10-08T10:17:43.000Z",
+        "current": "2026-10-09T01:57:21.000Z",
         "previous": "2026-10-07",
-        "week": "2026-10-01",
-        "month": "2026-09-08",
-        "quarter": "2026-07-08"
+        "week": "2026-10-02",
+        "month": "2026-09-09",
+        "quarter": "2026-07-09",
+        "year": "2025-10-09"
       },
-      "note": "2026년 11월물(CLX26.NYM)의 최신 시세(장중 포함)를 직전 거래일 완료 종가와 비교합니다. 선물의 저녁 개장 일봉은 다음 거래일 기준으로 표시합니다. 현재·직전·1주·1개월·3개월을 모두 동일 계약으로 비교하며, 출처의 시세 지연이 있을 수 있습니다.",
+      "note": "2026년 11월물(CLX26.NYM)의 최신 시세(장중 포함)를 직전 거래일 완료 종가와 비교합니다. 선물의 저녁 개장 일봉은 다음 거래일 기준으로 표시합니다. 현재·직전·1주·1개월·3개월·12개월을 모두 동일 계약으로 비교하며, 출처의 시세 지연이 있을 수 있습니다. 계약 상장 전 등 비교 자료가 없는 시점은 확인 불가로 표시합니다.",
       "comparisonSources": {
-        "current": "https://query1.finance.yahoo.com/v8/finance/chart/CLX26.NYM?range=6mo&interval=1d",
-        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/CLX26.NYM?range=6mo&interval=1d",
-        "week": "https://query1.finance.yahoo.com/v8/finance/chart/CLX26.NYM?range=6mo&interval=1d",
-        "month": "https://query1.finance.yahoo.com/v8/finance/chart/CLX26.NYM?range=6mo&interval=1d",
-        "quarter": "https://query1.finance.yahoo.com/v8/finance/chart/CLX26.NYM?range=6mo&interval=1d"
+        "current": "https://query1.finance.yahoo.com/v8/finance/chart/CLX26.NYM?range=2y&interval=1d",
+        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/CLX26.NYM?range=2y&interval=1d",
+        "week": "https://query1.finance.yahoo.com/v8/finance/chart/CLX26.NYM?range=2y&interval=1d",
+        "month": "https://query1.finance.yahoo.com/v8/finance/chart/CLX26.NYM?range=2y&interval=1d",
+        "quarter": "https://query1.finance.yahoo.com/v8/finance/chart/CLX26.NYM?range=2y&interval=1d",
+        "year": "https://query1.finance.yahoo.com/v8/finance/chart/CLX26.NYM?range=2y&interval=1d"
       },
       "live": true,
       "additionalSources": [],
       "provider": "Yahoo Finance",
-      "retrievedAt": "2026-10-08T10:27:52.154Z",
-      "attemptedAt": "2026-10-08T10:27:52.154Z",
+      "retrievedAt": "2026-10-09T02:07:26.348Z",
+      "attemptedAt": "2026-10-09T02:07:26.348Z",
       "priceKind": "market",
       "marketState": "trading",
-      "tradeDate": "2026-10-08",
+      "tradeDate": "2026-10-09",
       "missing": [],
       "refreshError": ""
     },
@@ -1141,38 +1257,41 @@
       "country": "US",
       "unit": "원/1달러",
       "decimals": 2,
-      "source": "https://query1.finance.yahoo.com/v8/finance/chart/KRW%3DX?range=6mo&interval=1d",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/KRW%3DX?range=2y&interval=1d",
       "contract": null,
       "values": {
-        "current": 1344.5,
-        "previous": 1339.739990234375,
-        "week": 1356.8399658203125,
-        "month": 1343.5699462890625,
-        "quarter": 1519.8599853515625
+        "current": 1342.26,
+        "previous": 1339.0799560546875,
+        "week": 1360.5899658203125,
+        "month": 1339.2099609375,
+        "quarter": 1503.3499755859375,
+        "year": 1422.52001953125
       },
       "dates": {
-        "current": "2026-10-08T10:27:38.000Z",
-        "previous": "2026-10-07",
-        "week": "2026-10-01",
-        "month": "2026-09-08",
-        "quarter": "2026-07-08"
+        "current": "2026-10-09T02:02:25.000Z",
+        "previous": "2026-10-08",
+        "week": "2026-10-02",
+        "month": "2026-09-09",
+        "quarter": "2026-07-09",
+        "year": "2025-10-09"
       },
       "note": "Yahoo Finance의 최신 시세(장중 포함)를 직전 거래일 완료 종가와 비교합니다. 현재 시세의 실제 기준 시각을 표시하며 출처의 지연 시세일 수 있습니다. 시장이 닫혀 있으면 마지막 거래 시세를 표시합니다.",
       "comparisonSources": {
-        "current": "https://query1.finance.yahoo.com/v8/finance/chart/KRW%3DX?range=6mo&interval=1d",
-        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/KRW%3DX?range=6mo&interval=1d",
-        "week": "https://query1.finance.yahoo.com/v8/finance/chart/KRW%3DX?range=6mo&interval=1d",
-        "month": "https://query1.finance.yahoo.com/v8/finance/chart/KRW%3DX?range=6mo&interval=1d",
-        "quarter": "https://query1.finance.yahoo.com/v8/finance/chart/KRW%3DX?range=6mo&interval=1d"
+        "current": "https://query1.finance.yahoo.com/v8/finance/chart/KRW%3DX?range=2y&interval=1d",
+        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/KRW%3DX?range=2y&interval=1d",
+        "week": "https://query1.finance.yahoo.com/v8/finance/chart/KRW%3DX?range=2y&interval=1d",
+        "month": "https://query1.finance.yahoo.com/v8/finance/chart/KRW%3DX?range=2y&interval=1d",
+        "quarter": "https://query1.finance.yahoo.com/v8/finance/chart/KRW%3DX?range=2y&interval=1d",
+        "year": "https://query1.finance.yahoo.com/v8/finance/chart/KRW%3DX?range=2y&interval=1d"
       },
       "live": true,
       "additionalSources": [],
       "provider": "Yahoo Finance",
-      "retrievedAt": "2026-10-08T10:27:51.442Z",
-      "attemptedAt": "2026-10-08T10:27:52.154Z",
+      "retrievedAt": "2026-10-09T02:07:23.726Z",
+      "attemptedAt": "2026-10-09T02:07:26.348Z",
       "priceKind": "market",
       "marketState": "trading",
-      "tradeDate": "2026-10-08",
+      "tradeDate": "2026-10-09",
       "missing": [],
       "refreshError": ""
     },
@@ -1184,38 +1303,41 @@
       "country": "EU",
       "unit": "원/1유로",
       "decimals": 2,
-      "source": "https://query1.finance.yahoo.com/v8/finance/chart/EURKRW%3DX?range=6mo&interval=1d",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/EURKRW%3DX?range=2y&interval=1d",
       "contract": null,
       "values": {
-        "current": 1502.7,
-        "previous": 1506.1300048828125,
-        "week": 1536.1300048828125,
-        "month": 1562.449951171875,
-        "quarter": 1726.5799560546875
+        "current": 1506.3,
+        "previous": 1499.4000244140625,
+        "week": 1528.2099609375,
+        "month": 1556.72998046875,
+        "quarter": 1717.22998046875,
+        "year": 1653.489990234375
       },
       "dates": {
-        "current": "2026-10-08T10:24:49.000Z",
-        "previous": "2026-10-07",
-        "week": "2026-10-01",
-        "month": "2026-09-08",
-        "quarter": "2026-07-08"
+        "current": "2026-10-09T02:04:49.000Z",
+        "previous": "2026-10-08",
+        "week": "2026-10-02",
+        "month": "2026-09-09",
+        "quarter": "2026-07-09",
+        "year": "2025-10-09"
       },
       "note": "Yahoo Finance의 최신 시세(장중 포함)를 직전 거래일 완료 종가와 비교합니다. 현재 시세의 실제 기준 시각을 표시하며 출처의 지연 시세일 수 있습니다. 시장이 닫혀 있으면 마지막 거래 시세를 표시합니다.",
       "comparisonSources": {
-        "current": "https://query1.finance.yahoo.com/v8/finance/chart/EURKRW%3DX?range=6mo&interval=1d",
-        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/EURKRW%3DX?range=6mo&interval=1d",
-        "week": "https://query1.finance.yahoo.com/v8/finance/chart/EURKRW%3DX?range=6mo&interval=1d",
-        "month": "https://query1.finance.yahoo.com/v8/finance/chart/EURKRW%3DX?range=6mo&interval=1d",
-        "quarter": "https://query1.finance.yahoo.com/v8/finance/chart/EURKRW%3DX?range=6mo&interval=1d"
+        "current": "https://query1.finance.yahoo.com/v8/finance/chart/EURKRW%3DX?range=2y&interval=1d",
+        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/EURKRW%3DX?range=2y&interval=1d",
+        "week": "https://query1.finance.yahoo.com/v8/finance/chart/EURKRW%3DX?range=2y&interval=1d",
+        "month": "https://query1.finance.yahoo.com/v8/finance/chart/EURKRW%3DX?range=2y&interval=1d",
+        "quarter": "https://query1.finance.yahoo.com/v8/finance/chart/EURKRW%3DX?range=2y&interval=1d",
+        "year": "https://query1.finance.yahoo.com/v8/finance/chart/EURKRW%3DX?range=2y&interval=1d"
       },
       "live": true,
       "additionalSources": [],
       "provider": "Yahoo Finance",
-      "retrievedAt": "2026-10-08T10:27:51.431Z",
-      "attemptedAt": "2026-10-08T10:27:52.154Z",
+      "retrievedAt": "2026-10-09T02:07:23.774Z",
+      "attemptedAt": "2026-10-09T02:07:26.348Z",
       "priceKind": "market",
       "marketState": "trading",
-      "tradeDate": "2026-10-08",
+      "tradeDate": "2026-10-09",
       "missing": [],
       "refreshError": ""
     },
@@ -1227,38 +1349,41 @@
       "country": "JP",
       "unit": "원/100엔",
       "decimals": 2,
-      "source": "https://query1.finance.yahoo.com/v8/finance/chart/JPYKRW%3DX?range=6mo&interval=1d",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/JPYKRW%3DX?range=2y&interval=1d",
       "contract": null,
       "values": {
-        "current": 847.6000000000001,
-        "previous": 846.3227272033691,
-        "week": 861.1030578613281,
-        "month": 873.2406616210938,
-        "quarter": 936.2272262573242
+        "current": 847.8999999999999,
+        "previous": 847.7417945861816,
+        "week": 861.4595413208008,
+        "month": 872.5896835327148,
+        "quarter": 924.9458312988281,
+        "year": 931.657600402832
       },
       "dates": {
-        "current": "2026-10-08T10:24:49.000Z",
-        "previous": "2026-10-07",
-        "week": "2026-10-01",
-        "month": "2026-09-08",
-        "quarter": "2026-07-08"
+        "current": "2026-10-09T02:04:49.000Z",
+        "previous": "2026-10-08",
+        "week": "2026-10-02",
+        "month": "2026-09-09",
+        "quarter": "2026-07-09",
+        "year": "2025-10-09"
       },
       "note": "Yahoo Finance의 최신 시세(장중 포함)를 직전 거래일 완료 종가와 비교합니다. 현재 시세의 실제 기준 시각을 표시하며 출처의 지연 시세일 수 있습니다. 시장이 닫혀 있으면 마지막 거래 시세를 표시합니다. 100엔당 원화로 환산했습니다.",
       "comparisonSources": {
-        "current": "https://query1.finance.yahoo.com/v8/finance/chart/JPYKRW%3DX?range=6mo&interval=1d",
-        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/JPYKRW%3DX?range=6mo&interval=1d",
-        "week": "https://query1.finance.yahoo.com/v8/finance/chart/JPYKRW%3DX?range=6mo&interval=1d",
-        "month": "https://query1.finance.yahoo.com/v8/finance/chart/JPYKRW%3DX?range=6mo&interval=1d",
-        "quarter": "https://query1.finance.yahoo.com/v8/finance/chart/JPYKRW%3DX?range=6mo&interval=1d"
+        "current": "https://query1.finance.yahoo.com/v8/finance/chart/JPYKRW%3DX?range=2y&interval=1d",
+        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/JPYKRW%3DX?range=2y&interval=1d",
+        "week": "https://query1.finance.yahoo.com/v8/finance/chart/JPYKRW%3DX?range=2y&interval=1d",
+        "month": "https://query1.finance.yahoo.com/v8/finance/chart/JPYKRW%3DX?range=2y&interval=1d",
+        "quarter": "https://query1.finance.yahoo.com/v8/finance/chart/JPYKRW%3DX?range=2y&interval=1d",
+        "year": "https://query1.finance.yahoo.com/v8/finance/chart/JPYKRW%3DX?range=2y&interval=1d"
       },
       "live": true,
       "additionalSources": [],
       "provider": "Yahoo Finance",
-      "retrievedAt": "2026-10-08T10:27:51.483Z",
-      "attemptedAt": "2026-10-08T10:27:52.154Z",
+      "retrievedAt": "2026-10-09T02:07:23.817Z",
+      "attemptedAt": "2026-10-09T02:07:26.348Z",
       "priceKind": "market",
       "marketState": "trading",
-      "tradeDate": "2026-10-08",
+      "tradeDate": "2026-10-09",
       "missing": [],
       "refreshError": ""
     },
@@ -1270,48 +1395,51 @@
       "country": "CN",
       "unit": "원/1위안",
       "decimals": 2,
-      "source": "https://query1.finance.yahoo.com/v8/finance/chart/KRW%3DX?range=6mo&interval=1d",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/KRW%3DX?range=2y&interval=1d",
       "contract": null,
       "values": {
-        "current": 200.88752091800143,
-        "previous": 199.82697450903802,
-        "week": 202.3774965584086,
-        "month": 200.2100959756616,
-        "quarter": 223.72597339808146
+        "current": 200.69677033492823,
+        "previous": 199.72852806856383,
+        "week": 202.9368223677978,
+        "month": 199.56933285714751,
+        "quarter": 220.99963633498567,
+        "year": 199.8342309518181
       },
       "dates": {
-        "current": "2026-10-08T10:24:19.000Z",
-        "previous": "2026-10-07",
-        "week": "2026-10-01",
-        "month": "2026-09-08",
-        "quarter": "2026-07-08"
+        "current": "2026-10-09T02:02:25.000Z",
+        "previous": "2026-10-08",
+        "week": "2026-10-02",
+        "month": "2026-09-09",
+        "quarter": "2026-07-09",
+        "year": "2025-10-09"
       },
-      "note": "USD/KRW와 USD/CNY의 최신 시세를 나눈 1위안당 원화 교차 환율입니다. 두 시세는 같은 거래일·15분 이내 시점만 사용하고 기준 시각은 둘 중 이전 시각입니다. 직전·1주·1개월·3개월은 두 계열에 모두 완료된 종가가 있는 날짜만 사용합니다. 직접 고시된 CNY/KRW 가격과 차이가 날 수 있습니다.",
+      "note": "USD/KRW와 USD/CNY의 최신 시세를 나눈 1위안당 원화 교차 환율입니다. 두 시세는 같은 거래일·15분 이내 시점만 사용하고 기준 시각은 둘 중 이전 시각입니다. 직전·1주·1개월·3개월·12개월은 두 계열에 모두 완료된 종가가 있는 날짜만 사용합니다. 직접 고시된 CNY/KRW 가격과 차이가 날 수 있습니다.",
       "comparisonSources": {
-        "current": "https://query1.finance.yahoo.com/v8/finance/chart/KRW%3DX?range=6mo&interval=1d",
-        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/KRW%3DX?range=6mo&interval=1d",
-        "week": "https://query1.finance.yahoo.com/v8/finance/chart/KRW%3DX?range=6mo&interval=1d",
-        "month": "https://query1.finance.yahoo.com/v8/finance/chart/KRW%3DX?range=6mo&interval=1d",
-        "quarter": "https://query1.finance.yahoo.com/v8/finance/chart/KRW%3DX?range=6mo&interval=1d"
+        "current": "https://query1.finance.yahoo.com/v8/finance/chart/KRW%3DX?range=2y&interval=1d",
+        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/KRW%3DX?range=2y&interval=1d",
+        "week": "https://query1.finance.yahoo.com/v8/finance/chart/KRW%3DX?range=2y&interval=1d",
+        "month": "https://query1.finance.yahoo.com/v8/finance/chart/KRW%3DX?range=2y&interval=1d",
+        "quarter": "https://query1.finance.yahoo.com/v8/finance/chart/KRW%3DX?range=2y&interval=1d",
+        "year": "https://query1.finance.yahoo.com/v8/finance/chart/KRW%3DX?range=2y&interval=1d"
       },
       "live": true,
       "additionalSources": [
-        "https://query1.finance.yahoo.com/v8/finance/chart/CNY%3DX?range=6mo&interval=1d"
+        "https://query1.finance.yahoo.com/v8/finance/chart/CNY%3DX?range=2y&interval=1d"
       ],
       "provider": "Yahoo Finance · 교차 환율",
-      "retrievedAt": "2026-10-08T10:27:51.718Z",
-      "attemptedAt": "2026-10-08T10:27:52.154Z",
+      "retrievedAt": "2026-10-09T02:07:24.140Z",
+      "attemptedAt": "2026-10-09T02:07:26.348Z",
       "priceKind": "market",
       "marketState": "trading",
-      "tradeDate": "2026-10-08",
+      "tradeDate": "2026-10-09",
       "quoteComponents": [
         {
-          "source": "https://query1.finance.yahoo.com/v8/finance/chart/KRW%3DX?range=6mo&interval=1d",
-          "date": "2026-10-08T10:27:48.000Z"
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/KRW%3DX?range=2y&interval=1d",
+          "date": "2026-10-09T02:02:25.000Z"
         },
         {
-          "source": "https://query1.finance.yahoo.com/v8/finance/chart/CNY%3DX?range=6mo&interval=1d",
-          "date": "2026-10-08T10:24:19.000Z"
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/CNY%3DX?range=2y&interval=1d",
+          "date": "2026-10-09T02:04:37.000Z"
         }
       ],
       "missing": [],
@@ -1325,38 +1453,41 @@
       "country": "CH",
       "unit": "원/1프랑",
       "decimals": 2,
-      "source": "https://query1.finance.yahoo.com/v8/finance/chart/CHFKRW%3DX?range=6mo&interval=1d",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/CHFKRW%3DX?range=2y&interval=1d",
       "contract": null,
       "values": {
-        "current": 1612.56,
-        "previous": 1609.3125,
-        "week": 1623.4930419921875,
-        "month": 1660.752197265625,
-        "quarter": 1878.680419921875
+        "current": 1617.29,
+        "previous": 1608.5372314453125,
+        "week": 1637.871826171875,
+        "month": 1655.191650390625,
+        "quarter": 1860.3583984375,
+        "year": 1774.634033203125
       },
       "dates": {
-        "current": "2026-10-08T10:24:49.000Z",
-        "previous": "2026-10-07",
-        "week": "2026-10-01",
-        "month": "2026-09-08",
-        "quarter": "2026-07-08"
+        "current": "2026-10-09T02:04:49.000Z",
+        "previous": "2026-10-08",
+        "week": "2026-10-02",
+        "month": "2026-09-09",
+        "quarter": "2026-07-09",
+        "year": "2025-10-09"
       },
       "live": true,
       "comparisonSources": {
-        "current": "https://query1.finance.yahoo.com/v8/finance/chart/CHFKRW%3DX?range=6mo&interval=1d",
-        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/CHFKRW%3DX?range=6mo&interval=1d",
-        "week": "https://query1.finance.yahoo.com/v8/finance/chart/CHFKRW%3DX?range=6mo&interval=1d",
-        "month": "https://query1.finance.yahoo.com/v8/finance/chart/CHFKRW%3DX?range=6mo&interval=1d",
-        "quarter": "https://query1.finance.yahoo.com/v8/finance/chart/CHFKRW%3DX?range=6mo&interval=1d"
+        "current": "https://query1.finance.yahoo.com/v8/finance/chart/CHFKRW%3DX?range=2y&interval=1d",
+        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/CHFKRW%3DX?range=2y&interval=1d",
+        "week": "https://query1.finance.yahoo.com/v8/finance/chart/CHFKRW%3DX?range=2y&interval=1d",
+        "month": "https://query1.finance.yahoo.com/v8/finance/chart/CHFKRW%3DX?range=2y&interval=1d",
+        "quarter": "https://query1.finance.yahoo.com/v8/finance/chart/CHFKRW%3DX?range=2y&interval=1d",
+        "year": "https://query1.finance.yahoo.com/v8/finance/chart/CHFKRW%3DX?range=2y&interval=1d"
       },
       "additionalSources": [],
       "provider": "Yahoo Finance",
       "note": "Yahoo Finance의 최신 시세(장중 포함)를 직전 거래일 완료 종가와 비교합니다. 현재 시세의 실제 기준 시각을 표시하며 출처의 지연 시세일 수 있습니다. 시장이 닫혀 있으면 마지막 거래 시세를 표시합니다.",
-      "retrievedAt": "2026-10-08T10:27:51.588Z",
-      "attemptedAt": "2026-10-08T10:27:52.154Z",
+      "retrievedAt": "2026-10-09T02:07:23.893Z",
+      "attemptedAt": "2026-10-09T02:07:26.348Z",
       "priceKind": "market",
       "marketState": "trading",
-      "tradeDate": "2026-10-08",
+      "tradeDate": "2026-10-09",
       "missing": [],
       "refreshError": ""
     },
@@ -1371,32 +1502,38 @@
       "source": "https://api.upbit.com/v1/ticker?markets=KRW-BTC",
       "contract": null,
       "values": {
-        "current": 113007000,
-        "previous": 113548000,
-        "week": 113740000,
-        "month": 107714000,
-        "quarter": 94922000
+        "current": 112980000,
+        "previous": 112360000,
+        "week": 115657000,
+        "month": 106367000,
+        "quarter": 92917000,
+        "year": 178011000
       },
       "dates": {
-        "current": "2026-10-08T10:27:47.309Z",
-        "previous": "2026-10-08T00:00:00.000Z",
-        "week": "2026-10-01T00:00:00.000Z",
-        "month": "2026-09-08T00:00:00.000Z",
-        "quarter": "2026-07-08T00:00:00.000Z"
+        "current": "2026-10-09T02:07:19.628Z",
+        "previous": "2026-10-09T00:00:00.000Z",
+        "week": "2026-10-02T00:00:00.000Z",
+        "month": "2026-09-09T00:00:00.000Z",
+        "quarter": "2026-07-09T00:00:00.000Z",
+        "year": "2025-10-09T00:00:00.000Z"
       },
-      "note": "업비트 원화시장 체결가격을 완료된 일봉 종가와 비교합니다. 일봉은 한국시간 오전 9시에 마감하며, 1주·1개월·3개월 비교는 체결가격 시점에서 각 비교 시점까지 완료된 최근 일봉 기준입니다.",
+      "note": "업비트 원화시장 체결가격을 완료된 일봉 종가와 비교합니다. 일봉은 한국시간 오전 9시에 마감하며, 1주·1개월·3개월·12개월 비교는 체결가격 시점에서 각 비교 시점까지 완료된 최근 일봉 기준입니다.",
       "comparisonSources": {
         "current": "https://api.upbit.com/v1/ticker?markets=KRW-BTC",
-        "previous": "https://api.upbit.com/v1/candles/days?market=KRW-BTC&to=2026-10-08T00%3A00%3A00.000Z&count=1",
-        "week": "https://api.upbit.com/v1/candles/days?market=KRW-BTC&to=2026-10-01T00%3A00%3A00.000Z&count=1",
-        "month": "https://api.upbit.com/v1/candles/days?market=KRW-BTC&to=2026-09-08T00%3A00%3A00.000Z&count=1",
-        "quarter": "https://api.upbit.com/v1/candles/days?market=KRW-BTC&to=2026-07-08T00%3A00%3A00.000Z&count=1"
+        "previous": "https://api.upbit.com/v1/candles/days?market=KRW-BTC&to=2026-10-09T00%3A00%3A00.000Z&count=1",
+        "week": "https://api.upbit.com/v1/candles/days?market=KRW-BTC&to=2026-10-02T00%3A00%3A00.000Z&count=1",
+        "month": "https://api.upbit.com/v1/candles/days?market=KRW-BTC&to=2026-09-09T00%3A00%3A00.000Z&count=1",
+        "quarter": "https://api.upbit.com/v1/candles/days?market=KRW-BTC&to=2026-07-09T00%3A00%3A00.000Z&count=1",
+        "year": "https://api.upbit.com/v1/candles/days?market=KRW-BTC&to=2025-10-09T00%3A00%3A00.000Z&count=1"
       },
       "live": true,
-      "additionalSources": [],
+      "additionalSources": [
+        "https://api.upbit.com/v1/candles/days?market=KRW-BTC&to=2026-10-09T02%3A07%3A19.628Z&count=120",
+        "https://api.upbit.com/v1/candles/days?market=KRW-BTC&to=2025-10-09T02%3A07%3A19.628Z&count=2"
+      ],
       "provider": "업비트",
-      "retrievedAt": "2026-10-08T10:27:50.903Z",
-      "attemptedAt": "2026-10-08T10:27:52.154Z",
+      "retrievedAt": "2026-10-09T02:07:23.065Z",
+      "attemptedAt": "2026-10-09T02:07:26.348Z",
       "priceKind": "market",
       "missing": [],
       "refreshError": ""
@@ -1412,32 +1549,38 @@
       "source": "https://api.upbit.com/v1/ticker?markets=KRW-ETH",
       "contract": null,
       "values": {
-        "current": 3487000,
-        "previous": 3510000,
-        "week": 3652000,
-        "month": 3390000,
-        "quarter": 2653000
+        "current": 3421000,
+        "previous": 3403000,
+        "week": 3689000,
+        "month": 3368000,
+        "quarter": 2604000,
+        "year": 6530000
       },
       "dates": {
-        "current": "2026-10-08T10:27:47.623Z",
-        "previous": "2026-10-08T00:00:00.000Z",
-        "week": "2026-10-01T00:00:00.000Z",
-        "month": "2026-09-08T00:00:00.000Z",
-        "quarter": "2026-07-08T00:00:00.000Z"
+        "current": "2026-10-09T02:07:15.994Z",
+        "previous": "2026-10-09T00:00:00.000Z",
+        "week": "2026-10-02T00:00:00.000Z",
+        "month": "2026-09-09T00:00:00.000Z",
+        "quarter": "2026-07-09T00:00:00.000Z",
+        "year": "2025-10-09T00:00:00.000Z"
       },
-      "note": "업비트 원화시장 체결가격을 완료된 일봉 종가와 비교합니다. 일봉은 한국시간 오전 9시에 마감하며, 1주·1개월·3개월 비교는 체결가격 시점에서 각 비교 시점까지 완료된 최근 일봉 기준입니다.",
+      "note": "업비트 원화시장 체결가격을 완료된 일봉 종가와 비교합니다. 일봉은 한국시간 오전 9시에 마감하며, 1주·1개월·3개월·12개월 비교는 체결가격 시점에서 각 비교 시점까지 완료된 최근 일봉 기준입니다.",
       "comparisonSources": {
         "current": "https://api.upbit.com/v1/ticker?markets=KRW-ETH",
-        "previous": "https://api.upbit.com/v1/candles/days?market=KRW-ETH&to=2026-10-08T00%3A00%3A00.000Z&count=1",
-        "week": "https://api.upbit.com/v1/candles/days?market=KRW-ETH&to=2026-10-01T00%3A00%3A00.000Z&count=1",
-        "month": "https://api.upbit.com/v1/candles/days?market=KRW-ETH&to=2026-09-08T00%3A00%3A00.000Z&count=1",
-        "quarter": "https://api.upbit.com/v1/candles/days?market=KRW-ETH&to=2026-07-08T00%3A00%3A00.000Z&count=1"
+        "previous": "https://api.upbit.com/v1/candles/days?market=KRW-ETH&to=2026-10-09T00%3A00%3A00.000Z&count=1",
+        "week": "https://api.upbit.com/v1/candles/days?market=KRW-ETH&to=2026-10-02T00%3A00%3A00.000Z&count=1",
+        "month": "https://api.upbit.com/v1/candles/days?market=KRW-ETH&to=2026-09-09T00%3A00%3A00.000Z&count=1",
+        "quarter": "https://api.upbit.com/v1/candles/days?market=KRW-ETH&to=2026-07-09T00%3A00%3A00.000Z&count=1",
+        "year": "https://api.upbit.com/v1/candles/days?market=KRW-ETH&to=2025-10-09T00%3A00%3A00.000Z&count=1"
       },
       "live": true,
-      "additionalSources": [],
+      "additionalSources": [
+        "https://api.upbit.com/v1/candles/days?market=KRW-ETH&to=2026-10-09T02%3A07%3A15.994Z&count=120",
+        "https://api.upbit.com/v1/candles/days?market=KRW-ETH&to=2025-10-09T02%3A07%3A15.994Z&count=2"
+      ],
       "provider": "업비트",
-      "retrievedAt": "2026-10-08T10:27:50.904Z",
-      "attemptedAt": "2026-10-08T10:27:52.154Z",
+      "retrievedAt": "2026-10-09T02:07:23.081Z",
+      "attemptedAt": "2026-10-09T02:07:26.348Z",
       "priceKind": "market",
       "missing": [],
       "refreshError": ""
@@ -1453,32 +1596,38 @@
       "source": "https://api.upbit.com/v1/ticker?markets=KRW-XRP",
       "contract": null,
       "values": {
-        "current": 1921,
-        "previous": 1939,
-        "week": 2028,
-        "month": 1901,
-        "quarter": 1667
+        "current": 1916,
+        "previous": 1897,
+        "week": 2038,
+        "month": 1920,
+        "quarter": 1628,
+        "year": 4157
       },
       "dates": {
-        "current": "2026-10-08T10:27:47.299Z",
-        "previous": "2026-10-08T00:00:00.000Z",
-        "week": "2026-10-01T00:00:00.000Z",
-        "month": "2026-09-08T00:00:00.000Z",
-        "quarter": "2026-07-08T00:00:00.000Z"
+        "current": "2026-10-09T02:07:19.285Z",
+        "previous": "2026-10-09T00:00:00.000Z",
+        "week": "2026-10-02T00:00:00.000Z",
+        "month": "2026-09-09T00:00:00.000Z",
+        "quarter": "2026-07-09T00:00:00.000Z",
+        "year": "2025-10-09T00:00:00.000Z"
       },
       "live": true,
       "comparisonSources": {
         "current": "https://api.upbit.com/v1/ticker?markets=KRW-XRP",
-        "previous": "https://api.upbit.com/v1/candles/days?market=KRW-XRP&to=2026-10-08T00%3A00%3A00.000Z&count=1",
-        "week": "https://api.upbit.com/v1/candles/days?market=KRW-XRP&to=2026-10-01T00%3A00%3A00.000Z&count=1",
-        "month": "https://api.upbit.com/v1/candles/days?market=KRW-XRP&to=2026-09-08T00%3A00%3A00.000Z&count=1",
-        "quarter": "https://api.upbit.com/v1/candles/days?market=KRW-XRP&to=2026-07-08T00%3A00%3A00.000Z&count=1"
+        "previous": "https://api.upbit.com/v1/candles/days?market=KRW-XRP&to=2026-10-09T00%3A00%3A00.000Z&count=1",
+        "week": "https://api.upbit.com/v1/candles/days?market=KRW-XRP&to=2026-10-02T00%3A00%3A00.000Z&count=1",
+        "month": "https://api.upbit.com/v1/candles/days?market=KRW-XRP&to=2026-09-09T00%3A00%3A00.000Z&count=1",
+        "quarter": "https://api.upbit.com/v1/candles/days?market=KRW-XRP&to=2026-07-09T00%3A00%3A00.000Z&count=1",
+        "year": "https://api.upbit.com/v1/candles/days?market=KRW-XRP&to=2025-10-09T00%3A00%3A00.000Z&count=1"
       },
-      "additionalSources": [],
+      "additionalSources": [
+        "https://api.upbit.com/v1/candles/days?market=KRW-XRP&to=2026-10-09T02%3A07%3A19.285Z&count=120",
+        "https://api.upbit.com/v1/candles/days?market=KRW-XRP&to=2025-10-09T02%3A07%3A19.285Z&count=2"
+      ],
       "provider": "업비트",
-      "note": "업비트 원화시장 체결가격을 완료된 일봉 종가와 비교합니다. 일봉은 한국시간 오전 9시에 마감하며, 1주·1개월·3개월 비교는 체결가격 시점에서 각 비교 시점까지 완료된 최근 일봉 기준입니다.",
-      "retrievedAt": "2026-10-08T10:27:50.952Z",
-      "attemptedAt": "2026-10-08T10:27:52.154Z",
+      "note": "업비트 원화시장 체결가격을 완료된 일봉 종가와 비교합니다. 일봉은 한국시간 오전 9시에 마감하며, 1주·1개월·3개월·12개월 비교는 체결가격 시점에서 각 비교 시점까지 완료된 최근 일봉 기준입니다.",
+      "retrievedAt": "2026-10-09T02:07:23.142Z",
+      "attemptedAt": "2026-10-09T02:07:26.348Z",
       "priceKind": "market",
       "missing": [],
       "refreshError": ""
@@ -1494,32 +1643,38 @@
       "source": "https://api.upbit.com/v1/ticker?markets=KRW-SOL",
       "contract": null,
       "values": {
-        "current": 156300,
-        "previous": 158600,
-        "week": 160700,
-        "month": 141300,
-        "quarter": 120900
+        "current": 151100,
+        "previous": 150600,
+        "week": 161500,
+        "month": 140000,
+        "quarter": 116200,
+        "year": 330300
       },
       "dates": {
-        "current": "2026-10-08T10:27:46.978Z",
-        "previous": "2026-10-08T00:00:00.000Z",
-        "week": "2026-10-01T00:00:00.000Z",
-        "month": "2026-09-08T00:00:00.000Z",
-        "quarter": "2026-07-08T00:00:00.000Z"
+        "current": "2026-10-09T02:07:19.290Z",
+        "previous": "2026-10-09T00:00:00.000Z",
+        "week": "2026-10-02T00:00:00.000Z",
+        "month": "2026-09-09T00:00:00.000Z",
+        "quarter": "2026-07-09T00:00:00.000Z",
+        "year": "2025-10-09T00:00:00.000Z"
       },
       "live": true,
       "comparisonSources": {
         "current": "https://api.upbit.com/v1/ticker?markets=KRW-SOL",
-        "previous": "https://api.upbit.com/v1/candles/days?market=KRW-SOL&to=2026-10-08T00%3A00%3A00.000Z&count=1",
-        "week": "https://api.upbit.com/v1/candles/days?market=KRW-SOL&to=2026-10-01T00%3A00%3A00.000Z&count=1",
-        "month": "https://api.upbit.com/v1/candles/days?market=KRW-SOL&to=2026-09-08T00%3A00%3A00.000Z&count=1",
-        "quarter": "https://api.upbit.com/v1/candles/days?market=KRW-SOL&to=2026-07-08T00%3A00%3A00.000Z&count=1"
+        "previous": "https://api.upbit.com/v1/candles/days?market=KRW-SOL&to=2026-10-09T00%3A00%3A00.000Z&count=1",
+        "week": "https://api.upbit.com/v1/candles/days?market=KRW-SOL&to=2026-10-02T00%3A00%3A00.000Z&count=1",
+        "month": "https://api.upbit.com/v1/candles/days?market=KRW-SOL&to=2026-09-09T00%3A00%3A00.000Z&count=1",
+        "quarter": "https://api.upbit.com/v1/candles/days?market=KRW-SOL&to=2026-07-09T00%3A00%3A00.000Z&count=1",
+        "year": "https://api.upbit.com/v1/candles/days?market=KRW-SOL&to=2025-10-09T00%3A00%3A00.000Z&count=1"
       },
-      "additionalSources": [],
+      "additionalSources": [
+        "https://api.upbit.com/v1/candles/days?market=KRW-SOL&to=2026-10-09T02%3A07%3A19.290Z&count=120",
+        "https://api.upbit.com/v1/candles/days?market=KRW-SOL&to=2025-10-09T02%3A07%3A19.290Z&count=2"
+      ],
       "provider": "업비트",
-      "note": "업비트 원화시장 체결가격을 완료된 일봉 종가와 비교합니다. 일봉은 한국시간 오전 9시에 마감하며, 1주·1개월·3개월 비교는 체결가격 시점에서 각 비교 시점까지 완료된 최근 일봉 기준입니다.",
-      "retrievedAt": "2026-10-08T10:27:50.964Z",
-      "attemptedAt": "2026-10-08T10:27:52.154Z",
+      "note": "업비트 원화시장 체결가격을 완료된 일봉 종가와 비교합니다. 일봉은 한국시간 오전 9시에 마감하며, 1주·1개월·3개월·12개월 비교는 체결가격 시점에서 각 비교 시점까지 완료된 최근 일봉 기준입니다.",
+      "retrievedAt": "2026-10-09T02:07:23.168Z",
+      "attemptedAt": "2026-10-09T02:07:26.348Z",
       "priceKind": "market",
       "missing": [],
       "refreshError": ""

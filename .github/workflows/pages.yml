@@ -30,6 +30,7 @@ jobs:
         run: |
           node scripts/test-market-data.mjs
           node scripts/test-refresh-api.mjs
+          node scripts/test-chart-comparison.mjs
       - name: Build static site
         run: node scripts/build-pages.mjs
       - uses: actions/configure-pages@v5

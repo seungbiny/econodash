@@ -1,5 +1,5 @@
-export const chartPeriods = ['quarter', 'month', 'week', 'previous', 'current'];
-export const chartPeriodLabels = {quarter:'3개월 전', month:'1개월 전', week:'1주일 전', previous:'직전 마감', current:'현재'};
+export const chartPeriods = ['year', 'quarter', 'month', 'week', 'previous', 'current'];
+export const chartPeriodLabels = {year:'12개월 전', quarter:'3개월 전', month:'1개월 전', week:'1주일 전', previous:'직전 마감', current:'현재'};
 
 // Match comparison periods, preserving gaps and each market's actual observation date.
 export function compareIndicators(items) {
