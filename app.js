@@ -161,7 +161,7 @@ async function exportReport() {
   const button=$('#export-button');button.disabled=true;button.setAttribute('aria-busy','true');
   try {
     const {openReport}=await import('./pdf-report.js');
-    openReport({data:state.data,selected:state.selected,compared:state.compared,chartStart:state.chartStart,pulsePeriod:state.pulsePeriod,lastRun:state.lastRun});
+    openReport({data:state.data});
   } catch {toast('보고서를 열지 못했습니다. 다시 시도해 주세요.');}
   finally {button.disabled=false;button.removeAttribute('aria-busy');}
 }
