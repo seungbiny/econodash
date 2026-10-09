@@ -49,12 +49,12 @@
       <section class="overview-grid" aria-label="지표 비교와 시장 요약">
         <div class="panel chart-panel">
           <div class="panel-heading"><div><span class="section-kicker">MARKET SNAPSHOT</span><h2>주요 지표 비교</h2></div><span class="subtle-tag">변화율 비교</span></div>
-          <div class="chart-selectors"><label class="chart-selector" data-series="0"><span>지표 1</span><select id="chart-select" aria-label="첫 번째 비교 지표"></select></label><label class="chart-selector" data-series="1"><span>지표 2</span><select id="chart-select-second" aria-label="두 번째 비교 지표"></select></label></div>
+          <div class="chart-selectors"><label class="chart-selector" data-series="0"><span>지표 1</span><select id="chart-select" aria-label="첫 번째 비교 지표"></select></label><label class="chart-selector" data-series="1"><span>지표 2</span><select id="chart-select-second" aria-label="두 번째 비교 지표"></select></label><label class="chart-selector chart-start-selector"><span>비교 시작 시점</span><select id="chart-start-period" aria-label="비교 시작 시점"><option value="year">12개월 전부터</option><option value="quarter">3개월 전부터</option><option value="month">1개월 전부터</option><option value="week">1주일 전부터</option><option value="previous">직전 마감부터</option></select></label></div>
           <div class="chart-legend" id="chart-legend" aria-live="polite"></div>
           <p class="chart-basis" id="chart-basis"></p>
           <div class="chart-container" id="chart-container"></div>
           <div class="chart-point-detail" id="chart-point-detail" aria-live="polite"></div>
-          <div class="chart-caption"><span>비교 시점 6개의 관측값</span><span id="chart-caption-date"></span></div>
+          <div class="chart-caption"><span id="chart-caption-count">비교 시점 6개의 관측값</span><span id="chart-caption-date"></span></div>
         </div>
         <div class="panel pulse-panel">
           <div class="panel-heading"><div><span class="section-kicker">THE BIG PICTURE</span><h2>시장 한눈에</h2></div><span class="subtle-tag" id="pulse-period-label">직전 마감 대비</span></div>

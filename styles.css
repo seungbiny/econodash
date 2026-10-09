@@ -34,3 +34,4 @@ dialog{max-width:620px;width:calc(100% - 32px);border:1px solid var(--line);bord
 @media(max-width:760px){.chart-selectors,.chart-legend{gap:9px}.chart-series-card{padding:10px}.chart-series-card>strong{font-size:17px}.chart-point-detail{min-height:38px}}
 
 .pulse-periods{grid-template-columns:repeat(5,minmax(0,1fr))}table,.table-scroll table{min-width:1230px}table th:first-child{width:22%}table th:nth-child(n+2){width:13%}.detail-comparisons .detail-box:last-child:nth-child(odd){grid-column:1/-1}
+.chart-start-selector{grid-column:1/-1;display:flex;align-items:center;gap:12px}.chart-start-selector>span{margin:0;color:var(--muted);white-space:nowrap}.chart-start-selector select{flex:1;max-width:220px}

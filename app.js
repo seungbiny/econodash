@@ -36,7 +36,8 @@ const storage = {
   set(key,value) { try { localStorage.setItem(key,JSON.stringify(value)); return true; } catch { return false; } },
 };
 const savedFavorites = storage.get('econodash-favorites');
-const state = { data:null,category:'all',query:'',sort:'default',selected:'kospi',compared:'sp500',pulsePeriod:'previous',favorites:new Set(Array.isArray(savedFavorites) ? savedFavorites.filter(v=>typeof v==='string') : []),refreshing:false,lastRun:null };
+const savedChartStart = storage.get('econodash-chart-start');
+const state = { data:null,category:'all',query:'',sort:'default',selected:'kospi',compared:'sp500',chartStart:chartPeriods.slice(0,-1).includes(savedChartStart)?savedChartStart:'year',pulsePeriod:'previous',favorites:new Set(Array.isArray(savedFavorites) ? savedFavorites.filter(v=>typeof v==='string') : []),refreshing:false,lastRun:null };
 const pulsePeriods={previous:'직전 마감',week:'1주일',month:'1개월',quarter:'3개월',year:'12개월'};
 let toastTimer;
 function toast(message, persistent = false) {
@@ -87,16 +88,18 @@ function pulseCounts(items,period) {
 function renderChart() {
   if(!state.data)return;
   const items=[state.selected,state.compared].map(id=>state.data.indicators.find(i=>i.id===id));
-  const {baseline,series}=compareIndicators(items),baseLabel=chartPeriodLabels[baseline];
+  const {baseline,periods,series,startPeriod}=compareIndicators(items,state.chartStart),baseLabel=chartPeriodLabels[baseline],startLabel=chartPeriodLabels[startPeriod];
+  $('#chart-start-period').value=startPeriod;
   $('#chart-legend').innerHTML=series.map(({item,points},index)=>`<div class="chart-series-card" data-series="${index}"><span class="chart-series-name"><i></i>${esc(item.name)}</span><strong>${number(item)} <small>${esc(item.unit)}</small></strong><span class="change ${changeClass(points.at(-1).percent)}">${signed(points.at(-1).percent)}${points.at(-1).percent===null?'':'%'}<small>${baseline?` · ${baseLabel} 대비`:''}</small></span></div>`).join('');
-  $('#chart-basis').textContent=baseline?`각 지표의 ${baseLabel} 값을 0%로 맞춘 변화율`:'두 지표에 공통으로 확인된 비교 기준이 없습니다.';
+  $('#chart-basis').textContent=baseline?`각 지표의 ${baseLabel} 값을 0%로 맞춘 변화율`:`선택한 ${startLabel} 기준값이 없거나 0인 지표가 있어 변화율을 비교할 수 없습니다.`;
+  $('#chart-caption-count').textContent=`비교 시점 ${periods.length}개의 관측값`;
   $('#chart-caption-date').textContent='기준일은 지표마다 다를 수 있습니다.';
   $('#chart-point-detail').textContent='점에 마우스를 올리거나 선택하면 실제 수치와 기준일을 볼 수 있습니다.';
   const container=$('#chart-container');
-  if(!baseline){container.innerHTML='<div class="chart-empty">비교할 수 있는 기준값이 없습니다.</div>';return;}
+  if(!baseline){container.innerHTML=`<div class="chart-empty">${startLabel} 기준으로 비교할 수 없습니다.</div>`;return;}
   const width=Math.max(container.clientWidth,240),height=207,pad={left:54,right:22,top:15,bottom:32};
   const values=series.flatMap(s=>s.points.map(p=>p.percent)).filter(Number.isFinite),low=Math.min(0,...values),high=Math.max(0,...values),span=high-low||2,min=low-span*.16,max=high+span*.16;
-  const x=index=>pad.left+index/(chartPeriods.length-1)*(width-pad.left-pad.right),y=value=>pad.top+(max-value)/(max-min)*(height-pad.top-pad.bottom);
+  const x=index=>pad.left+index/(periods.length-1)*(width-pad.left-pad.right),y=value=>pad.top+(max-value)/(max-min)*(height-pad.top-pad.bottom);
   const ticks=[...Array.from({length:5},(_,index)=>min+(max-min)*index/4).filter(value=>Math.abs(value)>(max-min)/20),0].sort((a,b)=>a-b);
   const tickFormat=value=>`${signed(value,Math.max(Math.abs(min),Math.abs(max))<1?2:1)}%`;
   const chartAlt=`${baseLabel} 대비 변화율. ${series.map(({item,points})=>`${item.name}: ${points.map(p=>`${chartPeriodLabels[p.key]} ${number(item,p.value)} ${item.unit}, ${signed(p.percent)}${p.percent===null?'':'%'}, ${longDate(p.date)}`).join('; ')}`).join('. ')}`;
@@ -105,7 +108,7 @@ function renderChart() {
     const line=points.map(p=>{if(p.percent===null){connected=false;return '';}const command=connected?'L':'M';connected=true;return `${command}${x(p.index).toFixed(2)},${y(p.percent).toFixed(2)}`;}).join(' ');
     return `<g class="chart-series" data-series="${index}" data-indicator="${esc(item.id)}"><path class="chart-line" d="${line}"/>${points.filter(p=>p.percent!==null).map(p=>`<circle class="chart-point" cx="${x(p.index)}" cy="${y(p.percent)}" r="${index?4:3}" tabindex="0" data-chart-point data-series="${index}" data-period="${p.key}" aria-label="${esc(`${item.name} · ${chartPeriodLabels[p.key]} · ${number(item,p.value)} ${item.unit} · ${signed(p.percent)}% · ${longDate(p.date)}`)}"><title>${esc(`${item.name} · ${chartPeriodLabels[p.key]} · ${number(item,p.value)} ${item.unit} · ${signed(p.percent)}% · ${longDate(p.date)}`)}</title></circle>`).join('')}</g>`;
   }).join('');
-  container.innerHTML=`<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="${esc(chartAlt)}">${ticks.map(t=>`<line class="chart-grid ${t===0?'chart-zero':''}" x1="${pad.left}" x2="${width-pad.right}" y1="${y(t)}" y2="${y(t)}"/><text class="chart-axis-text" x="${pad.left-8}" y="${y(t)+3}" text-anchor="end">${tickFormat(t)}</text>`).join('')}${lines}${chartPeriods.map((key,index)=>`<text class="chart-axis-text" x="${x(index)}" y="${height-12}" text-anchor="middle">${chartPeriodLabels[key]}</text>`).join('')}</svg>`;
+  container.innerHTML=`<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="${esc(chartAlt)}">${ticks.map(t=>`<line class="chart-grid ${t===0?'chart-zero':''}" x1="${pad.left}" x2="${width-pad.right}" y1="${y(t)}" y2="${y(t)}"/><text class="chart-axis-text" x="${pad.left-8}" y="${y(t)+3}" text-anchor="end">${tickFormat(t)}</text>`).join('')}${lines}${periods.map((key,index)=>`<text class="chart-axis-text" x="${x(index)}" y="${height-12}" text-anchor="middle">${chartPeriodLabels[key]}</text>`).join('')}</svg>`;
 }
 function showChartPoint(target) {
   const point=target.closest?.('[data-chart-point]');
@@ -196,6 +199,7 @@ $('#search-input').addEventListener('input',event=>{state.query=event.target.val
 $('#sort-select').addEventListener('change',event=>{state.sort=event.target.value;renderTables();});
 $('#chart-select').addEventListener('change',event=>{state.selected=event.target.value;renderChart();});
 $('#chart-select-second').addEventListener('change',event=>{state.compared=event.target.value;renderChart();});
+$('#chart-start-period').addEventListener('change',event=>{if(chartPeriods.slice(0,-1).includes(event.target.value)){state.chartStart=event.target.value;storage.set('econodash-chart-start',state.chartStart);renderChart();}});
 for(const event of ['pointerover','focusin','click'])$('#chart-container').addEventListener(event,event=>showChartPoint(event.target));
 $('#theme-button').addEventListener('click',()=>{const theme=document.documentElement.dataset.theme==='dark'?'light':'dark';applyTheme(theme);storage.set('econodash-theme',theme);});
 $('#export-button').addEventListener('click',exportCsv);$('#refresh-button').addEventListener('click',()=>refreshMarkets());
