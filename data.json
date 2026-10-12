@@ -12,43 +12,51 @@
       "country": "KR",
       "unit": "pt",
       "decimals": 2,
-      "source": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?range=2y&interval=1d",
+      "source": "https://stock.naver.com/domestic/index/KOSPI/price",
       "contract": null,
       "values": {
-        "current": 6625.93,
-        "previous": 6803.89990234375,
-        "week": 6971.35009765625,
-        "month": 6954.52001953125,
-        "quarter": 7246.7900390625,
-        "year": 3549.2099609375
+        "current": 6532.17,
+        "previous": 6625.93,
+        "week": 7003.74,
+        "month": 6909.91,
+        "quarter": 7475.94,
+        "year": 3610.6
       },
       "dates": {
-        "current": "2026-10-08T11:05:40.000Z",
-        "previous": "2026-10-07",
-        "week": "2026-10-01",
-        "month": "2026-09-08",
-        "quarter": "2026-07-08",
-        "year": "2025-10-02"
+        "current": "2026-10-12T00:13:00.000Z",
+        "previous": "2026-10-08",
+        "week": "2026-10-02",
+        "month": "2026-09-11",
+        "quarter": "2026-07-10",
+        "year": "2025-10-10"
       },
-      "note": "Yahoo Finance의 최신 시세(장중 포함)를 직전 거래일 완료 종가와 비교합니다. 현재 시세의 실제 기준 시각을 표시하며 출처의 지연 시세일 수 있습니다. 시장이 닫혀 있으면 마지막 거래 시세를 표시합니다.",
+      "note": "네이버 증권의 코스피(KOSPI) 지수를 사용합니다. 출처가 표시한 시세 지연은 0분이며 실제 시세 기준 시각을 표시합니다. 현재·직전·1주·1개월·3개월·12개월을 같은 네이버 지수 계열로 비교하고 오늘의 장중 일봉은 완료 종가에서 제외합니다. 장중 기준 시각이 지연 시간보다 5분 이상 오래된 응답은 조회 실패로 처리하여 이전 확인값과 실패 표시를 유지합니다.",
       "comparisonSources": {
-        "current": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?range=2y&interval=1d",
-        "previous": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?range=2y&interval=1d",
-        "week": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?range=2y&interval=1d",
-        "month": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?range=2y&interval=1d",
-        "quarter": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?range=2y&interval=1d",
-        "year": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?range=2y&interval=1d"
+        "current": "https://m.stock.naver.com/api/index/KOSPI/basic",
+        "previous": "https://m.stock.naver.com/api/index/KOSPI/price?pageSize=60&page=1",
+        "week": "https://m.stock.naver.com/api/index/KOSPI/price?pageSize=60&page=1",
+        "month": "https://m.stock.naver.com/api/index/KOSPI/price?pageSize=60&page=1",
+        "quarter": "https://m.stock.naver.com/api/index/KOSPI/price?pageSize=60&page=2",
+        "year": "https://m.stock.naver.com/api/index/KOSPI/price?pageSize=60&page=5"
       },
       "live": true,
-      "additionalSources": [],
-      "provider": "Yahoo Finance",
-      "retrievedAt": "2026-10-09T02:07:23.432Z",
-      "attemptedAt": "2026-10-09T02:07:26.348Z",
+      "additionalSources": [
+        "https://m.stock.naver.com/api/index/KOSPI/basic",
+        "https://m.stock.naver.com/api/index/KOSPI/price?pageSize=60&page=1",
+        "https://m.stock.naver.com/api/index/KOSPI/price?pageSize=60&page=2",
+        "https://m.stock.naver.com/api/index/KOSPI/price?pageSize=60&page=3",
+        "https://m.stock.naver.com/api/index/KOSPI/price?pageSize=60&page=4",
+        "https://m.stock.naver.com/api/index/KOSPI/price?pageSize=60&page=5"
+      ],
+      "provider": "네이버 증권",
+      "retrievedAt": "2026-10-12T00:13:26.093Z",
+      "attemptedAt": "2026-10-12T00:13:26.093Z",
       "priceKind": "market",
-      "marketState": "closed",
-      "tradeDate": "2026-10-08",
+      "marketState": "trading",
+      "tradeDate": "2026-10-12",
       "missing": [],
-      "refreshError": ""
+      "refreshError": "",
+      "delayMinutes": 0
     },
     {
       "id": "kosdaq",

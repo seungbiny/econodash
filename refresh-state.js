@@ -1,5 +1,5 @@
 const keys=['current','previous','week','month','quarter','year'];
-const hosts=new Set(['query1.finance.yahoo.com','query2.finance.yahoo.com','push2his.eastmoney.com','push2.eastmoney.com','web.ifzq.gtimg.cn','stock.naver.com','ecos.bok.or.kr','www.mof.go.jp','api.upbit.com']);
+const hosts=new Set(['query1.finance.yahoo.com','query2.finance.yahoo.com','push2his.eastmoney.com','push2.eastmoney.com','web.ifzq.gtimg.cn','stock.naver.com','m.stock.naver.com','ecos.bok.or.kr','www.mof.go.jp','api.upbit.com']);
 const date=value=>typeof value==='string'&&/^\d{4}-\d{2}-\d{2}(?:T.*Z)?$/.test(value)&&Number.isFinite(Date.parse(value));
 const source=value=>{try{const url=new URL(value);return url.protocol==='https:'&&hosts.has(url.hostname);}catch{return false;}};
 export function validateResponse(data,response) {
