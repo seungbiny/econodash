@@ -1,6 +1,7 @@
 const API_ENDPOINT=document.querySelector('meta[name="econodash-api-endpoint"]')?.content||'/api/refresh';
 import {applyResults,cacheResponse} from './refresh-state.js';
 import {chartPeriods,chartPeriodLabels,compareIndicators} from './chart-comparison.js';
+import {createRefreshScheduler} from './refresh-scheduler.js';
 const paths = {
   grid:'<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
   chart:'<path d="M4 4v16h16M7 14l4-4 4 3 5-7"/>',
@@ -182,6 +183,7 @@ async function refreshMarkets(automatic=false) {
     state.lastRun={completedAt,succeeded:0,failed:total};renderAll();toast(message+' 마지막 확인값을 유지합니다.');
   } finally {state.refreshing=false;button.disabled=false;button.removeAttribute('aria-busy');button.innerHTML=icon('refresh')+'전체 재조회';}
 }
+const refreshScheduler=createRefreshScheduler(refreshMarkets);
 function applyTheme(theme) {document.documentElement.dataset.theme=theme;$('#theme-button').innerHTML=icon(theme==='dark'?'sun':'moon');$('#theme-button').setAttribute('aria-label',theme==='dark'?'밝은 테마로 전환':'어두운 테마로 전환');}
 mountIcons();applyTheme(storage.get('econodash-theme')==='dark'?'dark':'light');
 document.addEventListener('click',event=>{
@@ -203,7 +205,11 @@ $('#chart-select-second').addEventListener('change',event=>{state.compared=event
 $('#chart-start-period').addEventListener('change',event=>{if(chartPeriods.slice(0,-1).includes(event.target.value)){state.chartStart=event.target.value;storage.set('econodash-chart-start',state.chartStart);renderChart();}});
 for(const event of ['pointerover','focusin','click'])$('#chart-container').addEventListener(event,event=>showChartPoint(event.target));
 $('#theme-button').addEventListener('click',()=>{const theme=document.documentElement.dataset.theme==='dark'?'light':'dark';applyTheme(theme);storage.set('econodash-theme',theme);});
-$('#export-button').addEventListener('click',exportReport);$('#refresh-button').addEventListener('click',()=>refreshMarkets());
+$('#export-button').addEventListener('click',exportReport);$('#refresh-button').addEventListener('click',()=>refreshScheduler.run());
+$('#refresh-button').title='5분마다 자동 재조회 · 수동 조회 시 누른 시점부터 5분을 다시 계산합니다.';
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)refreshScheduler.checkDue().catch(()=>{});});
+window.addEventListener('pageshow',()=>refreshScheduler.checkDue().catch(()=>{}));
+window.addEventListener('pagehide',event=>{if(!event.persisted)refreshScheduler.stop();});
 for(const id of ['method-button','footer-method'])$('#'+id).addEventListener('click',()=>$('#method-dialog').showModal());
 for(const dialog of document.querySelectorAll('dialog'))dialog.addEventListener('click',event=>{if(event.target===dialog){const box=dialog.getBoundingClientRect();if(event.clientX<box.left||event.clientX>box.right||event.clientY<box.top||event.clientY>box.bottom)dialog.close();}});
 new ResizeObserver(()=>renderChart()).observe($('#chart-container'));
@@ -222,5 +228,5 @@ try {
     const select=$('#'+id);select.innerHTML=state.data.indicators.map(i=>`<option value="${i.id}">${esc(i.name)}</option>`).join('');
     select.value=state[key];
   }
-  $('#load-status').classList.add('hidden');renderAll();await refreshMarkets(true);
+  $('#load-status').classList.add('hidden');renderAll();await refreshScheduler.run(true);
 }catch(error){$('#load-status').textContent=`${error.message} 페이지를 새로고침해 주세요.`;$('#refresh-button').disabled=true;$('#export-button').disabled=true;}
