@@ -2,6 +2,7 @@ const API_ENDPOINT=document.querySelector('meta[name="econodash-api-endpoint"]')
 import {applyResults,cacheResponse} from './refresh-state.js';
 import {chartPeriods,chartPeriodLabels,compareIndicators} from './chart-comparison.js';
 import {createRefreshScheduler} from './refresh-scheduler.js';
+import {createRefreshRequest} from './refresh-request.js';
 const paths = {
   grid:'<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
   chart:'<path d="M4 4v16h16M7 14l4-4 4 3 5-7"/>',
@@ -170,20 +171,20 @@ async function refreshMarkets(automatic=false) {
   state.refreshing=true;const total=state.data.indicators.length,button=$('#refresh-button');
   button.disabled=true;button.innerHTML=icon('refresh')+'전체 조회 중…';button.setAttribute('aria-busy','true');
   try {
-    const response=await fetch(API_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({ids:state.data.indicators.map(i=>i.id)}),signal:AbortSignal.timeout(120000),cache:'no-store'});
-    if(!response.ok)throw new Error('전체 조회에 응답하지 못했습니다 (HTTP '+response.status+').');
-    const result=await response.json();state.data=applyResults(state.data,result);
+    const result=await refreshRequest.request(API_ENDPOINT,state.data.indicators.map(i=>i.id));state.data=applyResults(state.data,result);
     state.lastRun={completedAt:result.completedAt,succeeded:result.results.filter(r=>r.ok).length,failed:result.results.filter(r=>!r.ok).length};
     storage.set('econodash-market-cache-v10',{snapshot:cacheResponse(state.data,result.completedAt),lastResponse:result});
     renderAll();if(!automatic||state.lastRun.failed)toast(state.lastRun.succeeded+'/'+total+'개 지표를 새로 조회했습니다.'+(state.lastRun.failed?' 실패한 지표는 이전 값을 유지합니다.':''));
   } catch(error) {
-    const message=error.name==='TimeoutError'?'조회 시간이 초과되었습니다.':error.message;
+    const message=error.name==='TimeoutError'?'조회 시간이 30초를 초과했습니다. 다시 재조회해 주세요.':error.message;
     const completedAt=new Date().toISOString();
     state.data={...state.data,indicators:state.data.indicators.map(i=>({...i,refreshError:message,attemptedAt:completedAt}))};
     state.lastRun={completedAt,succeeded:0,failed:total};renderAll();toast(message+' 마지막 확인값을 유지합니다.');
   } finally {state.refreshing=false;button.disabled=false;button.removeAttribute('aria-busy');button.innerHTML=icon('refresh')+'전체 재조회';}
 }
 const refreshScheduler=createRefreshScheduler(refreshMarkets);
+const refreshRequest=createRefreshRequest();
+function resumeRefresh() {refreshRequest.checkDeadline();refreshScheduler.checkDue().catch(()=>{});}
 function applyTheme(theme) {document.documentElement.dataset.theme=theme;$('#theme-button').innerHTML=icon(theme==='dark'?'sun':'moon');$('#theme-button').setAttribute('aria-label',theme==='dark'?'밝은 테마로 전환':'어두운 테마로 전환');}
 mountIcons();applyTheme(storage.get('econodash-theme')==='dark'?'dark':'light');
 document.addEventListener('click',event=>{
@@ -207,9 +208,10 @@ for(const event of ['pointerover','focusin','click'])$('#chart-container').addEv
 $('#theme-button').addEventListener('click',()=>{const theme=document.documentElement.dataset.theme==='dark'?'light':'dark';applyTheme(theme);storage.set('econodash-theme',theme);});
 $('#export-button').addEventListener('click',exportReport);$('#refresh-button').addEventListener('click',()=>refreshScheduler.run());
 $('#refresh-button').title='5분마다 자동 재조회 · 수동 조회 시 누른 시점부터 5분을 다시 계산합니다.';
-document.addEventListener('visibilitychange',()=>{if(!document.hidden)refreshScheduler.checkDue().catch(()=>{});});
-window.addEventListener('pageshow',()=>refreshScheduler.checkDue().catch(()=>{}));
-window.addEventListener('pagehide',event=>{if(!event.persisted)refreshScheduler.stop();});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)resumeRefresh();});
+window.addEventListener('pageshow',resumeRefresh);
+window.addEventListener('focus',resumeRefresh);
+window.addEventListener('pagehide',event=>{if(!event.persisted){refreshScheduler.stop();refreshRequest.cancel();}});
 for(const id of ['method-button','footer-method'])$('#'+id).addEventListener('click',()=>$('#method-dialog').showModal());
 for(const dialog of document.querySelectorAll('dialog'))dialog.addEventListener('click',event=>{if(event.target===dialog){const box=dialog.getBoundingClientRect();if(event.clientX<box.left||event.clientX>box.right||event.clientY<box.top||event.clientY>box.bottom)dialog.close();}});
 new ResizeObserver(()=>renderChart()).observe($('#chart-container'));

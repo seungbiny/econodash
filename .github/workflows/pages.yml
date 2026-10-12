@@ -32,6 +32,8 @@ jobs:
           node scripts/test-refresh-api.mjs
           node scripts/test-chart-comparison.mjs
           node scripts/test-refresh-scheduler.mjs
+          node scripts/test-refresh-request.mjs
+          node scripts/test-refresh-isolation.mjs
       - name: Build static site
         run: node scripts/build-pages.mjs
       - uses: actions/configure-pages@v5
