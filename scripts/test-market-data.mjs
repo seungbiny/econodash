@@ -2,8 +2,9 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import {monthBefore,compareSeries,compareQuote,yahooRows,yahooQuote,yahooTradeDate,futuresContract,naverBondSnapshot,naverKospiSnapshot,naverEtfSnapshot,cryptoComparisons,cryptoTarget,tencentIndexRows,tencentIndexQuote,IDS,LEGACY_IDS,CRYPTO_MARKETS} from '../lib/market-data.mjs';
 import {STOCK_ETFS} from '../lib/stock-universe.mjs';
+import {BOND_UNIVERSE,bondGroupFor} from '../lib/bond-universe.mjs';
 import {applyResults,cacheResponse,validateResponse} from '../refresh-state.js';
-assert.equal(IDS.length,73);assert.equal(new Set(IDS).size,73);
+assert.equal(IDS.length,100);assert.equal(new Set(IDS).size,100);
 assert.equal(LEGACY_IDS.length,22);assert.ok(!LEGACY_IDS.includes('chf'),'Old dashboards retain their original indicator list');
 const dashboard=JSON.parse(await fs.readFile(new URL('../data.json',import.meta.url),'utf8'));
 assert.deepEqual(new Set(dashboard.indicators.map(i=>i.id)),new Set(IDS),'Every displayed indicator has a matching refresh provider');
@@ -59,7 +60,20 @@ assert.deepEqual(dashboard.indicators.filter(i=>i.category==='fx').map(i=>i.id),
 const franc=dashboard.indicators.find(i=>i.id==='chf');
 assert.equal(franc.country,'CH');assert.equal(franc.unit,'원/1프랑');assert.equal(franc.decimals,2);
 assert.match(franc.source,/CHFKRW%3DX/);
-assert.deepEqual(dashboard.indicators.filter(i=>i.category==='bonds').map(i=>i.id),['kr1','kr3','kr10','kr30','us1','us3','us10','us30','jp1','jp3','jp10','jp30']);
+assert.deepEqual(dashboard.indicators.filter(i=>i.category==='bonds').map(i=>i.id),BOND_UNIVERSE.map(i=>i.id));
+assert.equal(BOND_UNIVERSE.length,39);
+for(const [country,count]of Object.entries({KR:9,US:12,JP:18}))assert.equal(BOND_UNIVERSE.filter(i=>i.country===country).length,count);
+for(const [maturity,group]of [['1M','ultra-short'],['9M','ultra-short'],['1Y','short'],['3Y','short'],['4Y','intermediate'],['7Y','intermediate'],['8Y','long'],['10Y','long'],['15Y','ultra-long'],['50Y','ultra-long']])assert.equal(bondGroupFor(maturity),group);
+for(const invalid of ['','0M','0Y','3','-1Y','3Q'])assert.throws(()=>bondGroupFor(invalid));
+for(const spec of BOND_UNIVERSE){
+  const item=dashboard.indicators.find(i=>i.id===spec.id);
+  assert.equal(item.bondGroup,spec.bondGroup);assert.equal(item.maturity,spec.maturity);assert.equal(item.country,spec.country);assert.equal(item.unit,'%');assert.equal(item.provider,'네이버 증권');
+  assert.ok(item.source.includes(encodeURIComponent(spec.code)),'Each tenor uses its own market-yield source');
+  for(const key of ['current','previous','week','month','quarter','year']){
+    if(item.values[key]===null){assert.ok(item.missing.includes(key));assert.equal(item.dates[key],null);}
+    else{assert.ok(Number.isFinite(item.values[key]));assert.ok(Number.isFinite(Date.parse(item.dates[key])));}
+  }
+}
 const tencent={code:0,data:{sz399106:{qt:{sz399106:['51','深证综指','399106']},day:[['2026-09-30','2419.83','2404.48']]}}};
 assert.equal(tencentIndexRows(tencent,'https://web.ifzq.gtimg.cn/').at(-1).value,2404.48);
 assert.throws(()=>tencentIndexRows({code:0,data:{sz399001:{day:[]}}},''));
@@ -177,6 +191,14 @@ const usQuote={...bondQuote,reutersCode:'US3YT=RR',nationType:'USA',currencyType
 const usHistory=[{localTradedAt:'2026-10-07T17:05:00-04:00',closePrice:'999'},{localTradedAt:'2026-10-06T17:05:00-04:00',closePrice:'3.110'},{localTradedAt:'2026-09-30T17:05:00-04:00',closePrice:'3.015'},{localTradedAt:'2026-09-04T17:05:00-04:00',closePrice:'2.887'}];
 const usBond=naverBondSnapshot('us3',usQuote,usHistory,now);
 assert.equal(usBond.tradeDate,'2026-10-07');assert.equal(usBond.dates.current,'2026-10-08T00:42:36.000Z');assert.equal(usBond.values.previous,3.110,'US comparisons use New York trading dates rather than Korean dates');
+for(const [id,code,maturity,nation,currency]of [['us1m','US1MT=RR','1M','USA','USD'],['jp9m','JP9MT=RR','9M','JPN','JPY'],['kr50','KR50YT=RR','50Y','KOR','KRW'],['jp40','JP40YT=RR','40Y','JPN','JPY'],['us10','US10YT=RR','10Y','USA','USD']]){
+  const tenorNow=Date.parse('2026-10-08T12:00:00Z'),quote={...bondQuote,reutersCode:code,maturityType:maturity,nationType:nation,currencyType:{code:currency},localTradedAt:nation==='USA'?'2026-10-08T00:42:36-04:00':bondQuote.localTradedAt,delayTime:nation==='JPN'?120:0};
+  const result=naverBondSnapshot(id,quote,bondHistory,tenorNow);
+  assert.equal(result.values.current,3.082);assert.equal(result.values.previous,3.109);
+  assert.throws(()=>naverBondSnapshot(id,{...quote,maturityType:maturity.endsWith('M')?maturity.replace('M','Y'):'1M'},bondHistory,tenorNow),'Monthly and yearly yield instruments cannot be mixed');
+  assert.throws(()=>naverBondSnapshot(id,{...quote,currencyType:{code:'EUR'}},bondHistory,tenorNow));
+}
+assert.throws(()=>naverBondSnapshot('kr1m',bondQuote,bondHistory,now),'Unavailable Korean month tenors must not be invented');
 const ticker={market:'KRW-BTC',timestamp:Date.parse('2026-03-31T03:30:00Z'),trade_price:100};
 const candles=[{candle_date_time_utc:'2026-03-31T00:00:00',trade_price:999},{candle_date_time_utc:'2026-03-30T00:00:00',trade_price:90},{candle_date_time_utc:'2026-03-23T00:00:00',trade_price:80},{candle_date_time_utc:'2026-02-27T00:00:00',trade_price:70},{candle_date_time_utc:'2025-12-31T00:00:00',trade_price:999},{candle_date_time_utc:'2025-12-30T00:00:00',trade_price:60},{candle_date_time_utc:'2025-12-29T00:00:00',trade_price:50}];
 const crypto=cryptoComparisons(ticker,candles);
@@ -214,4 +236,4 @@ assert.equal(bondUpdated.indicators[0].delayMinutes,120);assert.equal(applyResul
 assert.throws(()=>applyResults(bondBase,{...bondResponse,results:[{...bondResponse.results[0],delayMinutes:-1}]}));
 assert.throws(()=>applyResults(base,{completedAt,results:[success,success]}));
 assert.throws(()=>applyResults(base,{completedAt,results:[{...success,source:'javascript:alert(1)'},response.results[1]]}));
-console.log('PASS: 73 providers including ETF sectors/factors, India and Eurozone indices, four KRW crypto pairs, CHF/KRW and legacy response compatibility, 12 bond maturities, country/maturity validation, trading time zones, intraday quotes, delay metadata, completed comparisons, futures contracts, crypto cutoffs, partial failure retention and cache');
+console.log('PASS: 100 providers including ETF sectors/factors, India and Eurozone indices, four KRW crypto pairs, CHF/KRW and legacy response compatibility, 39 bond maturities, country/maturity validation, trading time zones, intraday quotes, delay metadata, completed comparisons, futures contracts, crypto cutoffs, partial failure retention and cache');

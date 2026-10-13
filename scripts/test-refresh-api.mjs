@@ -18,4 +18,8 @@ const newClient=await handleRefresh(new Request(endpoint,{method:'POST',headers:
 const expanded=await newClient.json();assert.equal(newClient.status,200);assert.deepEqual(expanded.results.map(i=>i.id),['jp30','kr1','kr10']);assert.equal(expanded.succeeded,2);assert.equal(expanded.failed,1);
 const malformed=await handleRefresh(new Request(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:'{"ids":["kr1","kr1"]}'}),refresh);assert.equal(malformed.status,400);assert.equal(calls,1);
 const unknown=await handleRefresh(new Request(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:'{"ids":["unknown"]}'}),all);assert.equal(unknown.status,400);
+const fullIds=Array.from({length:100},(_,i)=>'indicator-'+i),full=async()=>({results:fullIds.map(id=>({id,ok:true})),succeeded:100,failed:0});
+const complete=await handleRefresh(new Request(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({ids:fullIds})}),full);
+assert.equal(complete.status,200);assert.equal((await complete.json()).results.length,100,'The complete expanded dashboard fits the request limit');
+const tooMany=await handleRefresh(new Request(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({ids:[...fullIds,'extra']})}),full);assert.equal(tooMany.status,400);
 console.log('PASS: Pages CORS/preflight, old and expanded client responses, invalid indicator lists, no-store and upstream failures.');

@@ -52,9 +52,14 @@ export function buildReport({data,generatedAt=new Date().toISOString()}){
     const note=key==='country'?'주식 수치는 지수 포인트입니다. 휴장 또는 장 종료 시 마지막 거래 시세를 사용하며, 모든 비교값은 실제 완료된 거래일의 값입니다. 현재 시세는 출처에서 지연될 수 있습니다.':'섹터·팩터 수치는 대표 ETF의 거래소 시장가격입니다. 미국은 달러/주, 한국은 원/주입니다. 분배금을 제외한 가격 변화율이며 분배금 재투자 총수익률과 다릅니다. ETF의 섹터·팩터 편입 기준은 서로 다를 수 있습니다.';
     return [{title,body:table(items,'stocks',key==='country'?'국가별 지수':title)+'<p class="report-note">'+note+'</p>'}];
   });
+  const bondItems=indicators.filter(item=>item.category==='bonds'),bondNote='<p class="report-note">금리는 만기별 시장 수익률, 연율(%)입니다. 각 비교 칸은 당시 금리, 현재 대비 상대 변화율, 금리 차이(bp)를 함께 표시합니다. 1bp = 0.01%포인트이며 일본 국채는 출처 기준 2시간 지연 시세입니다. 직전 마감과 일별 자료가 일치하지 않는 경우 해당 비교는 확인 불가로 표시합니다.</p>';
+  const bondSections=bondItems.some(item=>item.bondGroup)?[['ultra-short','초단기','1년 미만'],['short','단기','1~3년'],['intermediate','중기','4~7년'],['long','장기','8~10년'],['ultra-long','초장기','10년 초과']].flatMap(([key,title,range])=>{
+    const items=bondItems.filter(item=>item.bondGroup===key);if(!items.length)return [];
+    return [{title:'국채 금리 · '+title,body:table(items,'bonds',title+' · '+range)+bondNote+(key==='ultra-short'?'<p class="report-note">한국의 1년 미만 국채 금리는 연결 출처에 없어 미국·일본만 표시합니다.</p>':'')}];
+  }):[{title:'국채 금리',body:table(indicators,'bonds')+bondNote}];
   const sections=[
     ...stockSections,
-    {title:'국채 금리',body:table(indicators,'bonds')+'<p class="report-note">금리는 연율(%)입니다. 각 비교 칸은 당시 금리, 현재 대비 상대 변화율, 금리 차이(bp)를 함께 표시합니다. 1bp = 0.01%포인트이며 일본 국채는 출처 기준 2시간 지연 시세입니다.</p>'},
+    ...bondSections,
     {title:'상품과 환율',body:table(indicators,'commodities')+table(indicators,'fx')+'<p class="report-note">상품의 모든 비교값은 같은 선물 계약월을 사용합니다. 환율은 외화당 원화, 엔은 100엔당 원화입니다. 위안은 같은 거래일·15분 이내 두 시세의 교차 환율입니다.</p>'},
     {title:'가상자산',body:table(indicators,'crypto')+`<aside class="report-reference" aria-labelledby="report-reference-title"><h2 id="report-reference-title">참고사항</h2><div class="report-notes"><section><h3>비교 기간과 계산</h3><p>직전 마감은 현재 시세의 현지 거래일보다 앞선 최근 완료 종가입니다. 1주일은 7일 전, 1개월·3개월·12개월은 달력 기준으로 계산하며 휴장일에는 해당 날짜 이전의 완료 값을 사용합니다. 변화율은 (현재 수치 - 비교 수치) ÷ 비교 수치 × 100으로 계산합니다. 금리 차이는 (현재 금리 - 비교 금리) × 100bp입니다.</p></section><section><h3>시각과 조회 상태</h3><p>보고서 작성 시각은 데이터 시각과 다릅니다. 날짜만 있는 값은 현지 거래일이며 시각이 있는 값은 한국시간(KST)입니다. 조회 실패 지표는 이전 확인값과 실패 표시를 유지하고, 없는 비교값은 확인 불가로 표시합니다. 이 보고서는 버튼을 누른 당시 화면의 데이터로 작성하며 추가 시세 조회를 실행하지 않습니다. 가상자산은 업비트 원화시장 체결가격이며 일봉은 한국시간 오전 9시에 마감합니다. 자료 제공: Yahoo Finance, 네이버 증권, Tencent Finance / Eastmoney, 업비트.</p></section></div></aside>`}
   ];
