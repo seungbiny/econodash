@@ -24,9 +24,9 @@ function comparison(item,key){
   const bp=item.category==='bonds'&&numeric(item.values.current)&&numeric(item.values[key])?` <span class="report-bp">(${signed((item.values.current-item.values[key])*100,1)}bp)</span>`:'';
   return `<td><div><strong class="report-inline">${value(item,key)}${item.category==='bonds'&&numeric(item.values[key])?'%':''}</strong> ${delta(item,key)}</div><small>${date(item.dates[key])}${bp}</small></td>`;
 }
-function table(indicators,key){
+function table(indicators,key,title=groups[key]){
   const items=indicators.filter(item=>item.category===key);
-  return `<section class="report-market"><h2>${groups[key]} <span>${items.length}개 지표</span></h2><table><caption class="report-sr-only">${groups[key]} 시세 및 기간별 비교</caption><colgroup><col style="width:17%"><col style="width:15%">${periods.map(()=>'<col style="width:13.6%">').join('')}</colgroup><thead><tr><th scope="col">지표 / 단위</th><th scope="col">현재 수치 / 기준 시각</th>${periods.map(key=>`<th scope="col">${labels[key]}<small>수치 · 변화율 · 기준일</small></th>`).join('')}</tr></thead><tbody>${items.map(item=>`<tr data-report-indicator="${esc(item.id)}"><th scope="row">${esc(item.name)}<small>${esc(item.ticker)} · ${esc(item.unit)}</small>${item.contract?`<small>${esc(item.contract)}</small>`:''}</th><td><div><strong class="${item.refreshError?'report-inline':''}">${value(item)}${item.category==='bonds'&&numeric(item.values.current)?'%':''}</strong>${item.refreshError?' <span class="report-error report-failed">조회 실패</span>':''}</div><small>${date(item.dates.current)}</small>${!item.refreshError&&(item.delayMinutes||item.priceKind==='published')?`<small>${esc(status(item))}</small>`:''}</td>${periods.map(key=>comparison(item,key)).join('')}</tr>`).join('')}</tbody></table></section>`;
+  return `<section class="report-market"><h2>${title} <span>${items.length}개 지표</span></h2><table><caption class="report-sr-only">${groups[key]} 시세 및 기간별 비교</caption><colgroup><col style="width:17%"><col style="width:15%">${periods.map(()=>'<col style="width:13.6%">').join('')}</colgroup><thead><tr><th scope="col">지표 / 단위</th><th scope="col">현재 수치 / 기준 시각</th>${periods.map(key=>`<th scope="col">${labels[key]}<small>수치 · 변화율 · 기준일</small></th>`).join('')}</tr></thead><tbody>${items.map(item=>`<tr data-report-indicator="${esc(item.id)}"><th scope="row">${esc(item.name)}<small>${esc(item.ticker)} · ${esc(item.unit)}</small>${item.contract?`<small>${esc(item.contract)}</small>`:''}</th><td><div><strong class="${item.refreshError?'report-inline':''}">${value(item)}${item.category==='bonds'&&numeric(item.values.current)?'%':''}</strong>${item.refreshError?' <span class="report-error report-failed">조회 실패</span>':''}</div><small>${date(item.dates.current)}</small>${!item.refreshError&&(item.delayMinutes||item.priceKind==='published')?`<small>${esc(status(item))}</small>`:''}</td>${periods.map(key=>comparison(item,key)).join('')}</tr>`).join('')}</tbody></table></section>`;
 }
 export const reportStyles=`
 #report-view{color-scheme:light;--report-ink:#253243;--report-muted:#617083;font-family:'DM Sans','Noto Sans KR','Malgun Gothic',system-ui,sans-serif;color:var(--report-ink);background:#e9edf2;line-height:1.45;min-height:100vh;padding-bottom:24px}
@@ -46,8 +46,14 @@ body.report-open{background:#e9edf2}body.report-open>.sidebar,body.report-open>.
 
 export function buildReport({data,generatedAt=new Date().toISOString()}){
   const indicators=data.indicators,created=date(generatedAt);
+  const stockSections=[['country','세계 주요 증시'],['us-sectors','미국 섹터'],['kr-sectors','한국 섹터'],['us-factors','미국 팩터'],['kr-factors','한국 팩터']].flatMap(([key,title])=>{
+    const items=indicators.filter(item=>item.category==='stocks'&&(item.stockGroup||'country')===key);
+    if(!items.length)return [];
+    const note=key==='country'?'주식 수치는 지수 포인트입니다. 휴장 또는 장 종료 시 마지막 거래 시세를 사용하며, 모든 비교값은 실제 완료된 거래일의 값입니다. 현재 시세는 출처에서 지연될 수 있습니다.':'섹터·팩터 수치는 대표 ETF의 거래소 시장가격입니다. 미국은 달러/주, 한국은 원/주입니다. 분배금을 제외한 가격 변화율이며 분배금 재투자 총수익률과 다릅니다. ETF의 섹터·팩터 편입 기준은 서로 다를 수 있습니다.';
+    return [{title,body:table(items,'stocks',key==='country'?'국가별 지수':title)+'<p class="report-note">'+note+'</p>'}];
+  });
   const sections=[
-    {title:'세계 주요 증시',body:table(indicators,'stocks')+'<p class="report-note">주식 수치는 지수 포인트입니다. 휴장 또는 장 종료 시 마지막 거래 시세를 사용하며, 모든 비교값은 실제 완료된 거래일의 값입니다. 현재 시세는 출처에서 지연될 수 있습니다.</p>'},
+    ...stockSections,
     {title:'국채 금리',body:table(indicators,'bonds')+'<p class="report-note">금리는 연율(%)입니다. 각 비교 칸은 당시 금리, 현재 대비 상대 변화율, 금리 차이(bp)를 함께 표시합니다. 1bp = 0.01%포인트이며 일본 국채는 출처 기준 2시간 지연 시세입니다.</p>'},
     {title:'상품과 환율',body:table(indicators,'commodities')+table(indicators,'fx')+'<p class="report-note">상품의 모든 비교값은 같은 선물 계약월을 사용합니다. 환율은 외화당 원화, 엔은 100엔당 원화입니다. 위안은 같은 거래일·15분 이내 두 시세의 교차 환율입니다.</p>'},
     {title:'가상자산',body:table(indicators,'crypto')+`<aside class="report-reference" aria-labelledby="report-reference-title"><h2 id="report-reference-title">참고사항</h2><div class="report-notes"><section><h3>비교 기간과 계산</h3><p>직전 마감은 현재 시세의 현지 거래일보다 앞선 최근 완료 종가입니다. 1주일은 7일 전, 1개월·3개월·12개월은 달력 기준으로 계산하며 휴장일에는 해당 날짜 이전의 완료 값을 사용합니다. 변화율은 (현재 수치 - 비교 수치) ÷ 비교 수치 × 100으로 계산합니다. 금리 차이는 (현재 금리 - 비교 금리) × 100bp입니다.</p></section><section><h3>시각과 조회 상태</h3><p>보고서 작성 시각은 데이터 시각과 다릅니다. 날짜만 있는 값은 현지 거래일이며 시각이 있는 값은 한국시간(KST)입니다. 조회 실패 지표는 이전 확인값과 실패 표시를 유지하고, 없는 비교값은 확인 불가로 표시합니다. 이 보고서는 버튼을 누른 당시 화면의 데이터로 작성하며 추가 시세 조회를 실행하지 않습니다. 가상자산은 업비트 원화시장 체결가격이며 일봉은 한국시간 오전 9시에 마감합니다. 자료 제공: Yahoo Finance, 네이버 증권, Tencent Finance / Eastmoney, 업비트.</p></section></div></aside>`}

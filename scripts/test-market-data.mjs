@@ -1,12 +1,41 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
-import {monthBefore,compareSeries,compareQuote,yahooRows,yahooQuote,yahooTradeDate,futuresContract,naverBondSnapshot,naverKospiSnapshot,cryptoComparisons,cryptoTarget,tencentIndexRows,tencentIndexQuote,IDS,LEGACY_IDS,CRYPTO_MARKETS} from '../lib/market-data.mjs';
+import {monthBefore,compareSeries,compareQuote,yahooRows,yahooQuote,yahooTradeDate,futuresContract,naverBondSnapshot,naverKospiSnapshot,naverEtfSnapshot,cryptoComparisons,cryptoTarget,tencentIndexRows,tencentIndexQuote,IDS,LEGACY_IDS,CRYPTO_MARKETS} from '../lib/market-data.mjs';
+import {STOCK_ETFS} from '../lib/stock-universe.mjs';
 import {applyResults,cacheResponse,validateResponse} from '../refresh-state.js';
-assert.equal(IDS.length,36);assert.equal(new Set(IDS).size,36);
+assert.equal(IDS.length,73);assert.equal(new Set(IDS).size,73);
 assert.equal(LEGACY_IDS.length,22);assert.ok(!LEGACY_IDS.includes('chf'),'Old dashboards retain their original indicator list');
 const dashboard=JSON.parse(await fs.readFile(new URL('../data.json',import.meta.url),'utf8'));
 assert.deepEqual(new Set(dashboard.indicators.map(i=>i.id)),new Set(IDS),'Every displayed indicator has a matching refresh provider');
-assert.equal(dashboard.indicators.filter(item=>item.category==='stocks').length,11);
+assert.equal(dashboard.indicators.filter(item=>item.category==='stocks').length,48);
+for(const [group,count] of Object.entries({country:11,'us-sectors':11,'kr-sectors':12,'us-factors':7,'kr-factors':7}))assert.equal(dashboard.indicators.filter(item=>item.category==='stocks'&&(item.stockGroup||'country')===group).length,count);
+assert.equal(STOCK_ETFS.length,37);
+for(const spec of STOCK_ETFS){
+  const item=dashboard.indicators.find(i=>i.id===spec.id);
+  assert.equal(item.ticker,spec.symbol);assert.equal(item.country,spec.country);assert.equal(item.stockGroup,spec.stockGroup);assert.equal(item.fundName,spec.fundName);assert.equal(item.instrument,'etf');
+  assert.equal(item.unit,spec.country==='KR'?'원/주':'달러/주');assert.ok(!LEGACY_IDS.includes(spec.id));
+  for(const key of ['current','previous','week','month','quarter','year']){assert.ok(Number.isFinite(item.values[key]));assert.ok(Number.isFinite(Date.parse(item.dates[key])));}
+}
+const etfNow=Date.parse('2026-10-13T03:10:00Z');
+const etfQuote={stockEndType:'etf',itemCode:'091160',reutersCode:'091160',closePrice:'13,500',localTradedAt:'2026-10-13T12:09:00+09:00',delayTime:0,marketStatus:'OPEN',stockExchangeType:{zoneId:'Asia/Seoul',nationType:'KOR'}};
+const etfHistory=[{localTradedAt:'2026-10-13',closePrice:'99,999'},{localTradedAt:'2026-10-12',closePrice:'13,000'},{localTradedAt:'2026-10-06',closePrice:'12,000'},{localTradedAt:'2026-09-11',closePrice:'11,000'},{localTradedAt:'2026-07-13',closePrice:'10,000',historyPage:2},{localTradedAt:'2025-10-13',closePrice:'9,000',historyPage:5}];
+const etf=naverEtfSnapshot('kr-sector-091160',etfQuote,etfHistory,etfNow);
+assert.deepEqual(etf.values,{current:13500,previous:13000,week:12000,month:11000,quarter:10000,year:9000});
+assert.equal(etf.dates.previous,'2026-10-12','Active daily prices cannot replace a completed ETF close');
+assert.match(etf.comparisonSources.year,/091160\/price\?pageSize=60&page=5$/);
+assert.equal(etf.delayMinutes,0);assert.equal(etf.marketState,'trading');
+assert.match(etf.note,/분배금/);
+assert.throws(()=>naverEtfSnapshot('kr-sector-091160',{...etfQuote,itemCode:'091170'},etfHistory,etfNow));
+assert.throws(()=>naverEtfSnapshot('kr-sector-091160',{...etfQuote,stockEndType:'stock'},etfHistory,etfNow));
+assert.throws(()=>naverEtfSnapshot('kr-sector-091160',{...etfQuote,stockExchangeType:{zoneId:'America/New_York',nationType:'USA'}},etfHistory,etfNow));
+assert.throws(()=>naverEtfSnapshot('kr-sector-091160',{...etfQuote,localTradedAt:'2026-10-13T12:00:00+09:00'},etfHistory,etfNow),'Do not show stale intraday ETF quotes as current');
+assert.throws(()=>naverEtfSnapshot('kr-sector-091160',{...etfQuote,localTradedAt:'2026-10-12T15:30:00+09:00'},etfHistory,etfNow));
+assert.throws(()=>naverEtfSnapshot('kr-sector-091160',{...etfQuote,localTradedAt:'2026-10-13T12:30:00+09:00'},etfHistory,etfNow));
+assert.throws(()=>naverEtfSnapshot('kr-sector-091160',{...etfQuote,delayTime:-1},etfHistory,etfNow));
+const sparseEtf=naverEtfSnapshot('kr-sector-091160',etfQuote,etfHistory.slice(0,2),etfNow);
+assert.equal(sparseEtf.values.year,null);assert.ok(sparseEtf.missing.includes('year'));
+const closedEtf=naverEtfSnapshot('kr-sector-091160',{...etfQuote,marketStatus:'CLOSE',localTradedAt:'2026-10-12T15:30:00+09:00',closePrice:'13,000'},etfHistory,etfNow);
+assert.equal(closedEtf.marketState,'closed');assert.equal(closedEtf.values.previous,12000);
 for(const [id,country,symbol] of [['nifty50','IN','^NSEI'],['eurostoxx50','EU','^STOXX50E']]) {
   const item=dashboard.indicators.find(i=>i.id===id);
   assert.equal(item.country,country);assert.equal(item.category,'stocks');assert.equal(item.unit,'pt');
@@ -185,4 +214,4 @@ assert.equal(bondUpdated.indicators[0].delayMinutes,120);assert.equal(applyResul
 assert.throws(()=>applyResults(bondBase,{...bondResponse,results:[{...bondResponse.results[0],delayMinutes:-1}]}));
 assert.throws(()=>applyResults(base,{completedAt,results:[success,success]}));
 assert.throws(()=>applyResults(base,{completedAt,results:[{...success,source:'javascript:alert(1)'},response.results[1]]}));
-console.log('PASS: 36 providers including India and Eurozone indices, four KRW crypto pairs, CHF/KRW and legacy response compatibility, 12 bond maturities, country/maturity validation, trading time zones, intraday quotes, delay metadata, completed comparisons, futures contracts, crypto cutoffs, partial failure retention and cache');
+console.log('PASS: 73 providers including ETF sectors/factors, India and Eurozone indices, four KRW crypto pairs, CHF/KRW and legacy response compatibility, 12 bond maturities, country/maturity validation, trading time zones, intraday quotes, delay metadata, completed comparisons, futures contracts, crypto cutoffs, partial failure retention and cache');

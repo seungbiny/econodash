@@ -32,13 +32,20 @@ const groups = {
   crypto: { name:'가상자산', icon:'coin', note:'업비트 원화시장 · 1개당 원', basis:'보고서 체결가격은 10월 8일 08:40:26 KST 기준. 비교 가격은 모두 완료된 업비트 일봉으로, 한국시간 오전 9시에 마감합니다.' },
 };
 const countries = { KR:'한국',US:'미국',CN:'중국',JP:'일본',HK:'홍콩',IN:'인도',EU:'유럽 유로존',CH:'스위스',BTC:'비트코인',ETH:'이더리움',XRP:'리플',SOL:'솔라나' };
+const stockGroups={
+  country:{name:'국가',note:'세계 주요 증시 · 지수 포인트',description:'국가별 대표 주가지수의 현재 수치와 기간별 변화를 비교하세요.'},
+  'us-sectors':{name:'미국 섹터',note:'미국 11개 섹터 · 대표 ETF · 달러/주',description:'미국 11개 섹터를 대표하는 ETF의 가격을 비교합니다. 변화율은 분배금을 제외한 가격 기준입니다.'},
+  'kr-sectors':{name:'한국 섹터',note:'한국 주요 산업 · 대표 ETF · 원/주',description:'한국 주요 산업을 대표하는 ETF의 가격을 비교합니다. 섹터 구성은 미국과 다르며 변화율은 분배금을 제외한 가격 기준입니다.'},
+  'us-factors':{name:'미국 팩터',note:'성장·가치·로우볼 등 · 대표 ETF · 달러/주',description:'성장·가치·로우볼·모멘텀·퀄리티·소형주·배당성장 ETF를 비교합니다. 변화율은 분배금을 제외한 가격 기준입니다.'},
+  'kr-factors':{name:'한국 팩터',note:'성장·가치·로우볼 등 · 대표 ETF · 원/주',description:'성장·가치·로우볼·모멘텀·퀄리티·배당·중소형주 ETF를 비교합니다. 변화율은 분배금을 제외한 가격 기준입니다.'},
+};
 const storage = {
   get(key) { try { return JSON.parse(localStorage.getItem(key)); } catch { return null; } },
   set(key,value) { try { localStorage.setItem(key,JSON.stringify(value)); return true; } catch { return false; } },
 };
 const savedFavorites = storage.get('econodash-favorites');
 const savedChartStart = storage.get('econodash-chart-start');
-const state = { data:null,category:'all',query:'',sort:'default',selected:'kospi',compared:'sp500',chartStart:chartPeriods.slice(0,-1).includes(savedChartStart)?savedChartStart:'year',pulsePeriod:'previous',favorites:new Set(Array.isArray(savedFavorites) ? savedFavorites.filter(v=>typeof v==='string') : []),refreshing:false,lastRun:null };
+const state = { data:null,category:'all',stockGroup:'country',query:'',sort:'default',selected:'kospi',compared:'sp500',chartStart:chartPeriods.slice(0,-1).includes(savedChartStart)?savedChartStart:'year',pulsePeriod:'previous',favorites:new Set(Array.isArray(savedFavorites) ? savedFavorites.filter(v=>typeof v==='string') : []),refreshing:false,lastRun:null };
 const pulsePeriods={previous:'직전 마감',week:'1주일',month:'1개월',quarter:'3개월',year:'12개월'};
 let toastTimer;
 function toast(message, persistent = false) {
@@ -54,13 +61,13 @@ function number(item,value=item.values.current) { return Number.isFinite(value)?
 function displayDate(value) {return value.includes('T')?new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date(value)):value.slice(0,10);}
 function shortDate(value) { if(!value)return '기준일 확인 불가'; const date=displayDate(value); return `${date.slice(5,7)}.${date.slice(8,10)}${value.includes('T')?' · '+new Date(value).toLocaleTimeString('ko-KR',{timeZone:'Asia/Seoul',hour:'2-digit',minute:'2-digit',hour12:false})+' KST':''}`; }
 function longDate(value) { if(!value)return '기준일 확인 불가'; return value.includes('T')?new Date(value).toLocaleString('ko-KR',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false})+' KST':value+' 현지 거래일'; }
-function sourceLabel(item) { return item.live ? item.provider : '10.08 보고서'; }
+function sourceLabel(item) { return item.live ? item.provider : item.instrument==='etf'?'ETF 시세':'10.08 보고서'; }
 function delayLabel(minutes) {return minutes===0?'실시간':minutes%60===0?`${minutes/60}시간 지연`:`${minutes}분 지연`;}
 function priceLabel(item) {const label=item.priceKind==='published'?'최신 공표값 · 장중 시세 미제공':item.priceKind==='market'?(item.marketState==='trading'?'장중 시세':item.marketState==='closed'?'최근 거래 시세':'현재 시세'):'저장된 확인값';return label+(item.priceKind==='market'&&Number.isInteger(item.delayMinutes)?' · '+delayLabel(item.delayMinutes):'');}
 function rowStatus(item) {return item.refreshError?'조회 실패 · 이전 값':item.live?priceLabel(item)+(item.missing?.length?' · 비교 일부 확인 불가':''):'초기 보고서';}
 function liveBasis(key) {return {stocks:'장중을 포함한 최신 시세와 직전 거래일의 완료 종가를 비교합니다. 시세 기준 시각은 한국시간입니다. 시장이 닫혀 있으면 마지막 거래 시세를 표시하며 출처의 시세 지연이 있을 수 있습니다.',bonds:'한국·일본의 1·3·10·30년물과 미국 1·3·30년물은 네이버 증권의 시장 수익률을 조회하며 일본은 출처 기준 2시간 지연입니다. 미국 10년물은 Yahoo Finance 기준입니다. 현재·직전·1주·1개월·3개월·12개월은 지표별 같은 출처를 사용하고 상대 변화율과 금리 차이(bp)를 표시합니다.',commodities:'동일 계약월의 현재 시세와 직전 완료 종가를 비교합니다. 저녁에 개장하는 미국 선물은 다음 거래일을 기준으로 비교합니다. 출처의 시세 지연이 있을 수 있습니다.',fx:'최신 환율과 직전 거래일 완료 종가를 비교합니다. 1외화당 원화, 엔은 100엔당 원화입니다. 위안은 같은 거래일·15분 이내 USD/KRW와 USD/CNY 시세의 교차 환율입니다.',crypto:'업비트 현재 체결가격과 완료된 일봉을 비교합니다. 일봉은 한국시간 오전 9시 마감이며 숫자 아래에 실제 기준 시각을 표시합니다.'}[key];}
 function starButton(item,extra='') { const pressed=state.favorites.has(item.id); return `<button class="star-button ${extra}" data-favorite="${item.id}" aria-pressed="${pressed}" aria-label="${esc(item.name)} ${pressed?'관심 지표에서 제거':'관심 지표에 추가'}">${icon('star')}</button>`; }
-function filtered() { if(!state.data)return []; let rows=state.data.indicators.filter(item => (state.category==='all'||(state.category==='favorites'?state.favorites.has(item.id):item.category===state.category)) && (!state.query || `${item.name} ${item.ticker} ${countries[item.country]} ${groups[item.category].name}`.toLowerCase().includes(state.query.toLowerCase()))); if(state.sort==='down')rows.sort((a,b)=>(change(b.values.current,b.values.previous)??-Infinity)-(change(a.values.current,a.values.previous)??-Infinity));if(state.sort==='up')rows.sort((a,b)=>(change(a.values.current,a.values.previous)??Infinity)-(change(b.values.current,b.values.previous)??Infinity));if(state.sort==='name')rows.sort((a,b)=>a.name.localeCompare(b.name,'ko'));return rows; }
+function filtered() { if(!state.data)return []; let rows=state.data.indicators.filter(item => (state.category==='all'||(state.category==='favorites'?state.favorites.has(item.id):item.category===state.category)) && (state.category!=='stocks'||(item.stockGroup||'country')===state.stockGroup) && (!state.query || `${item.name} ${item.ticker} ${item.fundName||''} ${countries[item.country]} ${groups[item.category].name}`.toLowerCase().includes(state.query.toLowerCase()))); if(state.sort==='down')rows.sort((a,b)=>(change(b.values.current,b.values.previous)??-Infinity)-(change(a.values.current,a.values.previous)??-Infinity));if(state.sort==='up')rows.sort((a,b)=>(change(a.values.current,a.values.previous)??Infinity)-(change(b.values.current,b.values.previous)??Infinity));if(state.sort==='name')rows.sort((a,b)=>a.name.localeCompare(b.name,'ko'));return rows; }
 function renderKpis() {
   $('#kpi-grid').innerHTML=['kospi','sp500','kr10','us10','gold','btc','usd'].map(id=>{
     const item=state.data.indicators.find(i=>i.id===id);
@@ -74,7 +81,7 @@ function renderPulse() {
   const items=state.data.indicators,period=state.pulsePeriod,label=pulsePeriods[period];
   $('#pulse-period-label').textContent=label+' 대비';
   document.querySelectorAll('[data-pulse-period]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.pulsePeriod===period)));
-  const rows=Object.entries(groups).map(([key,group])=>{const members=items.filter(i=>i.category===key),counts=pulseCounts(members,period),total=members.length||1;return `<div class="pulse-bar-row"><span>${group.name}</span><span class="pulse-bar"><i style="width:${counts.up/total*100}%;background:var(--up)"></i><i style="width:${counts.down/total*100}%;background:var(--down)"></i></span><span>${counts.up}↑ ${counts.down}↓</span></div>`;}).join('');
+  const rows=Object.entries(groups).map(([key,group])=>{const members=items.filter(i=>i.category===key&&(key!=='stocks'||(i.stockGroup||'country')==='country')),counts=pulseCounts(members,period),total=members.length||1;return `<div class="pulse-bar-row"><span>${group.name}</span><span class="pulse-bar"><i style="width:${counts.up/total*100}%;background:var(--up)"></i><i style="width:${counts.down/total*100}%;background:var(--down)"></i></span><span>${counts.up}↑ ${counts.down}↓</span></div>`;}).join('');
   $('#pulse-summary').innerHTML=rows;
 }
 function pulseCounts(items,period) {
@@ -123,6 +130,13 @@ function comparisonCell(item,key) {
 function renderTables() {
   const overview=state.category==='all';
   $('#indicators-section').hidden=overview;
+  const stocks=state.category==='stocks',stockGroup=stockGroups[state.stockGroup];
+  $('#stock-tabs').hidden=!stocks;$('#stock-tab-description').hidden=!stocks;
+  if(stocks){
+    $('#stock-tab-description').textContent=stockGroup.description;
+    document.querySelectorAll('[data-stock-group]').forEach(button=>{const active=button.dataset.stockGroup===state.stockGroup;button.setAttribute('aria-selected',String(active));button.tabIndex=active?0:-1;});
+    $('#tables-container').setAttribute('role','tabpanel');$('#tables-container').setAttribute('aria-labelledby','stock-tab-'+state.stockGroup);
+  }else{$('#tables-container').removeAttribute('role');$('#tables-container').removeAttribute('aria-labelledby');}
   $('#favorite-count').textContent=state.favorites.size;
   if(overview){$('#tables-container').innerHTML='';return;}
   const rows=filtered(),name=state.category==='favorites'?'관심':groups[state.category].name;
@@ -130,8 +144,9 @@ function renderTables() {
   if(!rows.length){$('#tables-container').innerHTML=`<div class="empty-state"><h3>${state.category==='favorites'&&!state.query?'아직 저장한 관심 지표가 없어요':'검색 결과가 없습니다'}</h3><p>${state.category==='favorites'&&!state.query?'지표 옆의 별을 눌러 나만의 목록을 만들어보세요.':'다른 검색어로 다시 확인해보세요.'}</p>${state.query?'<button class="button secondary" data-reset>검색 초기화</button>':''}</div>`;return;}
   $('#tables-container').innerHTML=Object.entries(groups).map(([key,group])=>{
     const members=rows.filter(i=>i.category===key);if(!members.length)return '';
-    const isLive=members.some(i=>i.live),basis=isLive?liveBasis(key):group.basis;
-    return `<div class="table-group"><div class="group-heading"><div class="group-title">${icon(group.icon)}${group.name}<span>${members.length}</span></div><span class="group-note">${group.note}${isLive?' · 새로 조회됨':''}</span></div><div class="table-scroll" tabindex="0" role="region" aria-label="${group.name} 지표 표, 좁은 화면에서는 좌우로 스크롤"><table><caption class="sr-only">${group.name} 현재·직전·1주·1개월·3개월·12개월 수치와 변화율</caption><thead><tr><th scope="col">지표</th><th scope="col">현재 수치</th><th scope="col">직전 마감 / 대비</th><th scope="col">1주 비교 / 대비</th><th scope="col">1개월 비교 / 대비</th><th scope="col">3개월 비교 / 대비</th><th scope="col">12개월 비교 / 대비</th></tr></thead><tbody>${members.map(item=>`<tr><td><div class="indicator-cell"><span class="market-badge" data-country="${item.country}">${item.country}</span><div><button class="indicator-name" data-detail="${item.id}">${esc(item.name)}</button><span class="ticker">${esc(item.ticker)}${item.contract?' · '+esc(item.contract.replace('년 ','/').replace('월물','')):''}</span></div>${starButton(item)}</div></td><td><span class="cell-value">${number(item)}${item.category==='bonds'?'%':''}</span><span class="cell-meta">${shortDate(item.dates.current)} · ${esc(item.unit)}</span><span class="row-source ${item.refreshError?'refresh-error':''}">${esc(sourceLabel(item))} · ${rowStatus(item)}</span></td>${['previous','week','month','quarter','year'].map(p=>comparisonCell(item,p)).join('')}</tr>`).join('')}</tbody></table></div><div class="basis-note">${icon('info')}<span>${esc(basis)}</span></div></div>`;
+    const isLive=members.some(i=>i.live),etfs=members.some(i=>i.instrument==='etf');
+    const basis=(isLive?liveBasis(key):group.basis)+(etfs?' ETF는 지수 자체가 아닌 거래소 시장가격이며 분배금을 제외한 가격 변화율입니다.':''),title=stocks?stockGroup.name==='국가'?'국가별 지수':stockGroup.name:group.name,note=stocks?stockGroup.note:group.note;
+    return `<div class="table-group"><div class="group-heading"><div class="group-title">${icon(group.icon)}${title}<span>${members.length}</span></div><span class="group-note">${note}${isLive?' · 새로 조회됨':''}</span></div><div class="table-scroll" tabindex="0" role="region" aria-label="${group.name} 지표 표, 좁은 화면에서는 좌우로 스크롤"><table><caption class="sr-only">${group.name} 현재·직전·1주·1개월·3개월·12개월 수치와 변화율</caption><thead><tr><th scope="col">지표</th><th scope="col">현재 수치</th><th scope="col">직전 마감 / 대비</th><th scope="col">1주 비교 / 대비</th><th scope="col">1개월 비교 / 대비</th><th scope="col">3개월 비교 / 대비</th><th scope="col">12개월 비교 / 대비</th></tr></thead><tbody>${members.map(item=>`<tr><td><div class="indicator-cell"><span class="market-badge" data-country="${item.country}">${item.country}</span><div><button class="indicator-name" data-detail="${item.id}">${esc(item.name)}</button><span class="ticker">${esc(item.ticker)}${item.fundName?' · '+esc(item.fundName):''}${item.contract?' · '+esc(item.contract.replace('년 ','/').replace('월물','')):''}</span></div>${starButton(item)}</div></td><td><span class="cell-value">${number(item)}${item.category==='bonds'?'%':''}</span><span class="cell-meta">${shortDate(item.dates.current)} · ${esc(item.unit)}</span><span class="row-source ${item.refreshError?'refresh-error':''}">${esc(sourceLabel(item))} · ${rowStatus(item)}</span></td>${['previous','week','month','quarter','year'].map(p=>comparisonCell(item,p)).join('')}</tr>`).join('')}</tbody></table></div><div class="basis-note">${icon('info')}<span>${esc(basis)}</span></div></div>`;
   }).join('');
 }
 function renderAll() { document.querySelectorAll('#navigation [data-category]').forEach(button=>{const category=button.dataset.category;button.querySelector('.nav-count').textContent=category==='all'?state.data.indicators.length:category==='favorites'?state.favorites.size:state.data.indicators.filter(i=>i.category===category).length;});renderKpis();renderPulse();renderChart();renderTables(); }
@@ -149,6 +164,10 @@ function setCategory(category) {
   $('#kpi-grid').style.display=category==='all'?'':'none';$('.overview-grid').style.display=category==='all'?'':'none';
   renderTables();
 }
+function setStockGroup(group) {
+  if(state.category!=='stocks'||!Object.hasOwn(stockGroups,group))return;
+  state.stockGroup=group;state.query='';$('#search-input').value='';renderTables();
+}
 function toggleFavorite(id) {
   if(!state.data?.indicators.some(i=>i.id===id))return;
   if(state.favorites.has(id))state.favorites.delete(id);else state.favorites.add(id);
@@ -157,7 +176,7 @@ function toggleFavorite(id) {
 }
 function openDetail(id) {
   const item=state.data.indicators.find(i=>i.id===id);if(!item)return;
-  $('#detail-content').innerHTML=`<div class="dialog-heading"><div><span class="section-kicker">${esc(item.ticker)} · ${groups[item.category].name}</span><h2>${esc(item.name)}</h2><p class="detail-unit">${esc(item.unit)}${item.contract?' · '+esc(item.contract):''}</p></div><button class="icon-button dialog-close" aria-label="상세 정보 닫기">${icon('close')}</button></div><div class="detail-big">${number(item)}${item.category==='bonds'?'%':''}</div><div class="detail-status">${esc(sourceLabel(item))} · ${longDate(item.dates.current)}</div><div class="detail-status ${item.refreshError?'refresh-error':''}">${rowStatus(item)}${item.retrievedAt?' · 마지막 성공 조회 '+longDate(item.retrievedAt):''}${item.refreshError?'<br>'+esc(item.refreshError):''}</div><div class="detail-comparisons">${[['previous','직전'],['week','1주 비교'],['month','1개월 비교'],['quarter','3개월 비교'],['year','12개월 비교']].map(([key,label])=>`<div class="detail-box"><small>${label}</small><strong>${number(item,item.values[key])}${item.category==='bonds'?'%':''}</strong>${changeHtml(item,key)}<div class="date">${longDate(item.dates[key])}${item.category==='bonds'?'<br>'+(Number.isFinite(item.values[key])?signed((item.values.current-item.values[key])*100,1)+'bp':'금리 차이 확인 불가'):''}</div></div>`).join('')}</div><p class="detail-note">${esc(item.note||'보고서에서 확인한 완료 마감값을 비교합니다. 비교일이 휴장일이면 해당 날짜 이전의 가장 최근 마감값을 사용했습니다.')}</p>`;
+  $('#detail-content').innerHTML=`<div class="dialog-heading"><div><span class="section-kicker">${esc(item.ticker)} · ${groups[item.category].name}</span><h2>${esc(item.name)}</h2><p class="detail-unit">${esc(item.unit)}${item.fundName?' · '+esc(item.fundName):''}${item.contract?' · '+esc(item.contract):''}</p></div><button class="icon-button dialog-close" aria-label="상세 정보 닫기">${icon('close')}</button></div><div class="detail-big">${number(item)}${item.category==='bonds'?'%':''}</div><div class="detail-status">${esc(sourceLabel(item))} · ${longDate(item.dates.current)}</div><div class="detail-status ${item.refreshError?'refresh-error':''}">${rowStatus(item)}${item.retrievedAt?' · 마지막 성공 조회 '+longDate(item.retrievedAt):''}${item.refreshError?'<br>'+esc(item.refreshError):''}</div><div class="detail-comparisons">${[['previous','직전'],['week','1주 비교'],['month','1개월 비교'],['quarter','3개월 비교'],['year','12개월 비교']].map(([key,label])=>`<div class="detail-box"><small>${label}</small><strong>${number(item,item.values[key])}${item.category==='bonds'?'%':''}</strong>${changeHtml(item,key)}<div class="date">${longDate(item.dates[key])}${item.category==='bonds'?'<br>'+(Number.isFinite(item.values[key])?signed((item.values.current-item.values[key])*100,1)+'bp':'금리 차이 확인 불가'):''}</div></div>`).join('')}</div><p class="detail-note">${esc(item.note||'보고서에서 확인한 완료 마감값을 비교합니다. 비교일이 휴장일이면 해당 날짜 이전의 가장 최근 마감값을 사용했습니다.')}</p>`;
   $('#detail-dialog').showModal();
 }
 async function exportReport() {
@@ -193,12 +212,17 @@ mountIcons();applyTheme(storage.get('econodash-theme')==='dark'?'dark':'light');
 document.addEventListener('click',event=>{
   const period=event.target.closest('[data-pulse-period]');if(period){if(Object.hasOwn(pulsePeriods,period.dataset.pulsePeriod)){state.pulsePeriod=period.dataset.pulsePeriod;renderPulse();}return;}
   const favorite=event.target.closest('[data-favorite]');if(favorite){event.stopPropagation();toggleFavorite(favorite.dataset.favorite);return;}
+  const stockGroup=event.target.closest('[data-stock-group]');if(stockGroup){setStockGroup(stockGroup.dataset.stockGroup);return;}
   const category=event.target.closest('[data-category]');if(category){setCategory(category.dataset.category);return;}
   const detail=event.target.closest('[data-detail]');if(detail){openDetail(detail.dataset.detail);return;}
   if(event.target.closest('.dialog-close'))event.target.closest('dialog').close();
   if(event.target.closest('[data-reset]')){state.query='';$('#search-input').value='';renderTables();}
 });
 document.addEventListener('keydown',event=>{
+  if(event.target.matches('[data-stock-group]')&&['ArrowLeft','ArrowRight','Home','End'].includes(event.key)){
+    event.preventDefault();const keys=Object.keys(stockGroups),index=keys.indexOf(event.target.dataset.stockGroup),next=event.key==='Home'?0:event.key==='End'?keys.length-1:(index+(event.key==='ArrowRight'?1:-1)+keys.length)%keys.length;
+    setStockGroup(keys[next]);$('#stock-tab-'+keys[next]).focus();return;
+  }
   if((event.key==='Enter'||event.key===' ')&&event.target.matches('.kpi-card')){event.preventDefault();openDetail(event.target.dataset.detail);}
   if(event.key==='/'&&!$('#indicators-section').hidden&&!['INPUT','TEXTAREA','SELECT'].includes(event.target.tagName)&&!document.querySelector('dialog[open]')){event.preventDefault();$('#search-input').focus();}
 });
@@ -230,8 +254,10 @@ try {
   }
   state.favorites=new Set([...state.favorites].filter(id=>state.data.indicators.some(i=>i.id===id)));
   for(const [id,key] of [['chart-select','selected'],['chart-select-second','compared']]) {
-    const select=$('#'+id);select.innerHTML=state.data.indicators.map(i=>`<option value="${i.id}">${esc(i.name)}</option>`).join('');
+    const select=$('#'+id),options=members=>members.map(i=>`<option value="${i.id}">${esc(i.name)}</option>`).join('');
+    select.innerHTML=Object.entries(stockGroups).map(([key,group])=>`<optgroup label="주식 · ${group.name}">${options(state.data.indicators.filter(i=>i.category==='stocks'&&(i.stockGroup||'country')===key))}</optgroup>`).join('')+Object.entries(groups).filter(([key])=>key!=='stocks').map(([key,group])=>`<optgroup label="${group.name}">${options(state.data.indicators.filter(i=>i.category===key))}</optgroup>`).join('');
     select.value=state[key];
   }
+  document.querySelectorAll('[data-total-indicators]').forEach(el=>el.textContent=state.data.indicators.length);
   $('#load-status').classList.add('hidden');renderAll();await refreshScheduler.run(true);
 }catch(error){$('#load-status').textContent=`${error.message} 페이지를 새로고침해 주세요.`;$('#refresh-button').disabled=true;$('#export-button').disabled=true;}
