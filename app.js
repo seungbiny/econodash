@@ -121,10 +121,13 @@ function comparisonCell(item,key) {
   return `<td><div class="cell-comparison"><span class="cell-value">${number(item,item.values[key])}${item.category==='bonds'&&Number.isFinite(item.values[key])?'%':''}</span>${changeHtml(item,key)}</div><span class="cell-meta">${date}${bp}</span></td>`;
 }
 function renderTables() {
-  const rows=filtered(),name=state.category==='all'?'전체 경제':state.category==='favorites'?'관심':groups[state.category].name;
-  $('#indicators-title').innerHTML=`${name} 지표 <span id="visible-count">${rows.length}</span>`;
+  const overview=state.category==='all';
+  $('#indicators-section').hidden=overview;
   $('#favorite-count').textContent=state.favorites.size;
-  if(!rows.length){$('#tables-container').innerHTML=`<div class="empty-state"><h3>${state.category==='favorites'&&!state.query?'아직 저장한 관심 지표가 없어요':'검색 결과가 없습니다'}</h3><p>${state.category==='favorites'&&!state.query?'지표 옆의 별을 눌러 나만의 목록을 만들어보세요.':'다른 검색어나 분류로 다시 확인해보세요.'}</p><button class="button secondary" data-reset>전체 지표 보기</button></div>`;return;}
+  if(overview){$('#tables-container').innerHTML='';return;}
+  const rows=filtered(),name=state.category==='favorites'?'관심':groups[state.category].name;
+  $('#indicators-title').innerHTML=`${name} 지표 <span id="visible-count">${rows.length}</span>`;
+  if(!rows.length){$('#tables-container').innerHTML=`<div class="empty-state"><h3>${state.category==='favorites'&&!state.query?'아직 저장한 관심 지표가 없어요':'검색 결과가 없습니다'}</h3><p>${state.category==='favorites'&&!state.query?'지표 옆의 별을 눌러 나만의 목록을 만들어보세요.':'다른 검색어로 다시 확인해보세요.'}</p>${state.query?'<button class="button secondary" data-reset>검색 초기화</button>':''}</div>`;return;}
   $('#tables-container').innerHTML=Object.entries(groups).map(([key,group])=>{
     const members=rows.filter(i=>i.category===key);if(!members.length)return '';
     const isLive=members.some(i=>i.live),basis=isLive?liveBasis(key):group.basis;
@@ -134,9 +137,9 @@ function renderTables() {
 function renderAll() { document.querySelectorAll('#navigation [data-category]').forEach(button=>{const category=button.dataset.category;button.querySelector('.nav-count').textContent=category==='all'?state.data.indicators.length:category==='favorites'?state.favorites.size:state.data.indicators.filter(i=>i.category===category).length;});renderKpis();renderPulse();renderChart();renderTables(); }
 function setCategory(category) {
   if(!['all','favorites',...Object.keys(groups)].includes(category))return;
+  if(state.category!==category){state.query='';$('#search-input').value='';}
   state.category=category;
   document.querySelectorAll('#navigation [data-category]').forEach(button=>{const active=button.dataset.category===category;button.classList.toggle('active',active);if(active)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current');});
-  document.querySelectorAll('#category-tabs [data-category]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.category===category)));
   const label=category==='all'?'전체 현황':category==='favorites'?'관심 지표':groups[category].name;
   $('#breadcrumb-current').textContent=label;
   $('.page-heading h1').textContent=category==='all'?'경제의 흐름을, 한눈에.':`${label} 대시보드`;
@@ -193,11 +196,11 @@ document.addEventListener('click',event=>{
   const category=event.target.closest('[data-category]');if(category){setCategory(category.dataset.category);return;}
   const detail=event.target.closest('[data-detail]');if(detail){openDetail(detail.dataset.detail);return;}
   if(event.target.closest('.dialog-close'))event.target.closest('dialog').close();
-  if(event.target.closest('[data-reset]')){state.query='';$('#search-input').value='';setCategory('all');}
+  if(event.target.closest('[data-reset]')){state.query='';$('#search-input').value='';renderTables();}
 });
 document.addEventListener('keydown',event=>{
   if((event.key==='Enter'||event.key===' ')&&event.target.matches('.kpi-card')){event.preventDefault();openDetail(event.target.dataset.detail);}
-  if(event.key==='/'&&!['INPUT','TEXTAREA','SELECT'].includes(event.target.tagName)&&!document.querySelector('dialog[open]')){event.preventDefault();$('#search-input').focus();}
+  if(event.key==='/'&&!$('#indicators-section').hidden&&!['INPUT','TEXTAREA','SELECT'].includes(event.target.tagName)&&!document.querySelector('dialog[open]')){event.preventDefault();$('#search-input').focus();}
 });
 $('#search-input').addEventListener('input',event=>{state.query=event.target.value.trim();renderTables();});
 $('#sort-select').addEventListener('change',event=>{state.sort=event.target.value;renderTables();});

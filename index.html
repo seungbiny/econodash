@@ -63,9 +63,9 @@
           <div class="pulse-note"><span data-icon="info"></span>상승·하락은 수치의 방향을 뜻합니다.<br>각 지표의 기준일은 서로 다를 수 있어요.</div>
         </div>
       </section>
-      <section class="indicators-section" aria-labelledby="indicators-title">
+      <section class="indicators-section" id="indicators-section" aria-labelledby="indicators-title" hidden>
         <div class="section-heading"><div><h2 id="indicators-title">전체 경제 지표 <span id="visible-count">36</span></h2><p>현재 시세와 직전 마감·1주·1개월·3개월·12개월 비교를 살펴보세요.</p></div><label class="search-field"><span data-icon="search"></span><input id="search-input" type="search" placeholder="지표 검색" aria-label="지표 이름 또는 국가 검색"><kbd>/</kbd></label></div>
-        <div class="table-toolbar"><div class="category-tabs" id="category-tabs" aria-label="지표 분류"><button data-category="all" aria-pressed="true">전체</button><button data-category="stocks" aria-pressed="false">주식</button><button data-category="bonds" aria-pressed="false">금리</button><button data-category="commodities" aria-pressed="false">상품</button><button data-category="fx" aria-pressed="false">환율</button><button data-category="crypto" aria-pressed="false">가상자산</button></div><label class="sort-control">정렬<select id="sort-select" aria-label="지표 정렬"><option value="default">기본 순서</option><option value="down">직전 변화율 ↓</option><option value="up">직전 변화율 ↑</option><option value="name">이름순</option></select></label></div>
+        <div class="table-toolbar"><label class="sort-control">정렬<select id="sort-select" aria-label="지표 정렬"><option value="default">기본 순서</option><option value="down">직전 변화율 ↓</option><option value="up">직전 변화율 ↑</option><option value="name">이름순</option></select></label></div>
         <div id="tables-container"></div>
       </section>
       <footer><span><strong>EconoDash</strong> 작은 숫자에서, 큰 흐름으로.</span><button id="footer-method">비교 기준 및 출처 안내<span data-icon="external"></span></button></footer>
