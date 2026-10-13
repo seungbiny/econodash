@@ -57,10 +57,18 @@ export function buildReport({data,generatedAt=new Date().toISOString()}){
     const items=bondItems.filter(item=>item.bondGroup===key);if(!items.length)return [];
     return [{title:'국채 금리 · '+title,body:table(items,'bonds',title+' · '+range)+bondNote+(key==='ultra-short'?'<p class="report-note">한국의 1년 미만 국채 금리는 연결 출처에 없어 미국·일본만 표시합니다.</p>':'')}];
   }):[{title:'국채 금리',body:table(indicators,'bonds')+bondNote}];
+  const commodityItems=indicators.filter(item=>item.category==='commodities'),commodityNote='<p class="report-note">상품 수치는 선택 계약월의 선물가격이며 현물가격과 다릅니다. 각 상품의 모든 비교값은 같은 계약월입니다. 달러와 미국 센트 단위를 구분하며 100센트는 1달러입니다. 실제 계약월과 상품별 단위를 확인하세요.</p>';
+  const commoditySections=commodityItems.some(item=>item.commodityGroup)?[
+    ...[['metals','금속'],['energy','에너지'],['agriculture','농산물']].flatMap(([key,title])=>{
+      const items=commodityItems.filter(item=>item.commodityGroup===key);if(!items.length)return [];
+      return [{title:'상품 · '+title,body:table(items,'commodities',title)+commodityNote}];
+    }),
+    {title:'환율',body:table(indicators,'fx')+'<p class="report-note">환율은 외화당 원화, 엔은 100엔당 원화입니다. 위안은 같은 거래일·15분 이내 두 시세의 교차 환율입니다.</p>'}
+  ]:[{title:'상품과 환율',body:table(indicators,'commodities')+table(indicators,'fx')+commodityNote}];
   const sections=[
     ...stockSections,
     ...bondSections,
-    {title:'상품과 환율',body:table(indicators,'commodities')+table(indicators,'fx')+'<p class="report-note">상품의 모든 비교값은 같은 선물 계약월을 사용합니다. 환율은 외화당 원화, 엔은 100엔당 원화입니다. 위안은 같은 거래일·15분 이내 두 시세의 교차 환율입니다.</p>'},
+    ...commoditySections,
     {title:'가상자산',body:table(indicators,'crypto')+`<aside class="report-reference" aria-labelledby="report-reference-title"><h2 id="report-reference-title">참고사항</h2><div class="report-notes"><section><h3>비교 기간과 계산</h3><p>직전 마감은 현재 시세의 현지 거래일보다 앞선 최근 완료 종가입니다. 1주일은 7일 전, 1개월·3개월·12개월은 달력 기준으로 계산하며 휴장일에는 해당 날짜 이전의 완료 값을 사용합니다. 변화율은 (현재 수치 - 비교 수치) ÷ 비교 수치 × 100으로 계산합니다. 금리 차이는 (현재 금리 - 비교 금리) × 100bp입니다.</p></section><section><h3>시각과 조회 상태</h3><p>보고서 작성 시각은 데이터 시각과 다릅니다. 날짜만 있는 값은 현지 거래일이며 시각이 있는 값은 한국시간(KST)입니다. 조회 실패 지표는 이전 확인값과 실패 표시를 유지하고, 없는 비교값은 확인 불가로 표시합니다. 이 보고서는 버튼을 누른 당시 화면의 데이터로 작성하며 추가 시세 조회를 실행하지 않습니다. 가상자산은 업비트 원화시장 체결가격이며 일봉은 한국시간 오전 9시에 마감합니다. 자료 제공: Yahoo Finance, 네이버 증권, Tencent Finance / Eastmoney, 업비트.</p></section></div></aside>`}
   ];
   return sections.map(({title,body},index)=>`<article class="report-page" aria-label="보고서 ${index+1}쪽"><header class="report-header"><div><div class="report-brand">Econo<em>Dash</em></div><h1>${title}</h1></div><div class="report-stamp">보고서 작성 ${created} KST<br>전체 ${indicators.length}개 지표 · 현재 및 5개 비교 기간</div></header>${body}<footer class="report-footer"><span>EconoDash · 시각 표시는 KST / 날짜만 있는 값은 현지 거래일</span><span>${index+1} / ${sections.length}</span></footer></article>`).join('');

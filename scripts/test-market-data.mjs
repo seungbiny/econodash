@@ -1,10 +1,11 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
-import {monthBefore,compareSeries,compareQuote,yahooRows,yahooQuote,yahooTradeDate,futuresContract,naverBondSnapshot,naverKospiSnapshot,naverEtfSnapshot,cryptoComparisons,cryptoTarget,tencentIndexRows,tencentIndexQuote,IDS,LEGACY_IDS,CRYPTO_MARKETS} from '../lib/market-data.mjs';
+import {monthBefore,compareSeries,compareQuote,yahooRows,yahooQuote,yahooTradeDate,futuresContract,calendarFuturesContract,futureSnapshot,naverBondSnapshot,naverKospiSnapshot,naverEtfSnapshot,cryptoComparisons,cryptoTarget,tencentIndexRows,tencentIndexQuote,IDS,LEGACY_IDS,CRYPTO_MARKETS} from '../lib/market-data.mjs';
 import {STOCK_ETFS} from '../lib/stock-universe.mjs';
 import {BOND_UNIVERSE,bondGroupFor} from '../lib/bond-universe.mjs';
+import {COMMODITY_UNIVERSE} from '../lib/commodity-universe.mjs';
 import {applyResults,cacheResponse,validateResponse} from '../refresh-state.js';
-assert.equal(IDS.length,100);assert.equal(new Set(IDS).size,100);
+assert.equal(IDS.length,113);assert.equal(new Set(IDS).size,113);
 assert.equal(LEGACY_IDS.length,22);assert.ok(!LEGACY_IDS.includes('chf'),'Old dashboards retain their original indicator list');
 const dashboard=JSON.parse(await fs.readFile(new URL('../data.json',import.meta.url),'utf8'));
 assert.deepEqual(new Set(dashboard.indicators.map(i=>i.id)),new Set(IDS),'Every displayed indicator has a matching refresh provider');
@@ -158,6 +159,31 @@ const eveningRows=yahooRows({meta:futuresMeta,timestamp:[Date.parse('2026-10-06T
 assert.equal(eveningRows.at(-1).date,'2026-10-07','Keep the previous completed futures session after the next evening session starts');
 assert.deepEqual(futuresContract({root:'GC',suffix:'CMX'},{shortName:'Gold Dec 26'}),{symbol:'GCZ26.CMX',contract:'2026년 12월물'});
 assert.throws(()=>futuresContract({root:'GC',suffix:'CMX'},{shortName:'Gold Futures'}));
+assert.deepEqual(futuresContract({root:'ZC',suffix:'CBT'},{shortName:'Corn Futures,Dec-2026'}),{symbol:'ZCZ26.CBT',contract:'2026년 12월물'});
+assert.deepEqual(futuresContract({root:'ZS',suffix:'CBT'},{shortName:'Soybean Futures,Nov-2026'}),{symbol:'ZSX26.CBT',contract:'2026년 11월물'});
+assert.deepEqual(futuresContract({root:'ZW',suffix:'CBT'},{shortName:'Truncated name',longName:'Wheat Dec 2026'}),{symbol:'ZWZ26.CBT',contract:'2026년 12월물'});
+assert.throws(()=>futuresContract({root:'ZW',suffix:'CBT'},{shortName:'Chicago SRW Wheat Futures,Dec-2'}));
+assert.equal(COMMODITY_UNIVERSE.length,17);
+for(const [group,count]of Object.entries({metals:5,energy:5,agriculture:7}))assert.equal(dashboard.indicators.filter(i=>i.category==='commodities'&&i.commodityGroup===group).length,count);
+for(const spec of COMMODITY_UNIVERSE){
+  const item=dashboard.indicators.find(i=>i.id===spec.id);
+  assert.equal(item.unit,spec.unit);assert.equal(item.quoteCurrency,spec.quoteCurrency);assert.equal(item.ticker,spec.root);assert.ok(item.contract);
+  for(const key of ['current','previous','week','month','quarter','year']){assert.ok(Number.isFinite(item.values[key]));assert.ok(Number.isFinite(Date.parse(item.dates[key])));assert.equal(item.comparisonSources[key],item.source,'Every price comes from the selected exact contract');}
+  if(!['gold','silver','copper','wti'].includes(spec.id))assert.ok(!LEGACY_IDS.includes(spec.id));
+}
+const catalog=id=>COMMODITY_UNIVERSE.find(i=>i.id===id),calendarNow=Date.parse('2026-10-13T14:00:00Z');
+for(const [id,symbol]of [['brent','BZZ26.NYM'],['wheat','ZWZ26.CBT'],['sugar','SBH27.NYB'],['cotton','CTZ26.NYB']])assert.equal(calendarFuturesContract(catalog(id),calendarNow).symbol,symbol);
+assert.equal(calendarFuturesContract(catalog('sugar'),Date.parse('2026-12-31T14:00:00Z')).symbol,'SBH27.NYB','Calendar selection rolls the year without stale or expired symbols');
+assert.equal(calendarFuturesContract(catalog('brent'),Date.parse('2026-11-01T14:00:00Z')).symbol,'BZF27.NYM','Brent delivery months lead the current month by two');
+assert.equal(calendarFuturesContract(catalog('cotton'),Date.parse('2026-12-01T14:00:00Z')).symbol,'CTH27.NYB');
+assert.throws(()=>calendarFuturesContract({...catalog('cotton'),deliveryMonths:[13]},calendarNow));assert.throws(()=>calendarFuturesContract({...catalog('cotton'),minMonthOffset:0},calendarNow));
+const cropResolved={symbol:'ZCZ26.CBT',contract:'2026년 12월물'},cropSource='https://query1.finance.yahoo.com/v8/finance/chart/ZCZ26.CBT?range=2y&interval=1d';
+const crop={meta:{symbol:cropResolved.symbol,instrumentType:'FUTURE',exchangeName:'CBT',currency:'USX',exchangeTimezoneName:'America/Chicago',regularMarketPrice:485.5,regularMarketTime:calendarNow/1000,currentTradingPeriod:{regular:{start:Date.parse('2026-10-12T23:00:00Z')/1000,end:Date.parse('2026-10-13T22:00:00Z')/1000}}},timestamp:['2025-10-13','2026-07-13','2026-09-11','2026-10-06','2026-10-12','2026-10-13'].map(date=>Date.parse(date+'T13:00:00Z')/1000),indicators:{quote:[{close:[450,460,465,470,480,999]}]}};
+const cropSnapshot=futureSnapshot(catalog('corn'),cropResolved,crop,cropSource,calendarNow);
+assert.deepEqual(cropSnapshot.values,{current:485.5,previous:480,week:470,month:465,quarter:460,year:450});
+assert.match(cropSnapshot.note,/센트\/부셸/);assert.match(cropSnapshot.note,/100센트/);
+for(const meta of [{currency:'USD'},{symbol:'ZCH27.CBT'},{exchangeName:'NYM'},{instrumentType:'ALTSYMBOL'}])assert.throws(()=>futureSnapshot(catalog('corn'),cropResolved,{...crop,meta:{...crop.meta,...meta}},cropSource,calendarNow),'Wrong currency, contract, exchange and front aliases cannot be mixed into exact-contract prices');
+assert.throws(()=>futureSnapshot(catalog('corn'),cropResolved,{...crop,meta:{...crop.meta,regularMarketTime:(calendarNow-8*86400000)/1000}},cropSource,calendarNow),'An inactive stale contract must not be shown as a current price');
 const bondQuote={dataType:'BOND',reutersCode:'JP10YT=RR',nationType:'JPN',maturityType:'10Y',currencyType:{code:'JPY'},name:'일본 국채 10년',closePriceYield:3.082,closePrice:999,localTradedAt:'2026-10-08T10:42:36+09:00',delayTime:120,marketStatus:'OPEN',yieldToLastClosePrice:3.109};
 const bondHistory=[{localTradedAt:'2026-10-08T10:00:00+09:00',closePrice:'999'},{localTradedAt:'2026-10-07T15:20:05+09:00',closePrice:'3.1090'},{localTradedAt:'2026-10-01T15:20:05+09:00',closePrice:'3.0150'},{localTradedAt:'2026-09-08T15:20:05+09:00',closePrice:'2.8870'},{localTradedAt:'2026-07-08T15:20:05+09:00',closePrice:'2.7000',historyPage:2}];
 const jgb=naverBondSnapshot('jp10',bondQuote,bondHistory,now);
@@ -236,4 +262,4 @@ assert.equal(bondUpdated.indicators[0].delayMinutes,120);assert.equal(applyResul
 assert.throws(()=>applyResults(bondBase,{...bondResponse,results:[{...bondResponse.results[0],delayMinutes:-1}]}));
 assert.throws(()=>applyResults(base,{completedAt,results:[success,success]}));
 assert.throws(()=>applyResults(base,{completedAt,results:[{...success,source:'javascript:alert(1)'},response.results[1]]}));
-console.log('PASS: 100 providers including ETF sectors/factors, India and Eurozone indices, four KRW crypto pairs, CHF/KRW and legacy response compatibility, 39 bond maturities, country/maturity validation, trading time zones, intraday quotes, delay metadata, completed comparisons, futures contracts, crypto cutoffs, partial failure retention and cache');
+console.log('PASS: 113 providers including 17 exact-contract commodities, ETF sectors/factors, India and Eurozone indices, four KRW crypto pairs, CHF/KRW and legacy response compatibility, 39 bond maturities, country/maturity validation, trading time zones, intraday quotes, delay metadata, completed comparisons, futures contracts, crypto cutoffs, partial failure retention and cache');
