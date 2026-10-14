@@ -171,7 +171,15 @@ function renderTables() {
     return `<div class="table-group"><div class="group-heading"><div class="group-title">${icon(group.icon)}${title}<span>${members.length}</span></div><span class="group-note">${note}${isLive?' · 새로 조회됨':''}</span></div><div class="table-scroll" tabindex="0" role="region" aria-label="${group.name} 지표 표, 좁은 화면에서는 좌우로 스크롤"><table><caption class="sr-only">${group.name} 현재·직전·1주·1개월·3개월·12개월 수치와 변화율</caption><thead><tr><th scope="col">지표</th><th scope="col">현재 수치</th><th scope="col">직전 마감 / 대비</th><th scope="col">1주 비교 / 대비</th><th scope="col">1개월 비교 / 대비</th><th scope="col">3개월 비교 / 대비</th><th scope="col">12개월 비교 / 대비</th></tr></thead><tbody>${members.map(item=>`<tr><td><div class="indicator-cell"><span class="market-badge" data-country="${item.country}">${item.country}</span><div><button class="indicator-name" data-detail="${item.id}">${esc(item.name)}</button><span class="ticker">${esc(item.ticker)}${item.fundName?' · '+esc(item.fundName):''}${item.contract?' · '+esc(item.contract.replace('년 ','/').replace('월물','')):''}</span></div>${starButton(item)}</div></td><td><span class="cell-value">${number(item)}${item.category==='bonds'?'%':''}</span><span class="cell-meta">${shortDate(item.dates.current)} · ${esc(item.unit)}</span><span class="row-source ${item.refreshError?'refresh-error':''}">${esc(sourceLabel(item))} · ${rowStatus(item)}</span></td>${['previous','week','month','quarter','year'].map(p=>comparisonCell(item,p)).join('')}</tr>`).join('')}</tbody></table></div><div class="basis-note">${icon('info')}<span>${esc(basis)}</span></div></div>`;
   }).join('');
 }
-function renderAll() { document.querySelectorAll('#navigation [data-category]').forEach(button=>{const category=button.dataset.category;button.querySelector('.nav-count').textContent=category==='all'?state.data.indicators.length:category==='favorites'?state.favorites.size:state.data.indicators.filter(i=>i.category===category).length;});renderKpis();renderPulse();renderChart();renderTables(); }
+function renderAll() {
+  document.querySelectorAll('#navigation [data-category]').forEach(button=>{
+    const count=button.querySelector('.nav-count');
+    if(!count)return;
+    const category=button.dataset.category;
+    count.textContent=category==='favorites'?state.favorites.size:state.data.indicators.filter(i=>i.category===category).length;
+  });
+  renderKpis();renderPulse();renderChart();renderTables();
+}
 function setCategory(category) {
   if(!['all','favorites',...Object.keys(groups)].includes(category))return;
   if(state.category!==category){state.query='';$('#search-input').value='';}
